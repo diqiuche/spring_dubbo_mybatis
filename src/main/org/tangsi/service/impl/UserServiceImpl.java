@@ -6,6 +6,8 @@ import org.tangsi.entity.User;
 import org.tangsi.dao.mapper.UserMapper;
 import org.tangsi.service.UserService;
 
+import java.util.List;
+
 /**
  * created by tangsi 2015/7/6
  */
@@ -28,6 +30,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int insert(User user) {
         return this.userMapper.insert(user);
+    }
+
+    @Override
+    public int saveBatch(List<User> users) {
+        return  this.userMapper.insertBatch(users);
     }
 
 }

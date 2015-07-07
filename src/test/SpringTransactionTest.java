@@ -8,6 +8,7 @@ import org.tangsi.entity.User;
 import org.tangsi.service.OrderService;
 import org.tangsi.service.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +47,28 @@ public class SpringTransactionTest {
         int num = userService.insert(user); //返回的是影响的行数
         System.out.println(num);
         System.out.println(user.getId());  //user对象的主键id已被填充
+
+    }
+
+    /**
+     * 测试mybatis批量插入
+     */
+    @Test
+    public void testSaveBatch() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
+        UserService userService = (UserService) context.getBean("userServiceImpl");
+        List<User> users = new ArrayList<User>();
+
+        for(int i=0; i<3; i++) {
+            User user = new User();
+            user.setEmail("email" + i);
+            user.setName("name" + i);
+            user.setPhone("189" + i);
+            users.add(user);
+        }
+        int num = userService.saveBatch(users);
+        System.out.print("插入的数据条数为： " + num);
+
 
     }
 }
