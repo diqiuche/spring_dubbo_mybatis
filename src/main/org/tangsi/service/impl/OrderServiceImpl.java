@@ -30,7 +30,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getListByUserId(long userId) {
-        //return this.orderMapper.getListByUserId(userId);
-        return null;
+        return this.orderMapper.getListByUserId(userId);
     }
 }

@@ -20,14 +20,14 @@ public class SpringTransactionTest {
         User user = userService.findById(1);
         System.out.println("用户名：" + user.getName());
 
-        OrderService orderService = (OrderService) context.getBean("orderServiceImpl");
-        Order order = orderService.getOrderById(user.getId());
-        System.out.println(order.getName());
+       OrderService orderService = (OrderService) context.getBean("orderServiceImpl");
+       /*  Order order = orderService.getOrderById(user.getId());
+        System.out.println(order.getName());*/
 
-       /* List<Order> list = orderService.getListByUserId(user.getId());
+        List<Order> list = orderService.getListByUserId(user.getId());
         for(Order order : list) {
             System.out.println(order.getName());
-        }*/
+        }
 
     }
 }
