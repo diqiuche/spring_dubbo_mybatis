@@ -52,6 +52,16 @@
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{phone,jdbcType=CHAR})
   </insert>
+
+
+  <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="false" keyProperty="id">
+      insert into t_user (id, name, email, phone)
+      values
+      <foreach collection="list" item="item" index="index" separator=",">
+          (#{item.id},#{item.name},#{item.email},#{item.phone})
+      </foreach>
+  </insert>
+
   <insert id="insertSelective" parameterType="org.tangsi.entity.User" >
     insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
