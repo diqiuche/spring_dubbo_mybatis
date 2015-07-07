@@ -10,4 +10,6 @@ public interface UserService {
     public User findById(long id);
 
     User getUserWithOrdersById(long id);
+
+    public int insert(User user);
 }

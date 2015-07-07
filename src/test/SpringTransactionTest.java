@@ -1,5 +1,6 @@
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.mchange.v2.c3p0.jboss.C3P0PooledDataSource;
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.tangsi.entity.Order;
@@ -28,6 +29,23 @@ public class SpringTransactionTest {
         for(Order order : list) {
             System.out.println(order.getName());
         }*/
+
+    }
+
+    /**
+     * 测试mybatis插入并反馈主键的值
+     */
+    @Test
+    public void testInsert() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
+        UserService userService = (UserService) context.getBean("userServiceImpl");
+        User user = new User();
+        user.setName("liushiyi");
+        user.setEmail("12124158@qq.com");
+        user.setPhone("18678745784");
+        int num = userService.insert(user); //返回的是影响的行数
+        System.out.println(num);
+        System.out.println(user.getId());  //user对象的主键id已被填充
 
     }
 }

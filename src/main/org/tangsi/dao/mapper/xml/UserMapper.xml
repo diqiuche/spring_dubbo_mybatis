@@ -42,7 +42,11 @@
     delete from t_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="org.tangsi.entity.User" >
+
+   <!-- useGeneratedKeys=true 是为了告诉mybatis获取数据库产生的主键
+     keyProperty="id"  是用获得的主键填充到pojo的哪一个属性
+     -->
+  <insert id="insert" parameterType="org.tangsi.entity.User" useGeneratedKeys="true" keyProperty="id">
     insert into t_user (id, name, email,
       phone)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 

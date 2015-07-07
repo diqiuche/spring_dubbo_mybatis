@@ -25,4 +25,9 @@ public class UserServiceImpl implements UserService {
         return this.userMapper.getUserWithOrdersByPrimaryKey(id);
     }
 
+    @Override
+    public int insert(User user) {
+        return this.userMapper.insert(user);
+    }
+
 }
