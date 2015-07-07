@@ -7,6 +7,28 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="CHAR" />
   </resultMap>
+
+  <resultMap id="orderResultMap" type="org.tangsi.entity.Order">
+    <id column="orderid" property="id" jdbcType="BIGINT"></id>
+     <result column="createtime" property="createtime" jdbcType="BIGINT"></result>
+     <result column="userId" property="userid" jdbcType="BIGINT"></result>
+     <result column="ordername" property="name" jdbcType="VARCHAR"></result>
+  </resultMap>
+
+  <resultMap id="userResultMap" type="org.tangsi.entity.User"  >
+      <id column="id" property="id" jdbcType="BIGINT" />
+      <result column="name" property="name" jdbcType="VARCHAR" />
+      <result column="email" property="email" jdbcType="VARCHAR" />
+      <result column="phone" property="phone" jdbcType="CHAR" />
+      <collection property="orders" ofType="org.tangsi.entity.Order" resultMap="orderResultMap"></collection>
+  </resultMap>
+
+    <!-- 关联查询，查询用户以及用户对应的所有订单 -->
+  <select id="getUserWithOrdersByPrimaryKey"  parameterType="java.lang.Long" resultMap="userResultMap">
+    select u.id, u.name, u.email,u.phone,o.id as orderid, o.createtime,o.userId,o.name as ordername from t_user u join t_order o on u.id = o.userId
+      where u.id= #{id,jdbcType=BIGINT}
+  </select>
+
   <sql id="Base_Column_List" >
     id, name, email, phone
   </sql>

@@ -50,4 +50,6 @@ public interface UserMapper {
      * @mbggenerated Tue Jul 07 15:02:42 CST 2015
      */
     int updateByPrimaryKey(User record);
+
+    public User getUserWithOrdersByPrimaryKey(long id);
 }

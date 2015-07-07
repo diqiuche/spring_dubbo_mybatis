@@ -20,4 +20,9 @@ public class UserServiceImpl implements UserService {
         return this.userMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public User getUserWithOrdersById(long id) {
+        return this.userMapper.getUserWithOrdersByPrimaryKey(id);
+    }
+
 }
