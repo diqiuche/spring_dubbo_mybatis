@@ -1,6 +1,6 @@
 drop table  if exists t_user;
 create table t_user(
-  id bigint primary  key ,
+  id bigint auto_increment primary  key  ,
   name varchar(256),
   email varchar(256),
   phone char(11)
