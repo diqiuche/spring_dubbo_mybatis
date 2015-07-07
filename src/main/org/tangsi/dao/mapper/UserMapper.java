@@ -51,5 +51,10 @@ public interface UserMapper {
      */
     int updateByPrimaryKey(User record);
 
+    /**
+     * 查询用户及其关联的订单
+     * @param id
+     * @return
+     */
     public User getUserWithOrdersByPrimaryKey(long id);
 }
