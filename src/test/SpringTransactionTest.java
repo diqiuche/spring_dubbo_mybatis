@@ -97,7 +97,7 @@ public class SpringTransactionTest {
 
 
     /**
-     * 测试mybatis 变量$与#的区别
+     * 测试mybatis 变量$与#的区别,$替代表名，#替代字段名
      */
     @Test
     public void testParamMap() {
