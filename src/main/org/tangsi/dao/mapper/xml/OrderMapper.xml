@@ -28,7 +28,7 @@
         delete from t_order
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" parameterType="org.tangsi.entity.Order">
+    <insert id="insert" parameterType="org.tangsi.entity.Order" keyProperty="id" useGeneratedKeys="true">
         insert into t_order (id, createtime, userId,
         name)
         values (#{id,jdbcType=BIGINT}, #{createtime,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT},

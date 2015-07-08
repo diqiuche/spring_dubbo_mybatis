@@ -114,4 +114,16 @@ public class SpringTransactionTest {
 
     }
 
+    /**
+     * 测试spring与mybatis整合事务的有效性（事务控制是否成功）
+     */
+    @Test
+    public void testTransaction() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
+        UserService userService = (UserService) context.getBean("userServiceImpl");
+
+        userService.saveRelatedTwoTabls(true);
+
+    }
+
 }

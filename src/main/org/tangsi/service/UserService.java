@@ -27,4 +27,6 @@ public interface UserService {
      * @return
      */
     public User selectWithParamMap(Map<String, Object> paramMap);
+
+    public void saveRelatedTwoTabls(boolean flag);
 }

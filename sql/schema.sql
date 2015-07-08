@@ -8,7 +8,7 @@ create table t_user(
 
 drop table if exists t_order;
 create table t_order(
-  id bigint primary  key,
+  id bigint auto_increment primary  key,
   createtime bigint ,
   userId bigint ,
   name varchar(256)

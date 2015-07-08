@@ -4,6 +4,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.tangsi.dao.mapper.OrderMapper;
+import org.tangsi.entity.Order;
 import org.tangsi.entity.User;
 import org.tangsi.dao.mapper.UserMapper;
 import org.tangsi.service.UserService;
@@ -19,6 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private OrderMapper orderMapper;
 
     @Override
     public User findById(long id) {
@@ -50,6 +55,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public User selectWithParamMap(Map<String, Object> paramMap) {
         return this.userMapper.selectWithParamMap(paramMap);
+    }
+
+    @Override
+    public void saveRelatedTwoTabls(boolean flag) {
+        User user = new User();
+        user.setName("huangye");
+        user.setEmail("email_huangye");
+        user.setPhone("13578974587");
+        this.userMapper.insert(user);
+
+        Order order = new Order();
+        order.setName("huangyedingdan");
+        order.setCreatetime(4787888L);
+        order.setUserid(user.getId());
+
+        this.orderMapper.insert(order);
+
+        //spring配置了对service方法的拦截，如果有方法中抛出异常，则前面插入的两条记录都不会被写入，因为事务被回滚
+        if(flag) {
+            throw new RuntimeException("事务出错");
+        }
     }
 
 }
