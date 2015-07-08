@@ -44,6 +44,19 @@
         <property name="dataSource" ref="dataSource"/>
         <!--  mybatis xml映射文件的扫描位置 -->
         <property name="mapperLocations" value="classpath:org/tangsi/dao/mapper/xml/*.xml"/>
+        <!-- mybatis分页插件 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>
+                            dialect=mysql
+                            reasonable=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
 
     <!--  mybatis Mapper类扫描位置 -->

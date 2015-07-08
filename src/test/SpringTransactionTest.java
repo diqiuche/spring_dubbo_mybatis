@@ -1,3 +1,4 @@
+import com.github.pagehelper.Page;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.mchange.v2.c3p0.jboss.C3P0PooledDataSource;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class SpringTransactionTest {
     }
 
     /**
-     * 测试mybatis插入并反馈主键的值
+     * 测试mybatis插入并返回主键的值
      */
     @Test
     public void testInsert() {
@@ -69,6 +70,26 @@ public class SpringTransactionTest {
         int num = userService.saveBatch(users);
         System.out.print("插入的数据条数为： " + num);
 
+    }
 
+    /**
+     * 测试mybatis分页
+     */
+    @Test
+    public void testPaging() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
+        UserService userService = (UserService) context.getBean("userServiceImpl");
+        Page<User> page = new Page<User>();
+        page.setPageNum(1);
+        page.setPageSize(7);
+        page = userService.listPage(page);
+
+        List<User> users = page;
+        System.out.println("总数: " + page.getTotal());
+        System.out.println("总页数：" + page.getPages());
+
+        for(User user : users) {
+            System.out.println("name:" + user.getName() + ",email:" + user.getEmail());
+        }
     }
 }

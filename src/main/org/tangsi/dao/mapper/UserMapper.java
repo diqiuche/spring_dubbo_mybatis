@@ -66,4 +66,7 @@ public interface UserMapper {
      * @return
      */
     public int insertBatch(List<User> users);
+
+
+    public List<User> selectAll();
 }

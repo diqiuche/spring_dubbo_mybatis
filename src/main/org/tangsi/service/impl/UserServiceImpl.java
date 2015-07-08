@@ -1,5 +1,7 @@
 package org.tangsi.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.tangsi.entity.User;
@@ -35,6 +37,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public int saveBatch(List<User> users) {
         return  this.userMapper.insertBatch(users);
+    }
+
+    @Override
+    public Page<User> listPage(Page<User> page) {
+        page = PageHelper.startPage(page.getPageNum(), page.getPageSize(), true);
+        List<User> users = this.userMapper.selectAll();
+        return page;
     }
 
 }

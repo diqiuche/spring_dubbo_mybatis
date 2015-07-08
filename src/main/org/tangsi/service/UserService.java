@@ -1,5 +1,6 @@
 package org.tangsi.service;
 
+import com.github.pagehelper.Page;
 import org.tangsi.entity.User;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface UserService {
     public int insert(User user);
 
     public int saveBatch(List<User> users);
+
+    public Page<User> listPage(Page<User> page);
 }
