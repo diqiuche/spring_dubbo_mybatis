@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.tangsi.dao.mapper.CommentMapper" >
+  <resultMap id="BaseResultMap" type="org.tangsi.entity.Comment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="blogid" property="blogid" jdbcType="BIGINT" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, name,blogid
+  </sql>
+
+  <!--  查询所有的评论 -->
+  <select id="selectAll" resultType="org.tangsi.entity.Comment">
+      select
+      <include refid="Base_Column_List" />
+      from t_comment
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+   <!-- useGeneratedKeys=true 是为了告诉mybatis获取数据库产生的主键
+     keyProperty="id"  是用获得的主键填充到pojo的哪一个属性
+     -->
+  <insert id="insert" parameterType="org.tangsi.entity.Comment" useGeneratedKeys="true" keyProperty="id">
+    insert into t_comment (id, name, blogid)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{blogid,jdbcType=BIGINT})
+  </insert>
+
+</mapper>

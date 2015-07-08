@@ -23,6 +23,38 @@
       <collection property="orders" ofType="org.tangsi.entity.Order" resultMap="orderResultMap"></collection>
   </resultMap>
 
+
+  <resultMap id="fullInformationMap" type="org.tangsi.entity.User">
+      <id column="id" property="id" jdbcType="BIGINT" />
+      <result column="name" property="name" jdbcType="VARCHAR" />
+      <result column="email" property="email" jdbcType="VARCHAR" />
+      <result column="phone" property="phone" jdbcType="CHAR" />
+      <collection property="blogs" ofType="org.tangsi.entity.Blog" resultMap="fullBlogMap"></collection>
+  </resultMap>
+
+  <resultMap id="fullBlogMap" type="org.tangsi.entity.Blog">
+      <id column="b_id" property="id" jdbcType="BIGINT"/>
+      <result column="b_name" property="name" jdbcType="VARCHAR"/>
+      <result column="b_userid" property="userid" jdbcType="BIGINT"/>
+        <collection property="comments" ofType="org.tangsi.entity.Comment" resultMap="commentResultMap"></collection>
+  </resultMap>
+
+   <resultMap id="commentResultMap" type="org.tangsi.entity.Comment">
+       <id column="c_id" property="id" jdbcType="BIGINT" />
+       <result column="c_name" property="name" jdbcType="VARCHAR" />
+       <result column="c_blogid" property="blogid" jdbcType="BIGINT" />
+   </resultMap>
+
+    <!-- 关联查询，查询用户，及用户管理的博客，及博客关联的评论   -->
+    <select id="getUserWithBlogAndComment" resultMap="fullInformationMap">
+
+        select u.id,u.name,u.email,u.phone, b.id as b_id, b.name as b_name, b.userid as b_userid
+        , c.id as c_id,c.name as c_name, c.blogid as c_blogid
+         from t_user u left outer join t_blog b on u.id = b.userid
+        left outer join t_comment c on c.blogid = b.id
+
+    </select>
+
     <!-- 关联查询，查询用户以及用户对应的所有订单 -->
   <select id="getUserWithOrdersByPrimaryKey"  parameterType="java.lang.Long" resultMap="userResultMap">
     select u.id, u.name, u.email,u.phone,o.id as orderid, o.createtime,o.userId,o.name as ordername from t_user u join t_order o on u.id = o.userId

@@ -29,4 +29,10 @@ public interface UserService {
     public User selectWithParamMap(Map<String, Object> paramMap);
 
     public void saveRelatedTwoTabls(boolean flag);
+
+    /**
+     * 查询用户，及用户关联的博客，及博客关联的评论
+     * @return
+     */
+    public List<User> getUserWithBlogAndComment();
 }

@@ -78,4 +78,14 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * 查询用户，及用户关联的博客，及博客关联的评论
+     * @return
+     */
+    @Override
+    public List<User> getUserWithBlogAndComment() {
+        return this.userMapper.getUserWithBlogAndComment();
+    }
+
+
 }

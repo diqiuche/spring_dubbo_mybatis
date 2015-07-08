@@ -40,6 +40,16 @@ public class User {
      */
     private List<Order> orders;
 
+    private List<Blog> blogs;
+
+    public List<Blog> getBlogs() {
+        return blogs;
+    }
+
+    public void setBlogs(List<Blog> blogs) {
+        this.blogs = blogs;
+    }
+
     public List<Order> getOrders() {
         return orders;
     }

@@ -13,3 +13,15 @@ create table t_order(
   userId bigint ,
   name varchar(256)
 );
+
+create table t_blog(
+  id bigint auto_increment primary key,
+  name varchar(256),
+  userid bigint
+);
+
+create table t_comment(
+  id bigint auto_increment primary key,
+  name varchar(256),
+  blogid bigint
+);

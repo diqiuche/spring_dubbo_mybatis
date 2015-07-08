@@ -4,6 +4,8 @@ import com.mchange.v2.c3p0.jboss.C3P0PooledDataSource;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.tangsi.entity.Blog;
+import org.tangsi.entity.Comment;
 import org.tangsi.entity.Order;
 import org.tangsi.entity.User;
 import org.tangsi.service.OrderService;
@@ -124,6 +126,37 @@ public class SpringTransactionTest {
 
         userService.saveRelatedTwoTabls(true);
 
+    }
+
+
+    /**
+     * 查询用户，及用户关联的博客，及博客关联的评论
+     */
+    @Test
+    public void testRelationQuery() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
+        UserService userService = (UserService) context.getBean("userServiceImpl");
+
+        List<User> users = userService.getUserWithBlogAndComment();
+
+        for(User user : users) {
+            System.out.println("userid : " + user.getId() + ", username: " + user.getName() );
+            List<Blog> blogs = user.getBlogs();
+            if(blogs != null && !blogs.isEmpty()) {
+                for(Blog blog : blogs) {
+                    System.out.println("\tblogname: " + blog.getName() + ", blogid : " + blog.getId());
+
+                    List<Comment> comments = blog.getComments();
+
+                    if(comments != null) {
+                        for(Comment comment : comments) {
+                            System.out.println("\t\tcommentname: " +comment.getName() + ",commentid: " + comment.getId() );
+                        }
+                    }
+
+                }
+            }
+        }
     }
 
 }

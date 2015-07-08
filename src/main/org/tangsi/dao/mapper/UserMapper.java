@@ -78,4 +78,6 @@ public interface UserMapper {
      * @return
      */
     public User selectWithParamMap(Map<String, Object> paramMap);
+
+    public List<User> getUserWithBlogAndComment();
 }
