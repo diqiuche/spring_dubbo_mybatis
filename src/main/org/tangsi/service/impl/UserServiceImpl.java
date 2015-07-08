@@ -9,6 +9,7 @@ import org.tangsi.dao.mapper.UserMapper;
 import org.tangsi.service.UserService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * created by tangsi 2015/7/6
@@ -44,6 +45,11 @@ public class UserServiceImpl implements UserService {
         page = PageHelper.startPage(page.getPageNum(), page.getPageSize(), true);
         List<User> users = this.userMapper.selectAll();
         return page;
+    }
+
+    @Override
+    public User selectWithParamMap(Map<String, Object> paramMap) {
+        return this.userMapper.selectWithParamMap(paramMap);
     }
 
 }

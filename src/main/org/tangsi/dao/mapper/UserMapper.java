@@ -3,6 +3,7 @@ package org.tangsi.dao.mapper;
 import org.tangsi.entity.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
     /**
@@ -69,4 +70,12 @@ public interface UserMapper {
 
 
     public List<User> selectAll();
+
+
+    /**
+     * 根据变量名来指定查询表名，与查询条件，注意$ # 两者的区别$只能替代表名，#只能替代字段名
+     * @param paramMap
+     * @return
+     */
+    public User selectWithParamMap(Map<String, Object> paramMap);
 }

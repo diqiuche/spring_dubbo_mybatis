@@ -40,6 +40,12 @@
       from t_user
   </select>
 
+  <select id="selectWithParamMap" resultMap="BaseResultMap" parameterType="map">
+      select
+      <include refid="Base_Column_List" />
+      from ${table} where id=#{id,jdbcType=BIGINT}
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />

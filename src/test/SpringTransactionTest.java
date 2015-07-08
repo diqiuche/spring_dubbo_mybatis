@@ -10,7 +10,9 @@ import org.tangsi.service.OrderService;
 import org.tangsi.service.UserService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * created by tangsi 2015/7/6
@@ -92,4 +94,24 @@ public class SpringTransactionTest {
             System.out.println("name:" + user.getName() + ",email:" + user.getEmail());
         }
     }
+
+
+    /**
+     * 测试mybatis 变量$与#的区别
+     */
+    @Test
+    public void testParamMap() {
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
+        UserService userService = (UserService) context.getBean("userServiceImpl");
+        Map<String, Object> param = new HashMap<>();
+        param.put("table","t_user");
+        param.put("id",8);
+
+        User user = userService.selectWithParamMap(param);
+        if(user != null)
+        System.out.println("userId:" + user.getId() + " , name=" + user.getName());
+
+    }
+
 }
