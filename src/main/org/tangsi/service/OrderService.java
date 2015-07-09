@@ -1,6 +1,6 @@
 package org.tangsi.service;
 
-import org.tangsi.entity.Order;
+import org.tangsi.order.entity.Order;
 
 import java.util.List;
 

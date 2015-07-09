@@ -2,8 +2,8 @@ package org.tangsi.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.tangsi.dao.mapper.OrderMapper;
-import org.tangsi.entity.Order;
+import org.tangsi.order.dao.mapper.OrderMapper;
+import org.tangsi.order.entity.Order;
 import org.tangsi.service.OrderService;
 
 import java.util.List;

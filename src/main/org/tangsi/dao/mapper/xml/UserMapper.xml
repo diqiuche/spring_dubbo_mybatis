@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.tangsi.dao.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="org.tangsi.entity.User" >
+<mapper namespace="org.tangsi.user.dao.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="org.tangsi.user.entity.User" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="CHAR" />
   </resultMap>
 
-  <resultMap id="orderResultMap" type="org.tangsi.entity.Order">
+  <resultMap id="orderResultMap" type="org.tangsi.order.entity.Order">
     <id column="orderid" property="id" jdbcType="BIGINT"></id>
      <result column="createtime" property="createtime" jdbcType="BIGINT"></result>
      <result column="userId" property="userid" jdbcType="BIGINT"></result>
      <result column="ordername" property="name" jdbcType="VARCHAR"></result>
   </resultMap>
 
-  <resultMap id="userResultMap" type="org.tangsi.entity.User"  >
+  <resultMap id="userResultMap" type="org.tangsi.user.entity.User"  >
       <id column="id" property="id" jdbcType="BIGINT" />
       <result column="name" property="name" jdbcType="VARCHAR" />
       <result column="email" property="email" jdbcType="VARCHAR" />
       <result column="phone" property="phone" jdbcType="CHAR" />
-      <collection property="orders" ofType="org.tangsi.entity.Order" resultMap="orderResultMap"></collection>
+      <collection property="orders" ofType="org.tangsi.order.entity.Order" resultMap="orderResultMap"></collection>
   </resultMap>
 
 
-  <resultMap id="fullInformationMap" type="org.tangsi.entity.User">
+  <resultMap id="fullInformationMap" type="org.tangsi.user.entity.User">
       <id column="id" property="id" jdbcType="BIGINT" />
       <result column="name" property="name" jdbcType="VARCHAR" />
       <result column="email" property="email" jdbcType="VARCHAR" />
       <result column="phone" property="phone" jdbcType="CHAR" />
-      <collection property="blogs" ofType="org.tangsi.entity.Blog" resultMap="fullBlogMap"></collection>
+      <collection property="blogs" ofType="org.tangsi.blog.entity.Blog" resultMap="fullBlogMap"></collection>
   </resultMap>
 
-  <resultMap id="fullBlogMap" type="org.tangsi.entity.Blog">
+  <resultMap id="fullBlogMap" type="org.tangsi.blog.entity.Blog">
       <id column="b_id" property="id" jdbcType="BIGINT"/>
       <result column="b_name" property="name" jdbcType="VARCHAR"/>
       <result column="b_userid" property="userid" jdbcType="BIGINT"/>
-        <collection property="comments" ofType="org.tangsi.entity.Comment" resultMap="commentResultMap"></collection>
+        <collection property="comments" ofType="org.tangsi.comment.entity.Comment" resultMap="commentResultMap"></collection>
   </resultMap>
 
-   <resultMap id="commentResultMap" type="org.tangsi.entity.Comment">
+   <resultMap id="commentResultMap" type="org.tangsi.comment.entity.Comment">
        <id column="c_id" property="id" jdbcType="BIGINT" />
        <result column="c_name" property="name" jdbcType="VARCHAR" />
        <result column="c_blogid" property="blogid" jdbcType="BIGINT" />
@@ -66,7 +66,7 @@
   </sql>
 
   <!--  查询所有的用户 -->
-  <select id="selectAll" resultType="org.tangsi.entity.User">
+  <select id="selectAll" resultType="org.tangsi.user.entity.User">
       select
       <include refid="Base_Column_List" />
       from t_user
@@ -92,7 +92,7 @@
    <!-- useGeneratedKeys=true 是为了告诉mybatis获取数据库产生的主键
      keyProperty="id"  是用获得的主键填充到pojo的哪一个属性
      -->
-  <insert id="insert" parameterType="org.tangsi.entity.User" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="org.tangsi.user.entity.User" useGeneratedKeys="true" keyProperty="id">
     insert into t_user (id, name, email,
       phone)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
@@ -108,7 +108,7 @@
       </foreach>
   </insert>
 
-  <insert id="insertSelective" parameterType="org.tangsi.entity.User" >
+  <insert id="insertSelective" parameterType="org.tangsi.user.entity.User" >
     insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -139,7 +139,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.tangsi.entity.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.tangsi.user.entity.User" >
     update t_user
     <set >
       <if test="name != null" >
@@ -154,7 +154,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.tangsi.entity.User" >
+  <update id="updateByPrimaryKey" parameterType="org.tangsi.user.entity.User" >
     update t_user
     set name = #{name,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},

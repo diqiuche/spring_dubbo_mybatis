@@ -1,13 +1,11 @@
 import com.github.pagehelper.Page;
-import com.mchange.v2.c3p0.ComboPooledDataSource;
-import com.mchange.v2.c3p0.jboss.C3P0PooledDataSource;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.tangsi.entity.Blog;
-import org.tangsi.entity.Comment;
-import org.tangsi.entity.Order;
-import org.tangsi.entity.User;
+import org.tangsi.blog.entity.Blog;
+import org.tangsi.comment.entity.Comment;
+import org.tangsi.order.entity.Order;
+import org.tangsi.user.entity.User;
 import org.tangsi.service.OrderService;
 import org.tangsi.service.UserService;
 
@@ -108,7 +106,7 @@ public class SpringTransactionTest {
         UserService userService = (UserService) context.getBean("userServiceImpl");
         Map<String, Object> param = new HashMap<>();
         param.put("table","t_user");
-        param.put("id",8);
+        param.put("id",4);
 
         User user = userService.selectWithParamMap(param);
         if(user != null)

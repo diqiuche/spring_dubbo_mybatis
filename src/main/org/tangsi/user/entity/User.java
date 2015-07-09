@@ -1,4 +1,7 @@
-package org.tangsi.entity;
+package org.tangsi.user.entity;
+
+import org.tangsi.blog.entity.Blog;
+import org.tangsi.order.entity.Order;
 
 import java.util.List;
 

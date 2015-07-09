@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.tangsi.dao.mapper.OrderMapper">
-    <resultMap id="BaseResultMap" type="org.tangsi.entity.Order">
+<mapper namespace="org.tangsi.order.dao.mapper.OrderMapper">
+    <resultMap id="BaseResultMap" type="org.tangsi.order.entity.Order">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="createtime" property="createtime" jdbcType="BIGINT"/>
         <result column="userId" property="userid" jdbcType="BIGINT"/>
@@ -11,7 +11,7 @@
         id, createtime, userId, name
     </sql>
 
-    <select id="getListByUserId" resultType="org.tangsi.entity.Order" parameterType="java.lang.Long">
+    <select id="getListByUserId" resultType="org.tangsi.order.entity.Order" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from t_order
@@ -28,13 +28,13 @@
         delete from t_order
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" parameterType="org.tangsi.entity.Order" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insert" parameterType="org.tangsi.order.entity.Order" keyProperty="id" useGeneratedKeys="true">
         insert into t_order (id, createtime, userId,
         name)
         values (#{id,jdbcType=BIGINT}, #{createtime,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT},
         #{name,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="org.tangsi.entity.Order">
+    <insert id="insertSelective" parameterType="org.tangsi.order.entity.Order">
         insert into t_order
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -65,7 +65,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="org.tangsi.entity.Order">
+    <update id="updateByPrimaryKeySelective" parameterType="org.tangsi.order.entity.Order">
         update t_order
         <set>
             <if test="createtime != null">
@@ -80,7 +80,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="org.tangsi.entity.Order">
+    <update id="updateByPrimaryKey" parameterType="org.tangsi.order.entity.Order">
         update t_order
         set createtime = #{createtime,jdbcType=BIGINT},
         userId = #{userid,jdbcType=BIGINT},

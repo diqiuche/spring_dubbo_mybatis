@@ -1,4 +1,6 @@
-package org.tangsi.entity;
+package org.tangsi.blog.entity;
+
+import org.tangsi.comment.entity.Comment;
 
 import java.util.List;
 

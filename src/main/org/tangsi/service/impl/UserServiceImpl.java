@@ -4,10 +4,10 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.tangsi.dao.mapper.OrderMapper;
-import org.tangsi.entity.Order;
-import org.tangsi.entity.User;
-import org.tangsi.dao.mapper.UserMapper;
+import org.tangsi.order.dao.mapper.OrderMapper;
+import org.tangsi.order.entity.Order;
+import org.tangsi.user.entity.User;
+import org.tangsi.user.dao.mapper.UserMapper;
 import org.tangsi.service.UserService;
 
 import java.util.List;

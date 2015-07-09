@@ -1,6 +1,6 @@
-package org.tangsi.dao.mapper;
+package org.tangsi.order.dao.mapper;
 
-import org.tangsi.entity.Order;
+import org.tangsi.order.entity.Order;
 
 import java.util.List;
 

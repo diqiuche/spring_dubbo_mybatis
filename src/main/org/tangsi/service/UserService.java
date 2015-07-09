@@ -1,7 +1,7 @@
 package org.tangsi.service;
 
 import com.github.pagehelper.Page;
-import org.tangsi.entity.User;
+import org.tangsi.user.entity.User;
 
 import java.util.List;
 import java.util.Map;

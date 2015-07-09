@@ -1,4 +1,4 @@
-package org.tangsi.entity;
+package org.tangsi.comment.entity;
 
 /**
  * created by tangsi 2015/7/8

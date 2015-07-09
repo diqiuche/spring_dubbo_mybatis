@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.tangsi.dao.mapper.BlogMapper">
-    <resultMap id="BaseResultMap" type="org.tangsi.entity.Blog">
+<mapper namespace="org.tangsi.blog.dao.mapper.BlogMapper">
+    <resultMap id="BaseResultMap" type="org.tangsi.blog.entity.Blog">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="userId" property="userid" jdbcType="BIGINT"/>
@@ -10,7 +10,7 @@
         id, name, userId
     </sql>
 
-    <select id="getListByUserId" resultType="org.tangsi.entity.Blog" parameterType="java.lang.Long">
+    <select id="getListByUserId" resultType="org.tangsi.blog.entity.Blog" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from t_blog
@@ -27,7 +27,7 @@
         delete from t_blog
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" parameterType="org.tangsi.entity.Blog" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insert" parameterType="org.tangsi.blog.entity.Blog" keyProperty="id" useGeneratedKeys="true">
         insert into t_blog (id, userId,name)
         values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR})
     </insert>

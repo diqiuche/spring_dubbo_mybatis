@@ -1,6 +1,6 @@
-package org.tangsi.dao.mapper;
+package org.tangsi.user.dao.mapper;
 
-import org.tangsi.entity.User;
+import org.tangsi.user.entity.User;
 
 import java.util.List;
 import java.util.Map;

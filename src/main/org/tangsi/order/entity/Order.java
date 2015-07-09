@@ -1,4 +1,4 @@
-package org.tangsi.entity;
+package org.tangsi.order.entity;
 
 public class Order {
     /**
