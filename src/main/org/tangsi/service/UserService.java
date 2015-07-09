@@ -35,4 +35,6 @@ public interface UserService {
      * @return
      */
     public List<User> getUserWithBlogAndComment();
+
+    public User findByUsernameAndPwd(Map<String, String> param);
 }

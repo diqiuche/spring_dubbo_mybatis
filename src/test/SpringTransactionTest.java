@@ -157,4 +157,17 @@ public class SpringTransactionTest {
         }
     }
 
+    @Test
+    public void testUserQuery() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
+        UserService userService = (UserService) context.getBean("userServiceImpl");
+        Map<String, String> param = new HashMap<>();
+        param.put("username", "root");
+        param.put("password", "root");
+        User user = userService.findByUsernameAndPwd(param);
+        if(user != null) {
+            System.out.println(user.getUsername());
+        }
+
+    }
 }

@@ -3,7 +3,9 @@ create table t_user(
   id bigint auto_increment primary  key  ,
   name varchar(256),
   email varchar(256),
-  phone char(11)
+  phone char(11),
+  username varchar(256),
+  password varchar(256)
 );
 
 drop table if exists t_order;

@@ -87,5 +87,9 @@ public class UserServiceImpl implements UserService {
         return this.userMapper.getUserWithBlogAndComment();
     }
 
+    @Override
+    public User findByUsernameAndPwd(Map<String, String> param) {
+        return this.userMapper.findByUsernameAndPwd(param);
+    }
 
 }

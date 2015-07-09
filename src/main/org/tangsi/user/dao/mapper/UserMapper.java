@@ -80,4 +80,6 @@ public interface UserMapper {
     public User selectWithParamMap(Map<String, Object> paramMap);
 
     public List<User> getUserWithBlogAndComment();
+
+    public User findByUsernameAndPwd(Map<String, String> map);
 }
