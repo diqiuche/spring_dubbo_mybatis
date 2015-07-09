@@ -61,6 +61,13 @@
             <version>${springversion}</version>
         </dependency>
 
+        <!-- 支持springmvc的参数校验 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.0.2.Final</version>
+        </dependency>
+
 
         <!-- dubbo rmi -->
         <!-- <dependency>
@@ -112,6 +119,13 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>3.0.1</version>
         </dependency>
+
+        <!-- Logging -->
+        <!--<dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.2</version>
+        </dependency>-->
 
         <dependency>
             <groupId>junit</groupId>

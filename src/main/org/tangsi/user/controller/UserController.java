@@ -32,8 +32,10 @@ public class UserController {
         param.put("username", username);
         param.put("password", password);
         User user = this.userService.findByUsernameAndPwd(param);
-        if(user != null)
+        if(user != null) {
+            request.getSession().setAttribute("currentUser", user);
             return "main";  //登录成功跳转到主页
+        }
         else
             request.setAttribute("error","用户名或密码错误");
         return "login";
