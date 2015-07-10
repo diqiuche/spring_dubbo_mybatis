@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,7 @@ import org.tangsi.user.entity.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,6 +37,10 @@ public class UserController {
 
         if(result.hasErrors()) {
             logger.info("参数校验有错误！！！");
+            List<FieldError> errorList = result.getFieldErrors();
+            for(FieldError fieldError : errorList) {
+                logger.info(fieldError.getField() + "----" + fieldError.getDefaultMessage());
+            }
         }
 
         Map<String, String> param = new HashMap<>();
