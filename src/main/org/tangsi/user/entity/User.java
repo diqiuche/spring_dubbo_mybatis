@@ -44,7 +44,7 @@ public class User {
      * 用户名, 采用jsr 3.3 注解式校验
      */
     @NotNull(message = "用户名不能为空")
-    @Pattern( regexp = "^root$", message = "用户名必须是root")
+    @Pattern( regexp = "^root$", message = "${username_not_valid}")
     private String username;
 
     /**
