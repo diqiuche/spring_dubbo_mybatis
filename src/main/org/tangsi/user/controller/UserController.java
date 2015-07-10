@@ -1,5 +1,6 @@
 package org.tangsi.user.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,11 @@ import java.util.Map;
 @RequestMapping("/user")
 @Controller
 public class UserController {
+
+    /**
+     * 日志句柄
+     */
+    private static  final Logger logger = Logger.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -43,6 +49,7 @@ public class UserController {
 
     @RequestMapping("/tologin")
     public String toLogin() {
+        logger.info("进入登录页");
         System.out.println("进入登录页");
         return "login";
     }
