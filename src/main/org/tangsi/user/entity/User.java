@@ -3,6 +3,8 @@ package org.tangsi.user.entity;
 import org.tangsi.blog.entity.Blog;
 import org.tangsi.order.entity.Order;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 public class User {
@@ -39,14 +41,24 @@ public class User {
     private String phone;
 
     /**
-     * 用户名
+     * 用户名, 采用jsr 3.3 注解式校验
      */
+    @NotNull(message = "用户名不能为空")
+    @Pattern( regexp = "^root$", message = "用户名必须是root")
     private String username;
 
     /**
      * 密码
      */
     private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getUsername() {
         return username;
