@@ -43,13 +43,15 @@ public class User {
     /**
      * 用户名, 采用jsr 3.3 注解式校验
      */
-    @NotNull(message = "用户名不能为空")
+    @NotNull(message = "{username_not_null}")
     @Pattern( regexp = "^root$", message = "{username_not_valid}")
     private String username;
 
     /**
      * 密码
      */
+    @NotNull(message = "{password_not_null}")
+    @Pattern(regexp = "^[\\w]+$",message = "${pwd_word_number}")
     private String password;
 
     public String getPassword() {

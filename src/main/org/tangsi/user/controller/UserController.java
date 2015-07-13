@@ -39,7 +39,13 @@ public class UserController {
             logger.info("参数校验有错误！！！");
             List<FieldError> errorList = result.getFieldErrors();
             for(FieldError fieldError : errorList) {
-                logger.info(fieldError.getField() + "----" + fieldError.getDefaultMessage());
+               // logger.info(fieldError.getField() + "----" + fieldError.getDefaultMessage());
+                if("username".equals(fieldError.getField())) {
+                    request.setAttribute("usernameValidMessage", fieldError.getDefaultMessage());
+                }else if("password".equals(fieldError.getField())) {
+                    request.setAttribute("passwordValidMessage", fieldError.getDefaultMessage());
+                }
+
             }
         }
 
