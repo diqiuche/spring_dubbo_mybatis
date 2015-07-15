@@ -5,9 +5,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.tangsi.blog.entity.Blog;
 import org.tangsi.comment.entity.Comment;
 import org.tangsi.order.entity.Order;
-import org.tangsi.user.entity.User;
 import org.tangsi.service.OrderService;
 import org.tangsi.service.UserService;
+import org.tangsi.user.entity.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -162,8 +162,8 @@ public class SpringTransactionTest {
         ApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
         UserService userService = (UserService) context.getBean("userServiceImpl");
         Map<String, String> param = new HashMap<>();
-        param.put("username", "root");
-        param.put("password", "root");
+        param.put("email", "tangside163@163.com");
+        param.put("password", "sa1234567");
         User user = userService.findByUsernameAndPwd(param);
         if(user != null) {
             System.out.println(user.getUsername());

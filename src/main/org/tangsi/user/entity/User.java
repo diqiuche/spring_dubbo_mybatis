@@ -1,7 +1,10 @@
 package org.tangsi.user.entity;
 
+import org.hibernate.validator.constraints.Email;
 import org.tangsi.blog.entity.Blog;
 import org.tangsi.order.entity.Order;
+import org.tangsi.user.validate.Login;
+import org.tangsi.user.validate.Registe;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -29,7 +32,10 @@ public class User {
      * This field corresponds to the database column t_user.email
      *
      * @mbggenerated Tue Jul 07 15:02:42 CST 2015
+     * 采用jsr 303 注解式校验
      */
+    @NotNull(message = "{email_not_null}", groups = {Login.class, Registe.class})  //分组验证：邮箱在登录与注册时都需要验证
+    @Email(message = "{not_valid_email}", groups = {Login.class, Registe.class})
     private String email;
 
     /**
@@ -41,18 +47,32 @@ public class User {
     private String phone;
 
     /**
-     * 用户名, 采用jsr 3.3 注解式校验
+     * 用户名,
      */
-    @NotNull(message = "{username_not_null}")
-    @Pattern( regexp = "^root$", message = "{username_not_valid}")
     private String username;
 
     /**
      * 密码
      */
-    @NotNull(message = "{password_not_null}")
-    @Pattern(regexp = "^[\\w]+$",message = "${pwd_word_number}")
+    @NotNull(message = "{password_not_null}", groups = {Login.class,Registe.class})
+    @Pattern(regexp = "^(([a-zA-Z]+[\\d]+)+)|(([\\d]+)+[a-zA-Z]+)$", message = "{pwd_word_number}", groups = {Login.class,Registe.class})
     private String password;
+
+    /**
+     * 确认密码，用于用户注册时的校验
+     */
+    @NotNull(message = "{password_not_null}", groups = Registe.class)
+    @Pattern(regexp = "^(([a-zA-Z]+[\\d]+)+)|(([\\d]+)+[a-zA-Z]+)$", message = "{confirm_pwd_word_number}", groups = Registe.class)
+    private String confirmPassword;
+
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 
     public String getPassword() {
         return password;

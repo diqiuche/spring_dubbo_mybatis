@@ -23,8 +23,8 @@
 
         <form class="form-signin" method="post" action="${base}/user/login">
             <h2 class="form-signin-heading">Please sign in</h2>
-            <label for="username" class="sr-only">Email address</label>
-            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus><span class="validError">${usernameValidMessage}</span>
+            <label for="email" class="sr-only">Email address</label>
+            <input type="text" id="email" name="email" class="form-control" placeholder="Email" required autofocus><span class="validError">${emailValidMessage}${errorMessage}</span>
             <label for="password" class="sr-only">Password</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required><span class="validError">${passwordValidMessage}</span>
             <div class="checkbox">

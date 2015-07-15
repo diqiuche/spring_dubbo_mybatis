@@ -87,7 +87,7 @@
   <select id="findByUsernameAndPwd" resultMap="BaseResultMap" parameterType="map">
       select
       <include refid="Base_Column_List" />
-      from t_user where username=#{username,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
+      from t_user where email=#{email,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -106,9 +106,9 @@
      -->
   <insert id="insert" parameterType="org.tangsi.user.entity.User" useGeneratedKeys="true" keyProperty="id">
     insert into t_user (id, name, email,
-      phone)
+      phone,username,password)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=CHAR})
+      #{phone,jdbcType=CHAR},#{username,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR})
   </insert>
 
 
