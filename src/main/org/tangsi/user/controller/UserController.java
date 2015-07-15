@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.tangsi.service.UserService;
 import org.tangsi.user.entity.User;
 import org.tangsi.user.validate.Login;
@@ -17,6 +18,7 @@ import org.tangsi.user.validate.Registe;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -132,5 +134,24 @@ public class UserController {
         user.setPhone("18670950324");
         map.put("user", user);
         return map;
+    }
+
+    /**
+     * 返回freemarker视图
+     * @return
+     */
+    @RequestMapping("/testFreemarker")
+    public ModelAndView testFreeMarker() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("test");
+        List<User> users = new ArrayList<>();
+        for(int i=0; i <3; i++) {
+            User user = new User();
+            user.setName("name" + i);
+            user.setEmail("email" + i);
+            users.add(user);
+        }
+        modelAndView.addObject("users", users);
+        return modelAndView;
     }
 }
