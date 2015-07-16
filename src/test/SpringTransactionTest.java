@@ -22,7 +22,7 @@ public class SpringTransactionTest {
     public static void main(String[] args)  {
         ApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
         UserService userService = (UserService) context.getBean("userServiceImpl");
-        User user = userService.findById(1);
+        User user = userService.findById(3);
         System.out.println("用户名：" + user.getName());
 
        OrderService orderService = (OrderService) context.getBean("orderServiceImpl");

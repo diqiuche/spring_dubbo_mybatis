@@ -48,7 +48,7 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
-        <property name="order" value="2"/>
+        <property name="order" value="0"/>
     </bean>
 
     <!-- freemarker的配置 -->
