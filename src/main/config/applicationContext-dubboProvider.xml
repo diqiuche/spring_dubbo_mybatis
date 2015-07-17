@@ -17,7 +17,7 @@
 
     <dubbo:application name="hello-world-provider"/>
 
-    <dubbo:registry address="zookeeper:192.168.114.136:2181" check="false" subscribe="false" register="false"/>
+    <dubbo:registry address="zookeeper://192.168.114.136:2181" check="false" subscribe="false" register="true"/>
 
     <dubbo:service interface="org.tangsi.dubbo.service.DubboDemoService" ref="dubboDemoServiceImpl"/>
 
