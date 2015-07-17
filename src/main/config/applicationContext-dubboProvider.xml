@@ -15,9 +15,9 @@
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!-- 提供方应用信息，用于计算依赖关系 -->
-    <dubbo:application name="hello-world-provider"/>
+    <dubbo:application name="hello-world-provider" owner="tangside163"/>
     <!-- dubbo 协议端口  -->
-    <dubbo:protocol  port="20880"/>
+    <dubbo:protocol  port="20880" />
     <!-- 使用zookeeper注册中心暴露服务地址 -->
     <dubbo:registry address="zookeeper://192.168.114.136:2181" check="false" subscribe="false" register="true"/>
     <!-- 声明需要暴露的服务接口 -->
