@@ -17,14 +17,15 @@
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="hello-world-provider" owner="tangside163"/>
     <!-- dubbo 协议端口  -->
-    <dubbo:protocol  port="20880" />
+    <dubbo:protocol  port="20880"  accesslog="true"/>
     <!-- 使用zookeeper注册中心暴露服务地址 -->
     <dubbo:registry id="zookeepernode1" address="zookeeper://192.168.114.136:2181" check="false" subscribe="false" register="true"/>
     <dubbo:registry id="zookeepernode2" address="zookeeper://192.168.114.136:2182" check="false" subscribe="false" register="true"/>
     <dubbo:registry id="zookeepernode3" address="zookeeper://192.168.114.136:2183" check="false" subscribe="false" register="true"/>
     <dubbo:registry  id="zookeepernode4" address="zookeeper://192.168.114.136:2184" check="false" subscribe="false" register="true"/>
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="org.tangsi.dubbo.service.DubboDemoService" ref="dubboDemoServiceImpl" loadbalance="roundrobin" registry="zookeepernode1,zookeepernode2,zookeepernode3,zookeepernode4"/>
+    <dubbo:service interface="org.tangsi.dubbo.service.DubboDemoService" ref="dubboDemoServiceImpl" loadbalance="roundrobin"
+                   registry="zookeepernode1,zookeepernode2,zookeepernode3,zookeepernode4" token="123456"/>
     <!-- 服务的实现类 -->
     <bean id="dubboDemoServiceImpl" class="org.tangsi.dubbo.service.impl.DubboDemoServiceImpl" />
 </beans>
