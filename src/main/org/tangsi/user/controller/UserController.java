@@ -52,7 +52,7 @@ public class UserController {
                 }
 
             }
-            return "login";
+            return "login.jsp";
         }
 
         Map<String, String> param = new HashMap<>();
@@ -61,23 +61,23 @@ public class UserController {
         User userFromDB = this.userService.findByUsernameAndPwd(param);
         if(userFromDB != null) {
             request.getSession().setAttribute("currentUser", userFromDB);
-            return "main";  //登录成功跳转到主页
+            return "main.jsp";  //登录成功跳转到主页
         }
         else
             request.setAttribute("errorMessage","用户名或密码错误");
-        return "login";
+        return "login.jsp";
     }
 
     @RequestMapping("/tologin")
     public String toLogin() {
         logger.info("进入登录页");
         System.out.println("进入登录页");
-        return "login";
+        return "login.jsp";
     }
 
     @RequestMapping("/toregiste")
     public String toRegiste() {
-        return "registe";
+        return "registe.jsp";
     }
 
     /**
@@ -101,17 +101,17 @@ public class UserController {
                     request.setAttribute("confirmPwd_not_valid", fieldError.getDefaultMessage());
                 }
             }
-            return  "registe";
+            return  "registe.jsp";
         }
 
         if(user.getPassword() != null) {
             if(!user.getPassword().equals(user.getConfirmPassword())) {
                 request.setAttribute("password_not_the_same", "两次密码不一致");
-                return  "registe";
+                return  "registe.jsp";
             }
         }else {
             request.setAttribute("password_is_null", "密码为空");
-            return "registe";
+            return "registe.jsp";
         }
 
         this.userService.insert(user);
@@ -151,7 +151,7 @@ public class UserController {
             users.add(user);
         }
         request.setAttribute("users", users);
-        return "test";
+        return "test.ftl";
       /*  modelAndView.addObject("users", users);
         return modelAndView;*/
     }
