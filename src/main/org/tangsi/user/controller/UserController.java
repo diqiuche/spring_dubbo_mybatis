@@ -1,5 +1,6 @@
 package org.tangsi.user.controller;
 
+import com.github.pagehelper.Page;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.tangsi.service.UserService;
 import org.tangsi.user.entity.User;
 import org.tangsi.user.validate.Login;
 import org.tangsi.user.validate.Registe;
+import org.tangsi.util.mvc.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -154,5 +156,17 @@ public class UserController {
         return "userlist.ftl";
       /*  modelAndView.addObject("users", users);
         return modelAndView;*/
+    }
+
+    @RequestMapping("/getUsers")
+    @ResponseBody
+    public Pager<User> getUsers(Pager<User> pager) {
+        Page<User> page = new Page<>();
+        page.setPageNum(pager.getPage());
+        page.setPageSize(pager.getPageSize());
+        page = this.userService.listPage(page);
+        pager.setRows(page.getResult());
+        pager.setTotal(page.getTotal());
+        return pager;
     }
 }

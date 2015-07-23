@@ -42,6 +42,7 @@
         $(document).ready(function(){
             $table = $("#dataTable");
             $table.datagrid({
+                url:'${baseDir.contextPath}/user/getUsers',
                 columns:[[
                     {field:'name',title:'姓名',sortable:true},
                     {field:'email',title:'邮箱',sortable:true},
@@ -53,6 +54,9 @@
                 ctrlSelect:true,  //按住ctrl键加click一行数据时才允许多选
                 loadMsg:'正在努力的加载数据，不要着急哦^_^',
                 singleSelect:true,
+                onBeforeLoad:function(param) {
+                    param.pageSize = param.rows;   //easyui 获取数据的字段定义为rows，分页控件请求参数rows却表示的页面大小,太逗了
+                },
                 onSelect:function(index,row) {  //单行选中事件
                     alert("选中行");
                     console.dir(row);
@@ -72,16 +76,16 @@
     </script>
     <body>
     <dvi style="margin: 0 auto;">
-        <table id="dataTable" class="easyui-datagrid" title="Basic DataGrid" style="width:700px;height:250px"
+        <table id="dataTable" class="easyui-datagrid" title="用户列表" style="width:700px;height:250px"
                data-options="singleSelect:true,collapsible:true,method:'get'">
             <tbody>
-            <#list users as user>
+           <#-- <#list users as user>
             <tr>
                 <td>${user.name}</td>
                 <td>${user.email}</td>
                 <td>186</td>
             </tr>
-            </#list>
+            </#list>-->
             </tbody>
         </table>
     </dvi>
