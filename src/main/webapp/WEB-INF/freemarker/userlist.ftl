@@ -4,12 +4,43 @@
     <title>this html page is rendered by freemarker</title>
     <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.2/themes/default/easyui.css" rel="stylesheet" type="text/css">
     <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.2/themes/icon.css" type="text/css">
+    <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.2/demo/demo.css" type="text/css">
     <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-1.11.3.js" ></script>
     <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-easyui-1.4.2/jquery.easyui.min.js" ></script>
     <script type="text/javascript">
-        var $table;
+        var $table, cmenu;
+        function createColumnMenu(){
+            cmenu = $('<div/>').appendTo('body');
+            cmenu.menu({
+                onClick: function(item){
+                    if (item.iconCls == 'icon-ok'){
+                        $table.datagrid('hideColumn', item.name);
+                        cmenu.menu('setIcon', {
+                            target: item.target,
+                            iconCls: 'icon-empty'
+                        });
+                    } else {
+                        $table.datagrid('showColumn', item.name);
+                        cmenu.menu('setIcon', {
+                            target: item.target,
+                            iconCls: 'icon-ok'
+                        });
+                    }
+                }
+            });
+            var fields = $table.datagrid('getColumnFields');
+            for(var i=0; i<fields.length; i++){
+                var field = fields[i];
+                var col = $table.datagrid('getColumnOption', field);
+                cmenu.menu('appendItem', {
+                    text: col.title,
+                    name: field,
+                    iconCls: 'icon-ok'
+                });
+            }
+        }
         $(document).ready(function(){
-            $table = $("#dataTable")
+            $table = $("#dataTable");
             $table.datagrid({
                 columns:[[
                     {field:'name',title:'姓名',sortable:true},
@@ -25,6 +56,16 @@
                 onSelect:function(index,row) {  //单行选中事件
                     alert("选中行");
                     console.dir(row);
+                },
+                onHeaderContextMenu:function(e,index) {  //表格标题栏右键菜单事件
+                    e.preventDefault();
+                    if (!cmenu){
+                        createColumnMenu();
+                    }
+                    cmenu.menu('show', {
+                        left:e.pageX,
+                        top:e.pageY
+                    });
                 }
             })
         });
