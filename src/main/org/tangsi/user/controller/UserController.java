@@ -151,7 +151,7 @@ public class UserController {
             users.add(user);
         }
         request.setAttribute("users", users);
-        return "test.ftl";
+        return "userlist.ftl";
       /*  modelAndView.addObject("users", users);
         return modelAndView;*/
     }

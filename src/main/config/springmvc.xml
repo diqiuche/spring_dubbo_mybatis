@@ -76,6 +76,7 @@
         <property name="exposeSessionAttributes" value="true" />
         <property name="exposeSpringMacroHelpers" value="true" />
         <property name="order" value="0"/>    <!-- 视图优先级 优先渲染freemarker视图 -->
+        <property name="requestContextAttribute" value="baseDir"/>   <!--  在freemarker ftl模板页面中获取contextPath -->
      </bean>
 
     <!-- 静态资源映射，防止静态资源被Spring DispathcerServlet拦截  -->
