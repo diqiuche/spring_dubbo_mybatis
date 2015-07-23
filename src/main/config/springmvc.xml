@@ -75,7 +75,7 @@
         <property name="exposeRequestAttributes" value="true" />
         <property name="exposeSessionAttributes" value="true" />
         <property name="exposeSpringMacroHelpers" value="true" />
-        <property name="order" value="0"/>
+        <property name="order" value="0"/>    <!-- 视图优先级 优先渲染freemarker视图 -->
      </bean>
 
     <!-- 静态资源映射，防止静态资源被Spring DispathcerServlet拦截  -->
