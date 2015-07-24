@@ -46,7 +46,12 @@
 
     <!--  jsp 视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewNames" value="*.jsp"/>
+        <property name="viewNames">
+            <array>
+                <value>*.jsp</value>
+                <value>redirect:*</value>     <!-- important， 重定向的地址也必须拦截 -->
+            </array>
+        </property>
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=""/>
         <property name="order" value="1"/>
@@ -68,7 +73,12 @@
     </bean>
     <!-- FreeMarker视图解析 。在这里配置后缀名ftl和视图解析器。。 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <property name="viewNames" value="*.ftl"/>
+        <property name="viewNames">
+            <array>
+                <value>*.ftl</value>
+                <value>redirect:*</value>     <!-- important， 重定向的地址也必须拦截 -->
+            </array>
+        </property>
         <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
         <property name="suffix" value="" />
         <property name="contentType" value="text/html;charset=UTF-8" />
