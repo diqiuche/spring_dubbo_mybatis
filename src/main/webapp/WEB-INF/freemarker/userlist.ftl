@@ -138,19 +138,19 @@
                     <input type="hidden" name="id"/>
                     <tr>
                         <td>Name:</td>
-                        <td><input class="easyui-textbox" type="text" name="name" data-options="required:true"></input></td>
+                        <td><input class="easyui-textbox" type="text" name="name" data-options="required:true" /></td>
                     </tr>
                     <tr>
                         <td>Username:</td>
-                        <td><input class="easyui-textbox" type="text" name="username" data-options="required:true"></input></td>
+                        <td><input class="easyui-textbox" type="text" name="username" data-options="required:true"/></td>
                     </tr>
                     <tr>
                         <td>Email:</td>
-                        <td><input class="easyui-textbox" type="text" name="email" data-options="required:true"></input></td>
+                        <td><input class="easyui-textbox" type="text" name="email" data-options="required:true" /></td>
                     </tr>
                     <tr>
                         <td>Phone:</td>
-                        <td><input class="easyui-textbox" type="text" name="phone" data-options="required:true"></input></td>
+                        <td><input class="easyui-textbox" type="text" name="phone" data-options="required:true" /></td>
                     </tr>
                 </table>
             </form>
