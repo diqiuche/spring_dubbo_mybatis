@@ -141,7 +141,7 @@ public class UserController {
      * 返回freemarker视图
      * @return
      */
-    @RequestMapping("/testFreemarker")
+    @RequestMapping("/listUsers")
     public String testFreeMarker(HttpServletRequest request) {
       /*  ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("test");*/
