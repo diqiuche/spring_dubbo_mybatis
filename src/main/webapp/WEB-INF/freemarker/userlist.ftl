@@ -2,11 +2,11 @@
 <html>
     <meta charset="utf-8" content="text/html"/>
     <title>this html page is rendered by freemarker</title>
-    <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.2/themes/default/easyui.css" rel="stylesheet" type="text/css">
-    <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.2/themes/icon.css" type="text/css">
-    <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.2/demo/demo.css" type="text/css">
+    <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/themes/default/easyui.css" rel="stylesheet" type="text/css">
+    <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/themes/icon.css" type="text/css">
+    <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/demo/demo.css" type="text/css">
     <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-1.11.3.js" ></script>
-    <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-easyui-1.4.2/jquery.easyui.min.js" ></script>
+    <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-easyui-1.4.3/jquery.easyui.min.js" ></script>
     <script type="text/javascript">
         var $table, cmenu;
         function createColumnMenu(){

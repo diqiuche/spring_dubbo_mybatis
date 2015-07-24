@@ -169,4 +169,18 @@ public class UserController {
         pager.setTotal(page.getTotal());
         return pager;
     }
+
+    @RequestMapping("/mainmetro")
+    public String mainPage() {
+        return "mainmetro.ftl";
+    }
+
+    /**
+     * 导向portal页面
+     * @return
+     */
+    @RequestMapping("/portal")
+    public String toPortal() {
+        return "portal.ftl";
+    }
 }
