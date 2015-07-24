@@ -169,6 +169,7 @@
   <update id="updateByPrimaryKey" parameterType="org.tangsi.user.entity.User" >
     update t_user
     set name = #{name,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=CHAR}
     where id = #{id,jdbcType=BIGINT}

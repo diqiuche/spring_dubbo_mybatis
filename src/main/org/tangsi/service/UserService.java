@@ -37,4 +37,11 @@ public interface UserService {
     public List<User> getUserWithBlogAndComment();
 
     public User findByUsernameAndPwd(Map<String, String> param);
+
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    public int update(User user);
 }

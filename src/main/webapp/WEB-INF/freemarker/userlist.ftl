@@ -8,7 +8,7 @@
     <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-1.11.3.js" ></script>
     <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-easyui-1.4.3/jquery.easyui.min.js" ></script>
     <script type="text/javascript">
-        var $table, cmenu;
+        var $table, cmenu,$messageDialog, $editUserForm;
         function createColumnMenu(){
             cmenu = $('<div/>').appendTo('body');
             cmenu.menu({
@@ -41,6 +41,20 @@
         }
         $(document).ready(function(){
             $table = $("#dataTable");
+            $editUserForm = $("#editUserForm").form({
+                ajax:true,
+                dataType:'json',
+                url:'${baseDir.contextPath}/user/updateUser',
+                success:function(data) {
+                    data = eval('(' + data + ')');  // change the JSON string to javascript object
+                    if(data.success) {
+                        $messageDialog.dialog("close");//关闭编辑框
+                        $table.datagrid("reload"); //重新加载数据
+                    }else {
+                        alert(data.message);
+                    }
+                }
+            });
             $table.datagrid({
                 url:'${baseDir.contextPath}/user/getUsers',
                 columns:[[
@@ -59,8 +73,15 @@
                     param.pageSize = param.rows;   //easyui 获取数据的字段定义为rows，分页控件请求参数rows却表示的页面大小,太逗了
                 },
                 onSelect:function(index,row) {  //单行选中事件
-                    alert("选中行");
-                    console.dir(row);
+                   // alert("选中行,姓名:" + row.name + ", 用户名：" + row.username + ", 邮箱：" + row.email + ", 电话: " + row.phone);
+                    $editUserForm.form("load",{
+                        id:row.id,
+                        name:row.name,
+                        username:row.username,
+                        email:row.email,
+                        phone:row.phone
+                    });
+                    $messageDialog.dialog("open");
                 },
                 onHeaderContextMenu:function(e,index) {  //表格标题栏右键菜单事件
                     e.preventDefault();
@@ -72,8 +93,26 @@
                         top:e.pageY
                     });
                 }
-            })
+            });
+
+            $messageDialog = $("#messageDialog").dialog({
+                title: '用户信息',
+                width: 400,
+                height: 300,
+                closed: true,
+                cache: false,
+                modal: true
+            });
         });
+
+        function submitForm() {
+            $editUserForm.form("submit");
+        }
+
+        function clearForm() {
+            $editUserForm.form("clear");
+        }
+
     </script>
     <body>
     <dvi style="margin: 0 auto;">
@@ -91,5 +130,35 @@
         </table>
     </dvi>
 
-    </body>
+    <div id="messageDialog" >
+        <div id="contentPanel" class="easyui-panel" title="修改" style="width:400px" data-options="fit:true">
+            <form action="" id="editUserForm" method="post">
+
+                <table cellpadding="5">
+                    <input type="hidden" name="id"/>
+                    <tr>
+                        <td>Name:</td>
+                        <td><input class="easyui-textbox" type="text" name="name" data-options="required:true"></input></td>
+                    </tr>
+                    <tr>
+                        <td>Username:</td>
+                        <td><input class="easyui-textbox" type="text" name="username" data-options="required:true"></input></td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td><input class="easyui-textbox" type="text" name="email" data-options="required:true"></input></td>
+                    </tr>
+                    <tr>
+                        <td>Phone:</td>
+                        <td><input class="easyui-textbox" type="text" name="phone" data-options="required:true"></input></td>
+                    </tr>
+                </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">Submit</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">Clear</a>
+            </div>
+        </div>
+    </div>
+ </body>
 </html>

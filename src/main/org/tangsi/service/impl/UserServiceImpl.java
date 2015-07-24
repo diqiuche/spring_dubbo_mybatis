@@ -92,4 +92,13 @@ public class UserServiceImpl implements UserService {
         return this.userMapper.findByUsernameAndPwd(param);
     }
 
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    public int update(User user) {
+        return  this.userMapper.updateByPrimaryKey(user);
+    }
+
 }

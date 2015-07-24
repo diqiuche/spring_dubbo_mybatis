@@ -122,6 +122,30 @@ public class UserController {
     }
 
     /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    @RequestMapping("/updateUser")
+    @ResponseBody
+    public Map<String, Object> updateUser(User user) {
+        System.out.println("进入更新");
+        Map<String, Object> map = new HashMap<>();
+        try {
+            this.userService.update(user);
+            map.put("message", "更新成功");
+            map.put("success", true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("message", "更新失败");
+            map.put("success", false);
+        }
+
+        return map;
+
+    }
+
+    /**
      * 返回json视图
      * @return
      */
