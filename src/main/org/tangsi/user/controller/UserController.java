@@ -183,4 +183,9 @@ public class UserController {
     public String toPortal() {
         return "portal.ftl";
     }
+
+    @RequestMapping("/highcharts")
+    public String renderHighCharts() {
+        return "highcharts.ftl";
+    }
 }
