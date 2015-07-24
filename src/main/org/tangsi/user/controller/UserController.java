@@ -1,5 +1,6 @@
 package org.tangsi.user.controller;
 
+import com.alibaba.dubbo.common.json.JSON;
 import com.github.pagehelper.Page;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,11 +139,12 @@ public class UserController {
     }
 
     /**
+     * 用户列表
      * 返回freemarker视图
      * @return
      */
     @RequestMapping("/listUsers")
-    public String testFreeMarker(HttpServletRequest request) {
+    public String listUserWithFreeMarker(HttpServletRequest request) {
       /*  ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("test");*/
         List<User> users = new ArrayList<>();
@@ -154,8 +156,6 @@ public class UserController {
         }
         request.setAttribute("users", users);
         return "userlist.ftl";
-      /*  modelAndView.addObject("users", users);
-        return modelAndView;*/
     }
 
     @RequestMapping("/getUsers")
@@ -167,6 +167,7 @@ public class UserController {
         page = this.userService.listPage(page);
         pager.setRows(page.getResult());
         pager.setTotal(page.getTotal());
+        System.out.println(com.alibaba.fastjson.JSON.toJSONString(page.getResult()));
         return pager;
     }
 }

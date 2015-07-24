@@ -13,14 +13,31 @@
         <param-value>classpath:config/log4j.properties</param-value>
     </context-param>
 
+    <!-- 自定义的filter，只是为了获取contextPath放入request中 -->
     <filter>
         <filter-name>baseFilter</filter-name>
         <filter-class>org.tangsi.filter.BaseFilter</filter-class>
     </filter>
+    <!-- 解决前后台乱码，统一utf-8编码 -->
+    <filter>
+        <filter-name>encodeFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+
     <filter-mapping>
         <filter-name>baseFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>encodeFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 
     <!-- 从contextConfigLocation 加载spring配置文件初始化spring容器 -->
     <listener>

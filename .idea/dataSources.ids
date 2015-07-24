@@ -3435,13 +3435,6 @@
       <index name="idx_unique_manager" unique="true" columns="manager_staff_id"/>
       <index name="idx_fk_address_id" unique="false" columns="address_id"/>
     </table>
-    <table name="user" schema="" catalog="springmybatis" type="TABLE">
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="name" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
-      <column name="email" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
-      <column name="phone" sqlType="CHAR" precision="11" scale="0" nullable="true" jdbcType="1"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
     <table name="city" schema="" catalog="world" type="TABLE">
       <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="Name" sqlType="CHAR" precision="35" scale="0" nullable="false" jdbcType="1" def="Jyc="/>
