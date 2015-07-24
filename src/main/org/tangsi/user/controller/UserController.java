@@ -167,7 +167,6 @@ public class UserController {
         page = this.userService.listPage(page);
         pager.setRows(page.getResult());
         pager.setTotal(page.getTotal());
-        System.out.println(com.alibaba.fastjson.JSON.toJSONString(page.getResult()));
         return pager;
     }
 }

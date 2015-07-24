@@ -45,6 +45,7 @@
                 url:'${baseDir.contextPath}/user/getUsers',
                 columns:[[
                     {field:'name',title:'姓名',sortable:true},
+                    {field:'username',title:'用户名',sortable:true},
                     {field:'email',title:'邮箱',sortable:true},
                     {field:'phone',title:'电话',sortable:true}
                 ]],
