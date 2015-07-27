@@ -51,6 +51,9 @@
 <br/>------------遍历map<br/>
   <#list testmap?keys as key>
       ${key}---->${testmap[key]}
+      <#if testmap[key]=='1111'>
+          键的值为1111
+      </#if>
       <#if key=='title2'>
           <#break>
       </#if>
