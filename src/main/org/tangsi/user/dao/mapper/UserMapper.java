@@ -82,4 +82,5 @@ public interface UserMapper {
     public List<User> getUserWithBlogAndComment();
 
     public User findByUsernameAndPwd(Map<String, String> map);
+
 }

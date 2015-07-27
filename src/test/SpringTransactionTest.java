@@ -4,6 +4,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.tangsi.blog.entity.Blog;
 import org.tangsi.comment.entity.Comment;
+import org.tangsi.country.entity.Country;
+import org.tangsi.country.service.CountryService;
 import org.tangsi.order.entity.Order;
 import org.tangsi.service.OrderService;
 import org.tangsi.service.UserService;
@@ -163,10 +165,30 @@ public class SpringTransactionTest {
         UserService userService = (UserService) context.getBean("userServiceImpl");
         Map<String, String> param = new HashMap<>();
         param.put("email", "tangside163@163.com");
-        param.put("password", "sa1234567");
+        param.put("password", "sa_1234567");
         User user = userService.findByUsernameAndPwd(param);
         if(user != null) {
             System.out.println(user.getUsername());
+        }
+
+    }
+
+
+    /**
+     * 测试一对一关联查询,
+     */
+    @Test
+    public void testJoinQuery() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
+        CountryService countryService = (CountryService) context.getBean("countryServiceImpl");
+        Country country = countryService.getCountryWithUser(1);
+        if(country != null) {
+            System.out.println("国籍名称：" + country.getCountryName() + ",userid=" + country.getUserId());
+            User user = country.getUser();
+            if(user != null) {
+                System.out.println("userid=" + user.getId() +", username=" + user.getName() + ", useremail=" + user.getEmail());
+
+            }
         }
 
     }

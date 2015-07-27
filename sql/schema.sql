@@ -16,14 +16,23 @@ create table t_order(
   name varchar(256)
 );
 
+drop table if exists t_blog;
 create table t_blog(
   id bigint auto_increment primary key,
   name varchar(256),
   userid bigint
 );
 
+drop table if exists t_comment;
 create table t_comment(
   id bigint auto_increment primary key,
   name varchar(256),
   blogid bigint
+);
+
+drop table if exists t_country;
+create table t_country(
+  id bigint auto_increment primary key,
+  countryname varchar(256),
+  userid bigint
 );

@@ -2,6 +2,7 @@ package org.tangsi.user.entity;
 
 import org.hibernate.validator.constraints.Email;
 import org.tangsi.blog.entity.Blog;
+import org.tangsi.country.entity.Country;
 import org.tangsi.order.entity.Order;
 import org.tangsi.user.validate.Login;
 import org.tangsi.user.validate.Registe;
@@ -54,8 +55,8 @@ public class User {
     /**
      * 密码
      */
-    @NotNull(message = "{password_not_null}", groups = {Login.class,Registe.class})
-    @Pattern(regexp = "^(([a-zA-Z]+[\\d]+)+)|(([\\d]+)+[a-zA-Z]+)$", message = "{pwd_word_number}", groups = {Login.class,Registe.class})
+    @NotNull(message = "{password_not_null}", groups = {Login.class, Registe.class})
+    @Pattern(regexp = "^(([a-zA-Z]+[\\d]+)+)|(([\\d]+)+[a-zA-Z]+)$", message = "{pwd_word_number}", groups = {Login.class, Registe.class})
     private String password;
 
     /**
