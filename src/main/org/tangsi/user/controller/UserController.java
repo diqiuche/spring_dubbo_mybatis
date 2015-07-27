@@ -236,6 +236,13 @@ public class UserController {
         }
         request.setAttribute("names", names);
         request.setAttribute("height", 160);
+
+        Map<String, String> map = new HashMap<>();
+        map.put("title1", "1111");
+        map.put("title2", "2222");
+        map.put("title3", "3333");
+        request.setAttribute("testmap", map);
+
         return "fetchInSession.ftl";
     }
 }

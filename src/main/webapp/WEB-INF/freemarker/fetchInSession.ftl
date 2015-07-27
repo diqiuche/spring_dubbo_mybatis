@@ -48,5 +48,13 @@
     <#break>
 </#switch>
 
+<br/>------------遍历map
+  <#list testmap?keys as key>
+      ${key}---->${testmap[key]}
+      <#if key_has_next>
+          ,<br/>
+      </#if>
+  </#list>
+
 </body>
 </html>
