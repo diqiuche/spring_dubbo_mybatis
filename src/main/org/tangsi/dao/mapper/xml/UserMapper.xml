@@ -180,4 +180,11 @@
       phone = #{phone,jdbcType=CHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+    <!-- 缓存 -->
+    <cache eviction="FIFO" flushInterval="60000" readOnly="true" size="512"/>  <!--  eviction缓存策略, FIFO 先进先出:按对象进入缓存的顺序来移除它们,
+      flushInterval:缓存刷新时间60秒. readOnly=true,只配置查询缓存, size=512:缓存会存储列表集合或对象的512个引用-->
+
+
+
 </mapper>
