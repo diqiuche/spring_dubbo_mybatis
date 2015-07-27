@@ -235,6 +235,7 @@ public class UserController {
             names.add("tt" + (i+1));
         }
         request.setAttribute("names", names);
+        request.setAttribute("height", 160);
         return "fetchInSession.ftl";
     }
 }
