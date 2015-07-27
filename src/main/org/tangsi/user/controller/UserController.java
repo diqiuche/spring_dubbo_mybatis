@@ -231,10 +231,10 @@ public class UserController {
     public String testFetchParamFromSession(HttpServletRequest request) {
           request.getSession().setAttribute("age",26);
         List<String> names = new ArrayList<>();
-       /* for(int i=0; i<3; i++) {
+       for(int i=0; i<3; i++) {
             names.add("tt" + (i+1));
-        }*/
-       // request.setAttribute("names", names);
+        }
+        request.setAttribute("names", names);
         return "fetchInSession.ftl";
     }
 }

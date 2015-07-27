@@ -17,6 +17,12 @@
     <#if names??>
         <#list names as name>
          ${name}
+        <#if name_has_next>
+            ,
+        </#if>
+        <#if name_index=1>
+            <#break>
+        </#if>
         </#list>
     </#if>
 <#if !names??>
