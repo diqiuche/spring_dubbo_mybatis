@@ -221,4 +221,20 @@ public class UserController {
     public String renderHighCharts() {
         return "highcharts.ftl";
     }
+
+    /**
+     * 返回freemarker视图
+     * @param request
+     * @return
+     */
+    @RequestMapping("/fetchInSession")
+    public String testFetchParamFromSession(HttpServletRequest request) {
+          request.getSession().setAttribute("age",26);
+        List<String> names = new ArrayList<>();
+       /* for(int i=0; i<3; i++) {
+            names.add("tt" + (i+1));
+        }*/
+       // request.setAttribute("names", names);
+        return "fetchInSession.ftl";
+    }
 }
