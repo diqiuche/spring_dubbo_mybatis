@@ -20,10 +20,7 @@ import org.tangsi.util.mvc.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * created by tangsi 2015/7/9
@@ -237,7 +234,7 @@ public class UserController {
         request.setAttribute("names", names);
         request.setAttribute("height", 160);
 
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new LinkedHashMap<>();
         map.put("title1", "1111");
         map.put("title2", "2222");
         map.put("title3", "3333");

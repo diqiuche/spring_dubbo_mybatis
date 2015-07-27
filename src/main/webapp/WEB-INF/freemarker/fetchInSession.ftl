@@ -48,9 +48,12 @@
     <#break>
 </#switch>
 
-<br/>------------遍历map
+<br/>------------遍历map<br/>
   <#list testmap?keys as key>
       ${key}---->${testmap[key]}
+      <#if key=='title2'>
+          <#break>
+      </#if>
       <#if key_has_next>
           ,<br/>
       </#if>
