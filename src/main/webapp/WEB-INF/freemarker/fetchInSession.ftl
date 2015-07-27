@@ -17,11 +17,11 @@
     <#if names??>
         <#list names as name>
          ${name}
-        <#if name_has_next>
+        <#if name_has_next>  <#-- 判断集合中是否有下一个元素 -->
             ,
         </#if>
         <#if name_index=1>
-            <#break>
+            <#break>  <#-- 提前终止循环 -->
         </#if>
         </#list>
     </#if>
