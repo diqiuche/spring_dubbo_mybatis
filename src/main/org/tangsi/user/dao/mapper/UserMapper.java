@@ -69,7 +69,7 @@ public interface UserMapper {
     public int insertBatch(List<User> users);
 
 
-    public List<User> selectAll();
+    public List<User> selectAll(Map<String, String> conditionMap);
 
 
     /**

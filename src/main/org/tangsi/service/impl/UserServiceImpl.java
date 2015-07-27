@@ -46,9 +46,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<User> listPage(Page<User> page) {
+    public Page<User> listPage(Page<User> page, Map<String, String> conditionMap) {
         page = PageHelper.startPage(page.getPageNum(), page.getPageSize(), true);
-        List<User> users = this.userMapper.selectAll();
+        List<User> users = this.userMapper.selectAll(conditionMap);
         return page;
     }
 

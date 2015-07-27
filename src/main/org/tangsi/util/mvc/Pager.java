@@ -28,6 +28,33 @@ public class Pager<T> {
      */
     private int pageSize;
 
+    /**
+     * 排序字段
+     */
+    private String sort;
+
+    /**
+     * 排序方向：asc or desc
+     */
+    private String order;
+
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
     public int getPage() {
         return page;
     }

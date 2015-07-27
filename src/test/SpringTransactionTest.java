@@ -84,7 +84,7 @@ public class SpringTransactionTest {
         Page<User> page = new Page<User>();
         page.setPageNum(1);
         page.setPageSize(7);
-        page = userService.listPage(page);
+        page = userService.listPage(page, new HashMap<String, String>());
 
         List<User> users = page;
         System.out.println("总数: " + page.getTotal());

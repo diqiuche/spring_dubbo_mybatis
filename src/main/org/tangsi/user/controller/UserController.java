@@ -171,24 +171,33 @@ public class UserController {
     public String listUserWithFreeMarker(HttpServletRequest request) {
       /*  ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("test");*/
-        List<User> users = new ArrayList<>();
+     /*   List<User> users = new ArrayList<>();
         for(int i=0; i <3; i++) {
             User user = new User();
             user.setName("name" + i);
             user.setEmail("email" + i);
             users.add(user);
         }
-        request.setAttribute("users", users);
+        request.setAttribute("users", users);*/
         return "userlist.ftl";
     }
 
     @RequestMapping("/getUsers")
     @ResponseBody
     public Pager<User> getUsers(Pager<User> pager) {
+
+        //构造排序条件
+        Map<String,String> conditionMap = new HashMap<>();
+        if(pager.getOrder() != null && !pager.getOrder().isEmpty()) {
+           conditionMap.put("order", pager.getOrder());
+        }
+        if(pager.getSort() != null && !pager.getSort().isEmpty()) {
+            conditionMap.put("sort", pager.getSort());
+        }
         Page<User> page = new Page<>();
         page.setPageNum(pager.getPage());
         page.setPageSize(pager.getPageSize());
-        page = this.userService.listPage(page);
+        page = this.userService.listPage(page, conditionMap);
         pager.setRows(page.getResult());
         pager.setTotal(page.getTotal());
         return pager;

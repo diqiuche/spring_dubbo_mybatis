@@ -19,7 +19,7 @@ public interface UserService {
 
     public int saveBatch(List<User> users);
 
-    public Page<User> listPage(Page<User> page);
+    public Page<User> listPage(Page<User> page, Map<String, String> conditionMap);
 
     /**
      * 指定表名变量与字段变量的查询
