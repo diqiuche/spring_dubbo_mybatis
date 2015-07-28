@@ -3,18 +3,10 @@
 <meta charset="utf-8" content="text/html"/>
 <title>this html page is rendered by freemarker</title>
 <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/themes/black/easyui.css" rel="stylesheet" type="text/css">
-<link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/themes/icon.css" type="text/css">
-<link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/demo/demo.css" type="text/css">
+<link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/themes/icon.css" rel="stylesheet" type="text/css">
+<link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/demo/demo.css" rel="stylesheet" type="text/css">
 <link href="${baseDir.contextPath}/css/commons.css" type="text/css">
 <style type="text/css">
-    .myicon-ok{
-        background:url('../ok.png') no-repeat center center;
-    }
-
-    .datagrid {
-        margin: 0px;
-        padding: 0px;
-    }
 </style>
 <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
@@ -24,7 +16,7 @@
         cmenu = $('<div/>').appendTo('body');
         cmenu.menu({
             onClick: function (item) {
-                if (item.iconCls == 'myicon-ok') {
+                if (item.iconCls == 'icon-ok') {
                     $table.datagrid('hideColumn', item.name);
                     cmenu.menu('setIcon', {
                         target: item.target,
@@ -34,7 +26,7 @@
                     $table.datagrid('showColumn', item.name);
                     cmenu.menu('setIcon', {
                         target: item.target,
-                        iconCls: 'myicon-ok'
+                        iconCls: 'icon-ok'
                     });
                 }
             }
@@ -84,6 +76,11 @@
             ctrlSelect: true,  //按住ctrl键加click一行数据时才允许多选
             loadMsg: '正在努力的加载数据，不要着急哦^_^',
             singleSelect: true,
+            toolbar:[
+                {iconCls:'icon-add',text:'新增',handler:function(){
+                    alert("新增");
+                }}
+            ],
             onBeforeLoad: function (param) {
                 param.pageSize = param.rows;   //easyui 获取数据的字段定义为rows，分页控件请求参数rows却表示的页面大小,太逗了
             },
