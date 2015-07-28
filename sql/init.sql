@@ -10,8 +10,8 @@ INSERT INTO t_user(name,email,phone,username,password) VALUES (9, '马云', 't8@
 INSERT INTO t_user(name,email,phone,username,password) VALUES (10, '马化腾1', 't9@163.com', '13478458741', 'mahuaten', 'xiaoyuandwo');
 INSERT INTO t_user(name,email,phone,username,password) VALUES (11, '俞敏洪', 't10@163.com', '13654871254', 'yuminghong', 'xiaoyuandwo');
 
-insert  into  t_order values(1,12121212212,1,'订单1');
-insert  into  t_order values(2,121212178812,1,'订单2');
-insert  into  t_order values(3,45452,1,'订单3');
+insert  into  t_order(createtim,userid,name) values(12121212212,1,'订单1');
+insert  into  t_order(createtim,userid,name) values(121212178812,1,'订单2');
+insert  into  t_order(createtim,userid,name) values(45452,1,'订单3');
 
 insert into t_country(countryname, userid) values('中国',1);
