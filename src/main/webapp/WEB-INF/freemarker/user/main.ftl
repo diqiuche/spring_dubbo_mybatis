@@ -47,7 +47,7 @@
 
     </script>
 <body class="easyui-layout">
-    <div data-options="region:'north',title:'今日热点',split:true" style="height:100px;"></div>
+    <div data-options="region:'north',title:'今日热点',split:true" style="height:200px;"></div>
     <div data-options="region:'west',title:'主菜单',split:true" style="width:200px;">
         <div id="accordionManager" class="easyui-accordion" style="width:200px;height:200px;">
         </div>
