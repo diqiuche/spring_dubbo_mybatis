@@ -11,7 +11,7 @@
     <script type="text/javascript">
 
         var $accordionManager, $userTree,$orderTree, $centralFrame,
-             $classTree;
+             $classTree,$musicTree;
 
         $(document).ready(function(){
             $accordionManager = $('#accordionManager');
@@ -19,6 +19,11 @@
             $accordionManager.accordion('add', {
                 title: '用户',
                 content: '<div><ul id="userTree"></ul></div>',
+                height:200,
+                selected: false
+            }).accordion('add', {
+                title: '音乐',
+                content: '<div><ul id="musicTree"></ul></div>',
                 height:200,
                 selected: false
             }).accordion('add', {
@@ -42,6 +47,14 @@
             });
             $orderTree = $("#orderTree");
             $classTree = $("#classTree");
+            $musicTree = $("#musicTree").tree({
+                url:'${baseDir.contextPath}/user/initMusicTree',
+                onClick:function(node){
+                    if(node.musicFlag) {
+                        $centralFrame.attr("src", "${baseDir.contextPath}/user/playmusic");
+                    }
+                }
+            });
 
         })
 

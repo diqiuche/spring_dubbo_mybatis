@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tangsi.commons.entity.MusicTreeNode;
 import org.tangsi.commons.entity.UserTreeNode;
 import org.tangsi.service.UserService;
 import org.tangsi.user.entity.User;
@@ -281,5 +282,25 @@ public class UserController {
             map.put("success",false);
         }
         return map;
+    }
+
+    /**
+     * 返回音乐树节点json数据
+     * @return
+     */
+    @RequestMapping("/initMusicTree")
+    @ResponseBody
+    public List<MusicTreeNode> initMusicTree(){
+        List<MusicTreeNode> data = new ArrayList<>();
+        List<MusicTreeNode> rootChildren = new ArrayList<>();
+        MusicTreeNode root = new MusicTreeNode(1,false, "音乐","open",null, rootChildren);
+        data.add(root);
+        rootChildren.add(new MusicTreeNode(2,true,"音乐1","open", null, null));
+        return data;
+    }
+
+    @RequestMapping("/playmusic")
+    public String playMusic(HttpServletRequest request) {
+         return   "jqplayer.ftl";
     }
 }

@@ -152,6 +152,15 @@
             }
         });
 
+        //tooltip 提示
+        $table.datagrid('getPager').find('a.l-btn').tooltip({
+            content: function(){
+                var cc = $(this).find('span.l-btn-icon').attr('class').split(' ');
+                var icon = cc[1].split('-')[1];
+                return icon + ' page';
+            }
+        });
+
         $messageDialog = $("#messageDialog").dialog({
             title: '用户信息',
             width: 400,
