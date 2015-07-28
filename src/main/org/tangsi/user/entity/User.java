@@ -56,7 +56,7 @@ public class User {
      * 密码
      */
     @NotNull(message = "{password_not_null}", groups = {Login.class, Registe.class})
-    @Pattern(regexp = "^(([a-zA-Z]+[\\d]+)+)|(([\\d]+)+[a-zA-Z]+)$", message = "{pwd_word_number}", groups = {Login.class, Registe.class})
+    @Pattern(regexp = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$", message = "{pwd_word_number}", groups = {Login.class, Registe.class})
     private String password;
 
     /**

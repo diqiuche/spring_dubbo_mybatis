@@ -11,7 +11,37 @@
 <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
 <script type="text/javascript">
-    var $table, cmenu, $messageDialog, $editUserForm;
+    var $table, cmenu, $messageDialog, $editUserForm,
+        $addUserForm,$addMessageDialog;
+
+    $.extend($.fn.validatebox.defaults.rules, {
+        equals: {
+            validator: function(value,param){
+                return value == $(param[0]).val();
+            },
+            message: 'Password and ConfirmPassword not matched'
+        }
+    });
+
+    //定制实现jquery easyui的手机号码的校验规则
+    $.extend($.fn.validatebox.defaults.rules, {
+        phone: {
+            validator: function(value, param){
+                return /^1\d{10}$/.test(value);
+            },
+            message: 'please enter 11 numbers which starts with 1'
+        }
+    });
+    //密码必须是字母和数字的组合
+    $.extend($.fn.validatebox.defaults.rules, {
+        pwdPattern: {
+            validator: function(value,param){
+                return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/.test(value);
+            },
+            message: '密码必须包含字母和数字,且长度必须在8至16之间'
+        }
+    });
+
     function createColumnMenu() {
         cmenu = $('<div/>').appendTo('body');
         cmenu.menu({
@@ -58,6 +88,20 @@
                 }
             }
         });
+        $addUserForm = $("#addUserForm").form({
+            ajax: true,
+            dataType: 'json',
+            url: '${baseDir.contextPath}/user/addUser',
+            success: function (data) {
+                data = eval('(' + data + ')');  // change the JSON string to javascript object
+                if (data.success) {
+                    $addMessageDialog.dialog("close");//关闭编辑框
+                    $table.datagrid("reload"); //重新加载数据
+                } else {
+                    alert(data.message);
+                }
+            }
+        });
         $table.datagrid({
             fit:true,
             fitColumns:true, //列宽自适应，防止出现滚动条
@@ -78,7 +122,8 @@
             singleSelect: true,
             toolbar:[
                 {iconCls:'icon-add',text:'新增',handler:function(){
-                    alert("新增");
+                    clearAddForm();
+                    $addMessageDialog.dialog("open");
                 }}
             ],
             onBeforeLoad: function (param) {
@@ -115,6 +160,15 @@
             cache: false,
             modal: true
         });
+
+        $addMessageDialog = $("#addMessageDialog").dialog({
+            title: '用户信息',
+            width: 400,
+            height: 350,
+            closed: true,
+            cache: false,
+            modal: true
+        });
     });
 
     function submitForm() {
@@ -123,6 +177,14 @@
 
     function clearForm() {
         $editUserForm.form("clear");
+    }
+
+    function submitAddForm() {
+        $addUserForm.form("submit");
+    }
+
+    function clearAddForm() {
+        $addUserForm.form("clear");
     }
 
 </script>
@@ -169,6 +231,44 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">Clear</a>
         </div>
     </div>
+
+    <div id="addMessageDialog">
+        <div id="addContentPanel" class="easyui-panel" title="新增" style="width:400px" data-options="fit:true">
+            <form action="" id="addUserForm" method="post">
+
+                <table cellpadding="5">
+                    <tr>
+                        <td>Name:</td>
+                        <td><input class="easyui-textbox" type="text" name="name" data-options="required:true"/></td>
+                    </tr>
+                    <tr>
+                        <td>Username:</td>
+                        <td><input class="easyui-textbox" type="text" name="username" data-options="required:true"/></td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td><input class="easyui-textbox" type="text" name="email" data-options="required:true" validType="email"/></td>
+                    </tr>
+                    <tr>
+                        <td>Phone:</td>
+                        <td><input  class="easyui-validatebox" type="text" name="phone" data-options="required:true" validType="phone" /></td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input id="password" class="easyui-validatebox" type="text" name="password" data-options="required:true" validType="pwdPattern" /></td>
+                    </tr>
+                    <tr>
+                        <td>ConfirmPassword:</td>
+                        <td><input class="easyui-textbox" type="text" name="confirmPassword" data-options="required:true,validType:{equals:['#password'],pwdPattern:[]}"/></td>
+                    </tr>
+                </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitAddForm()">Submit</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearAddForm()">Clear</a>
+            </div>
+        </div>
+
 </div>
 </body>
 </html>

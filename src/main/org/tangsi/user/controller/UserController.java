@@ -262,4 +262,24 @@ public class UserController {
         rootChildren.add(new UserTreeNode(2,"用户列表","open", null, null));
         return data;
     }
+
+    /**
+     * 新增用户入口函数
+     * @param user
+     * @return
+     */
+    @RequestMapping("/addUser")
+    @ResponseBody
+    public Map<String, Object> addUser(User user) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            this.userService.insert(user);
+            map.put("message", "保存成功");
+            map.put("success",true);
+        } catch (Exception e) {
+            map.put("message", "保存失败");
+            map.put("success",false);
+        }
+        return map;
+    }
 }
