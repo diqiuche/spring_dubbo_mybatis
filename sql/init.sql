@@ -1,4 +1,14 @@
-insert  into t_user(name,email,phone,username,password) values('唐思','tangside163@163.com', '18670650325','root','sa_1234567');
+INSERT INTO t_user(name,email,phone,username,password) VALUES (1, '唐思', 'tangside163@163.com', '18670650325', 'root', 'sa_1234567');
+INSERT INTO t_user(name,email,phone,username,password) VALUES (2, '王石', 't1@163.com', '18975487457', 'wangshi', 'xiaoyuandwo');
+INSERT INTO t_user(name,email,phone,username,password) VALUES (3, '徐小平', 't2@163.com', '15748794568', 'xuxiaoping', 'xiaoyuandwo');
+INSERT INTO t_user(name,email,phone,username,password) VALUES (4, '潘石屹', 't3@163.com', '15748794599', 'xiaopan', 'xiaoyuandwo');
+INSERT INTO t_user(name,email,phone,username,password) VALUES (5, '张朝阳1', 't4@163.com', '12547878744', 'zhangchaoyng', 'xiaoyuandwo');
+INSERT INTO t_user(name,email,phone,username,password) VALUES (6, 'hhhhyyy', 't5@163.com', '18678954251', 'liyanhong', 'xiaoyuandwo');
+INSERT INTO t_user(name,email,phone,username,password) VALUES (7, '丁磊', 't6@163.com', '16874589654', 'dinglei', 'xiaoyuandwo');
+INSERT INTO t_user(name,email,phone,username,password) VALUES (8, '陈天桥', 't7@163.com', '15623541287', 'chengtianqiao', 'xiaoyuandwo');
+INSERT INTO t_user(name,email,phone,username,password) VALUES (9, '马云', 't8@163.com', '18451241236', 'mayun', 'xiaoyuandwo');
+INSERT INTO t_user(name,email,phone,username,password) VALUES (10, '马化腾1', 't9@163.com', '13478458741', 'mahuaten', 'xiaoyuandwo');
+INSERT INTO t_user(name,email,phone,username,password) VALUES (11, '俞敏洪', 't10@163.com', '13654871254', 'yuminghong', 'xiaoyuandwo');
 
 insert  into  t_order values(1,12121212212,1,'订单1');
 insert  into  t_order values(2,121212178812,1,'订单2');

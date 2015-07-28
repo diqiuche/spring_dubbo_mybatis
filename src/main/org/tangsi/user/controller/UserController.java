@@ -252,7 +252,7 @@ public class UserController {
      * 返回用户树节点json数据
      * @return
      */
-    @RequestMapping("/getUserTree")
+    @RequestMapping("/initUserTree")
     @ResponseBody
     public List<UserTreeNode> getUserTree() {
         List<UserTreeNode> data = new ArrayList<>();

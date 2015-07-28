@@ -10,7 +10,8 @@
 
     <script type="text/javascript">
 
-        var $accordionManager, $userTree,$orderTree, $centralFrame;
+        var $accordionManager, $userTree,$orderTree, $centralFrame,
+             $classTree;
 
         $(document).ready(function(){
             $accordionManager = $('#accordionManager');
@@ -18,14 +19,21 @@
             $accordionManager.accordion('add', {
                 title: '用户',
                 content: '<div><ul id="userTree"></ul></div>',
+                height:200,
                 selected: false
             }).accordion('add', {
                 title: '订单',
                 content: '<div><ul id="orderTree"></ul></div>',
+                height:200,
+                selected: false
+            }).accordion('add', {
+                title: '课程',
+                content: '<div><ul id="classTree"></ul></div>',
+                height:200,
                 selected: false
             });
             $userTree = $("#userTree").tree({
-                url:'${baseDir.contextPath}/user/getUserTree',
+                url:'${baseDir.contextPath}/user/initUserTree',
                 onClick:function(node){
                     if(node.text=='用户列表') {
                         $centralFrame.attr("src", "${baseDir.contextPath}/user/listUsers");
@@ -33,7 +41,7 @@
                 }
             });
             $orderTree = $("#orderTree");
-
+            $classTree = $("#classTree");
 
         })
 
