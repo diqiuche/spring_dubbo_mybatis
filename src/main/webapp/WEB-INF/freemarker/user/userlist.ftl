@@ -2,12 +2,18 @@
 <html>
 <meta charset="utf-8" content="text/html"/>
 <title>this html page is rendered by freemarker</title>
-<link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/themes/default/easyui.css" rel="stylesheet" type="text/css">
+<link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/themes/black/easyui.css" rel="stylesheet" type="text/css">
 <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/themes/icon.css" type="text/css">
 <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/demo/demo.css" type="text/css">
+<link href="${baseDir.contextPath}/css/commons.css" type="text/css">
 <style type="text/css">
     .myicon-ok{
         background:url('../ok.png') no-repeat center center;
+    }
+
+    .datagrid {
+        margin: 0px;
+        padding: 0px;
     }
 </style>
 <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-1.11.3.js"></script>
@@ -61,6 +67,8 @@
             }
         });
         $table.datagrid({
+            fit:true,
+            fitColumns:true, //列宽自适应，防止出现滚动条
             url: '${baseDir.contextPath}/user/getUsers',   //数据源
             columns: [
                 [
@@ -122,8 +130,8 @@
 
 </script>
 <body>
-<dvi style="margin: 0 auto;">
-    <table id="dataTable" class="easyui-datagrid" title="用户列表" style="width:700px;height:250px"
+
+    <table id="dataTable" class="easyui-datagrid" title="用户列表"
            data-options="singleSelect:true,collapsible:true,method:'get'">
         <tbody>
         <#-- <#list users as user>
@@ -135,8 +143,6 @@
             </#list>-->
         </tbody>
     </table>
-</dvi>
-
 <div id="messageDialog">
     <div id="contentPanel" class="easyui-panel" title="修改" style="width:400px" data-options="fit:true">
         <form action="" id="editUserForm" method="post">

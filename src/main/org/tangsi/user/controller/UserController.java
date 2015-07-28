@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tangsi.commons.entity.UserTreeNode;
 import org.tangsi.service.UserService;
 import org.tangsi.user.entity.User;
 import org.tangsi.user.validate.Login;
@@ -204,6 +205,11 @@ public class UserController {
         return "mainmetro.ftl";
     }
 
+    @RequestMapping("/mainFtl")
+    public String mianFtl() {
+        return "user/main.ftl";
+    }
+
     /**
      * 导向portal页面
      * @return
@@ -240,5 +246,20 @@ public class UserController {
         request.setAttribute("testmap", map);
 
         return "fetchInSession.ftl";
+    }
+
+    /**
+     * 返回用户树节点json数据
+     * @return
+     */
+    @RequestMapping("/getUserTree")
+    @ResponseBody
+    public List<UserTreeNode> getUserTree() {
+        List<UserTreeNode> data = new ArrayList<>();
+        List<UserTreeNode> rootChildren = new ArrayList<>();
+        UserTreeNode root = new UserTreeNode(1,"用户","open",null, rootChildren);
+        data.add(root);
+        rootChildren.add(new UserTreeNode(2,"用户列表","open", null, null));
+        return data;
     }
 }
