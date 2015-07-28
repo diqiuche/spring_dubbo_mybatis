@@ -9,8 +9,12 @@
 <html>
 <head>
     <title>500|服务器内部错误</title>
+    <link href="${base}/css/commons.css" rel="stylesheet" type="text/css"/>
 </head>
-<body>
-    错误信息:${javax.servlet.error.message}
+<body class="errorBackground">
+    异常栈信息：<%= exception %>
+    <div class="backDiv">
+        <button type="button"  class="backButton" onclick="window.history.go(-1);">返回</button>
+    </div>
 </body>
 </html>

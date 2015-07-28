@@ -7,7 +7,7 @@
 <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/demo/demo.css" type="text/css">
 <style type="text/css">
     .myicon-ok{
-        background:url('ok.png') no-repeat center center;
+        background:url('../ok.png') no-repeat center center;
     }
 </style>
 <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-1.11.3.js"></script>

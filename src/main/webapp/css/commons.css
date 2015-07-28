@@ -1,0 +1,17 @@
+.errorBackground {
+    background-image:url('../images/commons/pacificocean.jpg');
+    background-repeat: repeat;
+}
+
+.backDiv {
+    width: 200px;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.backButton {
+    width:80px;
+    height:40px;
+    background-color: #cfc;
+    padding-bottom:-500px;
+}

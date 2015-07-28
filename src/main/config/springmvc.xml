@@ -17,7 +17,8 @@
     <mvc:annotation-driven validator="validator">  <!-- 这个validator属性非常重要，要不然验证实体中的message键取不到i18n文件中的值  -->
         <mvc:message-converters register-defaults="false">
             <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
-            <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+            <bean id="fastJsonHttpMessageConverter"
+                  class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
                 <property name="supportedMediaTypes">
                     <list>
                         <!-- 这里顺序不能反，一定先写text/html,不然ie下出现下载提示 -->
@@ -38,7 +39,9 @@
     <!-- 资源文件绑定器 -->
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
-            <list><value>/WEB-INF/i18n/message</value></list>
+            <list>
+                <value>/WEB-INF/i18n/message</value>
+            </list>
         </property>
         <property name="defaultEncoding" value="UTF-8"/>
         <property name="useCodeAsDefaultMessage" value="false"/>
@@ -49,7 +52,8 @@
         <property name="viewNames">
             <array>
                 <value>*.jsp</value>
-                <value>redirect:*</value>     <!-- important， 重定向的地址也必须拦截 -->
+                <value>redirect:*</value>
+                <!-- important， 重定向的地址也必须拦截 -->
             </array>
         </property>
         <property name="prefix" value="/WEB-INF/jsp/"/>
@@ -59,8 +63,8 @@
 
     <!-- freemarker的配置 -->
     <bean id="freemarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/WEB-INF/freemarker/" />
-        <property name="defaultEncoding" value="UTF-8" />
+        <property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>
+        <property name="defaultEncoding" value="UTF-8"/>
         <property name="freemarkerSettings">
             <props>
                 <prop key="template_update_delay">10</prop>
@@ -76,23 +80,38 @@
         <property name="viewNames">
             <array>
                 <value>*.ftl</value>
-                <value>redirect:*</value>     <!-- important， 重定向的地址也必须拦截 -->
+                <value>redirect:*</value>
+                <!-- important， 重定向的地址也必须拦截 -->
             </array>
         </property>
-        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
-        <property name="suffix" value="" />
-        <property name="contentType" value="text/html;charset=UTF-8" />
-        <property name="exposeRequestAttributes" value="true" />
-        <property name="exposeSessionAttributes" value="true" />
-        <property name="exposeSpringMacroHelpers" value="true" />
-        <property name="order" value="0"/>    <!-- 视图优先级 优先渲染freemarker视图 -->
-        <property name="requestContextAttribute" value="baseDir"/>   <!--  在freemarker ftl模板页面中获取contextPath -->
-     </bean>
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+        <property name="suffix" value=""/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="order" value="0"/>
+        <!-- 视图优先级 优先渲染freemarker视图 -->
+        <property name="requestContextAttribute" value="baseDir"/>
+        <!--  在freemarker ftl模板页面中获取contextPath -->
+    </bean>
 
     <!-- 静态资源映射，防止静态资源被Spring DispathcerServlet拦截  -->
-    <mvc:resources mapping="/resources/**" location="/resources/" />
-    <mvc:resources  mapping="/images/**" location="/images/" />
-    <mvc:resources mapping="/js/**" location="/js/" />
-    <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+
+    <!-- 将Controller抛出的异常转到特定View -->
+    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="error"/>      <!-- 默认发生异常的错误视图 -->
+        <property name="exceptionAttribute" value="ex"/>           <!-- 异常页面用来获取异常信息的变量名 -->
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">error</prop>   <!-- 只要发生Exception异常则跳转到/WEB-INF/jsp/error.jsp -->
+                <prop key="org.springframework.web.util.NestedServletException">error</prop>
+            </props>
+        </property>
+    </bean>
 
 </beans>

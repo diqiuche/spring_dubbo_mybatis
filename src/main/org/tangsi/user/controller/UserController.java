@@ -1,6 +1,5 @@
 package org.tangsi.user.controller;
 
-import com.alibaba.dubbo.common.json.JSON;
 import com.github.pagehelper.Page;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +51,7 @@ public class UserController {
                 }
 
             }
-            return "login.jsp";
+            return "user/login.jsp";
         }
 
         Map<String, String> param = new HashMap<>();
@@ -61,23 +60,23 @@ public class UserController {
         User userFromDB = this.userService.findByUsernameAndPwd(param);
         if(userFromDB != null) {
             request.getSession().setAttribute("currentUser", userFromDB);
-            return "main.jsp";  //登录成功跳转到主页
+            return "user/main.jsp";  //登录成功跳转到主页
         }
         else
             request.setAttribute("errorMessage","用户名或密码错误");
-        return "login.jsp";
+        return "user/login.jsp";
     }
 
     @RequestMapping("/tologin")
     public String toLogin() {
         logger.info("进入登录页");
         System.out.println("进入登录页");
-        return "login.jsp";
+        return "user/login.jsp";
     }
 
     @RequestMapping("/toregiste")
     public String toRegiste() {
-        return "registe.jsp";
+        return "user/registe.jsp";
     }
 
     /**
@@ -101,17 +100,17 @@ public class UserController {
                     request.setAttribute("confirmPwd_not_valid", fieldError.getDefaultMessage());
                 }
             }
-            return  "registe.jsp";
+            return "user/registe.jsp";
         }
 
         if(user.getPassword() != null) {
             if(!user.getPassword().equals(user.getConfirmPassword())) {
                 request.setAttribute("password_not_the_same", "两次密码不一致");
-                return  "registe.jsp";
+                return "user/registe.jsp";
             }
         }else {
             request.setAttribute("password_is_null", "密码为空");
-            return "registe.jsp";
+            return "user/registe.jsp";
         }
 
         this.userService.insert(user);
@@ -176,7 +175,7 @@ public class UserController {
             users.add(user);
         }
         request.setAttribute("users", users);*/
-        return "userlist.ftl";
+        return "user/userlist.ftl";
     }
 
     @RequestMapping("/getUsers")
