@@ -20,3 +20,7 @@ body {
     margin: 0px;
     padding: 0px;
 }
+
+.videoCls {
+    background: url('../images/commons/logo.jpg')  no-repeat -245px -115px;
+}
