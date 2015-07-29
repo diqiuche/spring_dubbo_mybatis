@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.tangsi.video.dao.mapper.VideoCategoryMapper">
+    <resultMap id="BaseResultMap" type="org.tangsi.video.entity.VideoTreeNode">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="countryName" property="countryName" jdbcType="VARCHAR"/>
+        <result column="userId" property="userId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="UserResultMap" type="org.tangsi.user.entity.User">
+        <id property="id" column="u_id"/>
+        <result property="name" column="u_name" />
+        <result property="email" column="u_email" />
+        <result property="phone" column="u_phone" />
+        <result property="username" column="u_username" />
+        <result property="password" column="u_password" />
+    </resultMap>
+
+    <resultMap id="CountryUserResultMap" type="org.tangsi.country.entity.Country">
+        <id property="id" column="id" />
+        <result property="countryName" column="countryName" />
+        <result property="userId" column="userId"/>
+        <association property="user" column="Country_userId" javaType="org.tangsi.user.entity.User" resultMap="UserResultMap" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, countryName, userId
+    </sql>
+
+    <select id="selectCountry" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+          <include refid="Base_Column_List"/>
+         from t_country where id=#{countryId,jdbcType=BIGINT}
+    </select>
+
+    <!-- 一对一关联查询, 查询国籍以及其绑定的用户(实际上国籍与用户是一对多关系，此处只是为了测试mybatis的一对一关联查询，dont be serious) -->
+    <select id="getCountryWithUser" parameterType="java.lang.Long" resultMap="CountryUserResultMap">
+        select c.id,c.countryname,c.userid,c.userid as Country_userId,
+          u.id as u_id, u.name as u_name,u.email as u_email, u.phone as u_phone, u.username as u_username, u.password as u_password
+         from t_country c left join t_user u on c.userid=u.id
+        where c.id=#{countryId,jdbcType=BIGINT}
+    </select>
+
+
+
+</mapper>

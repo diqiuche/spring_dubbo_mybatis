@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.tangsi.commons.entity.MusicTreeNode;
 import org.tangsi.commons.entity.UserTreeNode;
+import org.tangsi.video.entity.VideoTreeNode;
 import org.tangsi.service.UserService;
 import org.tangsi.user.entity.User;
 import org.tangsi.user.validate.Login;
@@ -290,12 +290,12 @@ public class UserController {
      */
     @RequestMapping("/initMusicTree")
     @ResponseBody
-    public List<MusicTreeNode> initMusicTree(){
-        List<MusicTreeNode> data = new ArrayList<>();
-        List<MusicTreeNode> rootChildren = new ArrayList<>();
-        MusicTreeNode root = new MusicTreeNode(1,false, "音乐","open",null, rootChildren);
+    public List<VideoTreeNode> initMusicTree(){
+        List<VideoTreeNode> data = new ArrayList<>();
+        List<VideoTreeNode> rootChildren = new ArrayList<>();
+        VideoTreeNode root = new VideoTreeNode(1,false, "音乐","open",null, rootChildren);
         data.add(root);
-        rootChildren.add(new MusicTreeNode(2,true,"音乐1","open", null, null));
+        rootChildren.add(new VideoTreeNode(2,true,"音乐1","open", null, null));
         return data;
     }
 

@@ -37,16 +37,16 @@ create table t_country(
   userid bigint
 );
 
-drop table if exists t_music_category;
-create table t_music_category(
+drop table if exists t_video_category;
+create table t_video_category(
   id bigint auto_increment primary key,
   pid bigint not null,
   name varchar(256) not null,
   iconCls varchar(128) default ''
 );
 
-drop table if exists t_music;
-create table t_music(
+drop table if exists t_video;
+create table t_video(
   id bigint auto_increment primary key,
   musicCategoryId bigint not null,
   name varchar(256) not null,
