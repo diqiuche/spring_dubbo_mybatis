@@ -63,7 +63,7 @@
 <body class="easyui-layout">
     <div data-options="region:'north',title:'今日热点',split:true" style="height:200px;"></div>
     <div data-options="region:'west',title:'主菜单',split:true" style="width:200px;">
-        <div id="accordionManager" class="easyui-accordion" style="width:200px;height:200px;">
+        <div id="accordionManager" class="easyui-accordion" style="height:250px;" data-options="fit:true">
         </div>
     </div>
     <div data-options="region:'center',title:'',border:false" style="padding:0px;background:#eee;overflow: hidden;border: 0px;">
