@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tangsi.user.entity.UserTreeNode;
 import org.tangsi.video.entity.VideoTreeNode;
 import org.tangsi.service.UserService;
 import org.tangsi.user.entity.User;
 import org.tangsi.user.validate.Login;
 import org.tangsi.user.validate.Registe;
 import org.tangsi.util.mvc.Pager;
+import org.tangsi.video.service.VideoCategoryService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -36,6 +38,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private VideoCategoryService videoCategoryService;
+
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login( @Validated(Login.class) @Valid @ModelAttribute User user, BindingResult result, HttpServletRequest request) {
@@ -252,16 +258,16 @@ public class UserController {
      * 返回用户树节点json数据
      * @return
      */
-    /*@RequestMapping("/initUserTree")
+    @RequestMapping("/initUserTree")
     @ResponseBody
     public List<UserTreeNode> getUserTree() {
         List<UserTreeNode> data = new ArrayList<>();
         List<UserTreeNode> rootChildren = new ArrayList<>();
         UserTreeNode root = new UserTreeNode(1,"用户","open",null, rootChildren);
         data.add(root);
-        rootChildren.add(new UserTreeNode(2,"用户列表","open", null, null));
+        rootChildren.add(new UserTreeNode(2, "用户列表", "open", null, null));
         return data;
-    }*/
+    }
 
     /**
      * 新增用户入口函数
@@ -290,12 +296,7 @@ public class UserController {
     @RequestMapping("/initMusicTree")
     @ResponseBody
     public List<VideoTreeNode> initMusicTree(){
-        List<VideoTreeNode> data = new ArrayList<>();
-        List<VideoTreeNode> rootChildren = new ArrayList<>();
-        VideoTreeNode root = new VideoTreeNode(1,false, "音乐","open",null, rootChildren);
-        data.add(root);
-        rootChildren.add(new VideoTreeNode(2,true,"音乐1","open", null, null));
-        return data;
+        return this.videoCategoryService.buildVideoTree();
     }
 
     @RequestMapping("/playmusic")

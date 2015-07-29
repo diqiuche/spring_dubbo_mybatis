@@ -8,6 +8,10 @@ import java.util.List;
  */
 public class VideoTreeNode {
 
+    public static final boolean MUSIC_FLAG_YES = true;
+
+    public static final boolean MUSIC_FLAG_NOT = false;
+
     private long id;
 
     /**
@@ -30,12 +34,16 @@ public class VideoTreeNode {
      */
     private String iconCls;
 
-    public VideoTreeNode(long id, boolean musicFlag, String text, String state, String iconCls, List<VideoTreeNode> children) {
+    public VideoTreeNode(long id, boolean musicFlag, String text, String state, String iconCls) {
         this.id = id;
         this.musicFlag = musicFlag;
         this.text = text;
         this.state = state;
         this.iconCls = iconCls;
+    }
+
+    public VideoTreeNode(long id, boolean musicFlag, String text, String state, String iconCls, List<VideoTreeNode> children) {
+        this(id, musicFlag, text, state, iconCls);
         this.children = children;
     }
 

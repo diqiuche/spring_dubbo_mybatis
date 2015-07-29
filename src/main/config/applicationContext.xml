@@ -54,7 +54,8 @@
 
     <!--  mybatis Mapper类扫描位置 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="org.tangsi.user.dao.mapper,org.tangsi.order.dao.mapper,org.tangsi.comment.dao.mapper,org.tangsi.blog.dao.mapper,org.tangsi.country.dao.mapper"/>
+        <property name="basePackage" value="org.tangsi.user.dao.mapper,org.tangsi.order.dao.mapper,
+                org.tangsi.comment.dao.mapper,org.tangsi.blog.dao.mapper,org.tangsi.country.dao.mapper,org.tangsi.video.dao.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
     
