@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.tangsi.commons.entity.UserTreeNode;
 import org.tangsi.video.entity.VideoTreeNode;
 import org.tangsi.service.UserService;
 import org.tangsi.user.entity.User;
@@ -253,7 +252,7 @@ public class UserController {
      * 返回用户树节点json数据
      * @return
      */
-    @RequestMapping("/initUserTree")
+    /*@RequestMapping("/initUserTree")
     @ResponseBody
     public List<UserTreeNode> getUserTree() {
         List<UserTreeNode> data = new ArrayList<>();
@@ -262,7 +261,7 @@ public class UserController {
         data.add(root);
         rootChildren.add(new UserTreeNode(2,"用户列表","open", null, null));
         return data;
-    }
+    }*/
 
     /**
      * 新增用户入口函数

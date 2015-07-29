@@ -10,6 +10,8 @@ import org.tangsi.order.entity.Order;
 import org.tangsi.service.OrderService;
 import org.tangsi.service.UserService;
 import org.tangsi.user.entity.User;
+import org.tangsi.video.entity.VideoCategory;
+import org.tangsi.video.service.VideoCategoryService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -191,5 +193,15 @@ public class SpringTransactionTest {
             }
         }
 
+    }
+
+    @Test
+    public void testVideoCategoryService() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
+       VideoCategoryService videoCategoryService = (VideoCategoryService) context.getBean("videoCategoryServiceImpl");
+        List<VideoCategory> allCategory = videoCategoryService.getAllCategory();
+        for(VideoCategory category : allCategory) {
+            System.out.println("类别: " + category.getName() + ", id: " + category.getId() + " , pid: " + category.getPid());
+        }
     }
 }

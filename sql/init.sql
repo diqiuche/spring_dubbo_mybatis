@@ -15,3 +15,11 @@ insert  into  t_order(createtime,userid,name) values(121212178812,1,'订单2');
 insert  into  t_order(createtime,userid,name) values(45452,1,'订单3');
 
 insert into t_country(countryname, userid) values('中国',1);
+
+-- 初始化视频类别
+insert into t_video_category(pid, name) values (0,'视频');
+insert into t_video_category(pid, name) values (1,'流行');
+
+-- 初始化视频
+insert into t_video(musicCategoryId,name) values (1,'whenising.flv');
+insert into t_video(musicCategoryId,name) values (1,'whenising.mp4');
