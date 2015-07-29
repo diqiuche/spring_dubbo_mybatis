@@ -12,7 +12,8 @@
     <script type="text/javascript">
 
         var $accordionManager, $userTree,$orderTree, $centralFrame,
-             $classTree,$musicTree;
+             $classTree,$videoTree;
+        var $addCategoryBtn,$addVideoBtn;  //新增视频与视频分类的按钮
 
         $(document).ready(function(){
             $accordionManager = $('#accordionManager');
@@ -24,7 +25,11 @@
                 selected: false
             }).accordion('add', {
                 title: '视频',
-                content: '<div><ul id="musicTree"></ul></div>',
+                content: '<div class="easyui-panel" style="padding:5px;">'
+                       +      '<a href="#" id="addCategoryBtn" class="easyui-linkbutton" data-options="plain:true,iconCls:\'icon-add\',disabled:true">新增分类</a>'
+                       +      '<a href="#" id="addVideoBtn" class="easyui-linkbutton" data-options="plain:true,iconCls:\'icon-add\',disabled:true">新增视频</a>'
+                       + '</div>'
+                       + '<div><ul id="videoTree"></ul></div>',
                 height:200,
                 selected: false
             }).accordion('add', {
@@ -38,6 +43,14 @@
                 height:200,
                 selected: false
             });
+
+            $addCategoryBtn = $('#addCategoryBtn').click(function(){
+
+            });
+            $addVideoBtn = $('#addVideoBtn').click(function(){
+
+            });
+
             $userTree = $("#userTree").tree({
                 url:'${baseDir.contextPath}/user/initUserTree',
                 onClick:function(node){
@@ -48,11 +61,16 @@
             });
             $orderTree = $("#orderTree");
             $classTree = $("#classTree");
-            $musicTree = $("#musicTree").tree({
+            $videoTree = $("#videoTree").tree({
                 url:'${baseDir.contextPath}/user/initMusicTree',
                 onClick:function(node){
-                    if(node.musicFlag) {
+                    if(node.musicFlag) {  //视频节点
+                        $addVideoBtn.linkbutton("enable");
+                        $addCategoryBtn.linkbutton("disable");
                         $centralFrame.attr("src", "${baseDir.contextPath}/user/playvideo?videoname=" + node.text);
+                    }else {  //视频分类节点
+                        $addCategoryBtn.linkbutton("enable");
+                        $addVideoBtn.linkbutton("disable");
                     }
                 }
             });
@@ -62,7 +80,7 @@
     </script>
 <body class="easyui-layout">
     <div data-options="region:'north',title:'今日热点',split:true" style="height:200px;"></div>
-    <div data-options="region:'west',title:'主菜单',split:true" style="width:200px;">
+    <div data-options="region:'west',title:'主菜单',split:true" style="width:300px;">
         <div id="accordionManager" class="easyui-accordion" style="height:250px;" data-options="fit:true">
         </div>
     </div>
