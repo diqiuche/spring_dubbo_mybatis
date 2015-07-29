@@ -41,6 +41,11 @@ public class VideoCategoryServiceImpl implements VideoCategoryService {
         return data;
     }
 
+    @Override
+    public void add(VideoCategory category) {
+        this.videoCategoryMapper.save(category);
+    }
+
     private void buildVideoTreeRecursive(VideoTreeNode rootCategoryTreeNode, List<VideoCategory> children, List<Video> videos) {
         List<VideoTreeNode> treeNodes = new ArrayList<>();
         //构建视频分类下的视频

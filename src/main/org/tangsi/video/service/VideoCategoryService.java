@@ -19,4 +19,5 @@ public interface VideoCategoryService {
     public List<VideoTreeNode> buildVideoTree();
 
 
+    public void add(VideoCategory category);
 }

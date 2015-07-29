@@ -9,6 +9,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.tangsi.user.entity.UserTreeNode;
+import org.tangsi.video.entity.VideoCategory;
 import org.tangsi.video.entity.VideoTreeNode;
 import org.tangsi.service.UserService;
 import org.tangsi.user.entity.User;
@@ -307,4 +308,21 @@ public class UserController {
          request.setAttribute("videoName", videoname);
          return   "jqplayer.ftl";
     }
+
+    @RequestMapping("/saveCategory")
+    @ResponseBody
+    public Map<String, Object> saveCategory(VideoCategory category) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            this.videoCategoryService.add(category);
+            map.put("message", "新增成功");
+            map.put("success", true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("message", "新增失败");
+            map.put("success", false);
+        }
+        return map;
+    }
+
 }

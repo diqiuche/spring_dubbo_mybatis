@@ -11,4 +11,5 @@ public interface VideoCategoryMapper {
 
     public List<VideoCategory> getAll();
 
+    public void save(VideoCategory category);
 }
