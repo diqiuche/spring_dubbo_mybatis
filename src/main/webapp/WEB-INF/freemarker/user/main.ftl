@@ -22,7 +22,7 @@
                 height:200,
                 selected: false
             }).accordion('add', {
-                title: '音乐',
+                title: '视频',
                 content: '<div><ul id="musicTree"></ul></div>',
                 height:200,
                 selected: false

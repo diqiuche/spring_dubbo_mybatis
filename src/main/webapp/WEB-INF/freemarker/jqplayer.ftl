@@ -68,7 +68,7 @@
             },
             cssSelectorAncestor: "#jp_container_1",
             swfPath: "${baseDir.contextPath}/js/jPlayer-2.9.2",
-            supplied: "flv",
+            supplied: <#if videoName?ends_with('flv')>"flv"<#elseif videoName?ends_with('mp4')>"mp4"</#if>,
             useStateClassSkin: true,
             autoBlur: false,
             smoothPlayBar: true,
