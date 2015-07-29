@@ -1,6 +1,6 @@
 package org.tangsi.video.dao.mapper;
 
-import org.tangsi.video.entity.VideoTreeNode;
+import org.tangsi.video.entity.VideoCategory;
 
 import java.util.List;
 
@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface VideoCategoryMapper {
 
-    public List<VideoTreeNode> getAll();
+    public List<VideoCategory> getAll();
 
 }
