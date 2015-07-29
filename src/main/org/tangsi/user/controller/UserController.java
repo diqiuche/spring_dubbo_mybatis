@@ -7,10 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.tangsi.user.entity.UserTreeNode;
 import org.tangsi.video.entity.VideoTreeNode;
 import org.tangsi.service.UserService;
@@ -299,8 +296,15 @@ public class UserController {
         return this.videoCategoryService.buildVideoTree();
     }
 
-    @RequestMapping("/playmusic")
-    public String playMusic(HttpServletRequest request) {
+    /**
+     * 播放视频
+     * @param request
+     * @param videoname
+     * @return
+     */
+    @RequestMapping("/playvideo")
+    public String playMusic(HttpServletRequest request, @RequestParam("videoname") String videoname) {
+         request.setAttribute("videoName", videoname);
          return   "jqplayer.ftl";
     }
 }

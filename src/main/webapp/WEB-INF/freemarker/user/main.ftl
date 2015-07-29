@@ -51,7 +51,7 @@
                 url:'${baseDir.contextPath}/user/initMusicTree',
                 onClick:function(node){
                     if(node.musicFlag) {
-                        $centralFrame.attr("src", "${baseDir.contextPath}/user/playmusic/" + node.);
+                        $centralFrame.attr("src", "${baseDir.contextPath}/user/playvideo?videoname=" + node.text);
                     }
                 }
             });

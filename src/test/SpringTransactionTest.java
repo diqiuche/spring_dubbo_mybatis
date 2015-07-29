@@ -1,3 +1,4 @@
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -12,8 +13,10 @@ import org.tangsi.service.UserService;
 import org.tangsi.user.entity.User;
 import org.tangsi.video.entity.Video;
 import org.tangsi.video.entity.VideoCategory;
+import org.tangsi.video.entity.VideoTreeNode;
 import org.tangsi.video.service.VideoCategoryService;
 import org.tangsi.video.service.VideoService;
+import org.tangsi.video.service.impl.VideoCategoryServiceImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -215,5 +218,14 @@ public class SpringTransactionTest {
         for(Video video : allVideos) {
             System.out.println("name=" + video.getName() +",categoryId=" + video.getMusicCategoryId());
         }
+    }
+
+    @Test
+    public void testVideoCategoryServiceBuildVideTree() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
+        VideoCategoryServiceImpl videoCategoryService = (VideoCategoryServiceImpl) context.getBean("videoCategoryServiceImpl");
+        VideoCategory category =  videoCategoryService.buildCategoryInTree();
+        String json = JSON.toJSONString(category);
+        System.out.println(json);
     }
 }

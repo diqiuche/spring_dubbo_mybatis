@@ -58,10 +58,10 @@
         $("#jquery_jplayer_1").jPlayer({
             ready: function () {
                 $(this).jPlayer("setMedia", {
-                    title: "Big Buck Bunny Trailer",
+                    title: "${videoName}",
                     /* m4v: "http://www.jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v", */
-                    flv:'${baseDir.contextPath}/video/whenising.flv',
-                    m4v:"${baseDir.contextPath}/video/whenising.mp4",
+                    flv:'${baseDir.contextPath}/video/${videoName}',
+                    m4v:"${baseDir.contextPath}/video/${videoName}",
                     /* ogv: "http://www.jplayer.org/video/ogv/Big_Buck_Bunny_Trailer.ogv", */
                     poster: "http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png"
                 });
