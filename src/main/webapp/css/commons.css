@@ -25,6 +25,10 @@ body {
     background: url('../images/commons/logo.jpg')  no-repeat -245px -115px;
 }
 
+.musicCls {
+    background: url('../images/commons/logo.jpg')  no-repeat -284px -470px;
+}
+
 .icon_upload {
     background: url('../images/commons/upload.png')  no-repeat 0px 0px;
 }
