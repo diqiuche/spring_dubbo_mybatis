@@ -15,7 +15,7 @@ public class VideoTreeNode {
     private long id;
 
     /**
-     * 是否是音乐
+     * 是否是视频
      */
     private boolean videoFlag;
 
