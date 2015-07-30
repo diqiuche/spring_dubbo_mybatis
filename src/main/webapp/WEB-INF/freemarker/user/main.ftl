@@ -8,7 +8,7 @@
 
     <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-1.11.3.js"></script>
     <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
-
+    <script type="text/javascript" src="${baseDir.contextPath}/js/ajaxfileupload.js"></script>
     <script type="text/javascript">
 
         //定制实现jquery easyui的视频上传校验规则，只能提交MP4或者flv
@@ -47,18 +47,7 @@
                 }
             });
 
-            $addVideoForm = $("#addVideoForm").form({
-               ajax:true,
-               success:function(data) {
-                   data = eval('(' + data + ')');  // change the JSON string to javascript object
-                   if(data.success) {
-                       $addVideoDialog.dialog("close");
-                   }else {
-                       alert("提交完成");
-                   }
-
-               }
-            });
+            $addVideoForm = $("#addVideoForm").form({});
 
             $addCategoryDialog = $('#addCategoryDialog').dialog({
                 title: '新增分类',
@@ -127,7 +116,9 @@
 
             //新增视频提交按钮点击事件逻辑
             $videoSubmitBtn = $("#videoSubmitBtn").click(function(){
-                $addVideoForm.form("submit");
+                //$addVideoForm.form("submit");
+                var videoCategoryId = $("#videoCategoryId").val();
+                uploadFileHandler.upload(videoCategoryId);
             });
 
             $userTree = $("#userTree").tree({
@@ -167,6 +158,26 @@
             $addCategoryForm.form("clear");
         }
 
+        var uploadFileHandler = {
+            upload:function(videoCategoryId) {
+                $.ajaxFileUpload ( {
+                    url: '${baseDir.contextPath}/user/saveVideo', //用于文件上传的服务器端请求地址
+                    data:{'videoCategoryId':videoCategoryId},
+                    secureuri: false, //是否需要安全协议，一般设置为false
+                    fileElementId: 'videoFile', //文件上传域的ID
+                    dataType: 'json', //返回值类型 一般设置为json
+                    success: function (data, status)  //服务器成功响应处理函数
+                    {
+                        alert(data.message);
+                    },
+                    error: function (data, status, e)//服务器响应失败处理函数
+                    {
+                        alert(e);
+                    }
+                });
+            }
+        };
+
     </script>
 <body class="easyui-layout">
     <div data-options="region:'north',title:'今日热点',split:true" style="height:200px;"></div>
@@ -202,10 +213,10 @@
     <div id="addVideoDialog">
         <div class="easyui-panel" title="" data-options="fit:true">
             <form action="${baseDir.contextPath}/user/saveVideo" id="addVideoForm" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="videoCategoryId"/>
+                <input type="hidden" name="videoCategoryId"  id="videoCategoryId"/>
                 <div style="margin-bottom:20px">
                     <div>视频文件:</div>
-                    <input class="easyui-filebox easyui-validatebox" name="videoFile" data-options="prompt:'Choose a video...',required:true" validType="mp4OrFlv" style="width:100%">
+                    <input class=" easyui-validatebox" type="file" name="videoFile" id="videoFile" data-options="prompt:'Choose a video...',required:true" validType="mp4OrFlv" style="width:100%">
                 </div>
             </form>
             <div style="width: 70px;margin: 0 auto;">
