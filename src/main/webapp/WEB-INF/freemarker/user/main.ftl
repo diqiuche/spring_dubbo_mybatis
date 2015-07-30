@@ -135,7 +135,7 @@
                 url:'${baseDir.contextPath}/user/initVideoTree',
                 lines:true,
                 onClick:function(node){
-                    if(node.musicFlag) {  //视频节点
+                    if(node.videoFlag) {  //视频节点
                         $addVideoBtn.linkbutton("enable");
                         $addCategoryBtn.linkbutton("disable");
                         $centralFrame.attr("src", "${baseDir.contextPath}/user/playvideo?videoid=" + node.id);
