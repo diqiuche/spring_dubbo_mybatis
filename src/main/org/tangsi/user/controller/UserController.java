@@ -9,6 +9,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.tangsi.music.entity.Music;
 import org.tangsi.music.entity.MusicTreeNode;
 import org.tangsi.music.service.MusicCategoryService;
 import org.tangsi.music.service.MusicService;
@@ -387,6 +388,15 @@ public class UserController {
         }
 
         return map;
+    }
+
+
+    @RequestMapping("/playmusic")
+    public String playmusic(@RequestParam("musicid") long musicid, HttpServletRequest request) {
+        Music music =  this.musicService.fetch(musicid);
+        String musicname = music.getName();
+        request.setAttribute("musicName", musicname);
+        return "playmusic.ftl";
     }
 
 }
