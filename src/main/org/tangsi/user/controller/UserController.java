@@ -9,6 +9,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.tangsi.user.entity.UserTreeNode;
+import org.tangsi.video.entity.Video;
 import org.tangsi.video.entity.VideoCategory;
 import org.tangsi.video.entity.VideoTreeNode;
 import org.tangsi.service.UserService;
@@ -17,6 +18,7 @@ import org.tangsi.user.validate.Login;
 import org.tangsi.user.validate.Registe;
 import org.tangsi.util.mvc.Pager;
 import org.tangsi.video.service.VideoCategoryService;
+import org.tangsi.video.service.VideoService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -39,6 +41,9 @@ public class UserController {
 
     @Autowired
     private VideoCategoryService videoCategoryService;
+
+    @Autowired
+    private VideoService videoService;
 
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
@@ -304,7 +309,9 @@ public class UserController {
      * @return
      */
     @RequestMapping("/playvideo")
-    public String playMusic(HttpServletRequest request, @RequestParam("videoname") String videoname) {
+    public String playMusic(HttpServletRequest request, @RequestParam("videoid") long videoid) {
+        Video video = this.videoService.fetch(videoid);
+        String videoname = video.getName();
          request.setAttribute("videoName", videoname);
          return   "jqplayer.ftl";
     }
@@ -317,9 +324,9 @@ public class UserController {
             this.videoCategoryService.add(category);
             map.put("message", "新增成功");
             map.put("success", true);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             e.printStackTrace();
-            map.put("message", "新增失败");
+            map.put("message", e.getMessage());
             map.put("success", false);
         }
         return map;

@@ -17,4 +17,11 @@
           <include refid="Base_Column_List"/>
          from t_video
     </select>
+
+    <select id="getByPrimaryId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+          <include refid="Base_Column_List"/>
+        from t_video
+        where id=#{videoid,jdbcType=BIGINT}
+    </select>
 </mapper>

@@ -19,8 +19,9 @@
          from t_video_category
     </select>
 
+
     <insert id="save" parameterType="org.tangsi.video.entity.VideoCategory" useGeneratedKeys="true" keyProperty="id">
-        insert into t_video_category(pid, name) values (#{category.pid},#{category.name})
+        insert into t_video_category(pid, name) values (#{pid},#{name})
     </insert>
 
 </mapper>

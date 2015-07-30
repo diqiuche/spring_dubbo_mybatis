@@ -11,4 +11,5 @@ public interface VideoService {
 
     public List<Video> getAllVideo();
 
+    public Video fetch(long videoid);
 }

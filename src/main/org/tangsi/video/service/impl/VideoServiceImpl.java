@@ -21,4 +21,9 @@ public class VideoServiceImpl implements VideoService {
     public List<Video> getAllVideo() {
         return this.videoMapper.getAllVideo();
     }
+
+    @Override
+    public Video fetch(long videoid) {
+        return this.videoMapper.getByPrimaryId(videoid);
+    }
 }

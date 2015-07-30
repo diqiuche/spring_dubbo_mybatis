@@ -20,9 +20,16 @@
             $accordionManager = $('#accordionManager');
             $centralFrame = $("#centralFrame");
             $addCategoryForm = $("#addCategoryForm").form({
+                ajax:true,
                 success: function (data) {
                     data = eval('(' + data + ')');  // change the JSON string to javascript object
-                    $videoTree.tree("reload");
+                    $addCategoryDialog.dialog("close");  //不管添加成功或失败都关闭弹出层
+                    if(data.success) {
+                        $videoTree.tree("reload");
+                    }else {
+                        alert("新增失败,错误原因：" + data.message);//好吧，原生的提示，以后有时间改进
+                    }
+
                 }
             });
             $addCategoryDialog = $('#addCategoryDialog').dialog({
@@ -61,7 +68,7 @@
 
             $addCategoryBtn = $('#addCategoryBtn').click(function(){
                 var selectedNode  = $videoTree.tree("getSelected");
-                $addCategoryForm.form({
+                $addCategoryForm.form("load",{
                    pid: selectedNode.id
                 });
                 $addCategoryDialog.dialog("open");
@@ -86,7 +93,7 @@
                     if(node.musicFlag) {  //视频节点
                         $addVideoBtn.linkbutton("enable");
                         $addCategoryBtn.linkbutton("disable");
-                        $centralFrame.attr("src", "${baseDir.contextPath}/user/playvideo?videoname=" + node.text);
+                        $centralFrame.attr("src", "${baseDir.contextPath}/user/playvideo?videoid=" + node.id);
                     }else {  //视频分类节点
                         $addCategoryBtn.linkbutton("enable");
                         $addVideoBtn.linkbutton("disable");

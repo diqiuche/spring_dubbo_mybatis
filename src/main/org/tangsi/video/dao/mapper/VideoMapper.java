@@ -11,4 +11,5 @@ public interface VideoMapper {
 
     public List<Video> getAllVideo();
 
+    public Video getByPrimaryId(long videoid);
 }
