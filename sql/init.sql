@@ -23,3 +23,11 @@ insert into t_video_category(pid, name) values (1,'流行');
 -- 初始化视频
 insert into t_video(videoCategoryId,name,iconCls) values (1,'whenising.flv','videoCls');
 insert into t_video(videoCategoryId,name,iconCls) values (1,'whenising.mp4','videoCls');
+
+-- 初始化音乐类别
+insert into t_music_category(pid, name) values (0,'音乐');
+insert into t_music_category(pid, name) values (1,'流行');
+
+-- 初始化视频
+insert into t_music(videoCategoryId,name,iconCls) values (1,'whenising.flv','videoCls');
+insert into t_music(videoCategoryId,name,iconCls) values (1,'whenising.mp4','videoCls');

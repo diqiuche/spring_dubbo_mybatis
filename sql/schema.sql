@@ -52,3 +52,20 @@ create table t_video(
   name varchar(256) not null,
   iconCls varchar(128) default ''
 );
+
+
+drop table if exists t_music_category;
+create table t_music_category(
+  id bigint auto_increment primary key,
+  pid bigint not null,
+  name varchar(256) not null,
+  iconCls varchar(128) default ''
+);
+
+drop table if exists t_music;
+create table t_music(
+  id bigint auto_increment primary key,
+  musicCategoryId bigint not null,
+  name varchar(256) not null,
+  iconCls varchar(128) default ''
+);
