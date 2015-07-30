@@ -29,5 +29,5 @@ insert into t_music_category(pid, name) values (0,'音乐');
 insert into t_music_category(pid, name) values (1,'流行');
 
 -- 初始化视频
-insert into t_music(videoCategoryId,name,iconCls) values (1,'whenising.flv','videoCls');
-insert into t_music(videoCategoryId,name,iconCls) values (1,'whenising.mp4','videoCls');
+insert into t_music(musicCategoryId,name,iconCls) values (1,'青春纪念册.mp3','musicCls');
+insert into t_music(musicCategoryId,name,iconCls) values (1,'一天一点爱恋.mp3','musicCls');

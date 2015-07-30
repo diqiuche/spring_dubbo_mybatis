@@ -1,8 +1,8 @@
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.tangsi.order.entity.Order;
-import org.tangsi.user.entity.User;
 import org.tangsi.service.UserService;
+import org.tangsi.user.entity.User;
 
 import java.util.List;
 

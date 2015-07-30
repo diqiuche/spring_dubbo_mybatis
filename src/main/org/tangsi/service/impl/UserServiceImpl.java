@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.tangsi.order.dao.mapper.OrderMapper;
 import org.tangsi.order.entity.Order;
-import org.tangsi.user.entity.User;
-import org.tangsi.user.dao.mapper.UserMapper;
 import org.tangsi.service.UserService;
+import org.tangsi.user.dao.mapper.UserMapper;
+import org.tangsi.user.entity.User;
 
 import java.util.List;
 import java.util.Map;

@@ -2,7 +2,6 @@ package org.tangsi.user.entity;
 
 import org.hibernate.validator.constraints.Email;
 import org.tangsi.blog.entity.Blog;
-import org.tangsi.country.entity.Country;
 import org.tangsi.order.entity.Order;
 import org.tangsi.user.validate.Login;
 import org.tangsi.user.validate.Registe;

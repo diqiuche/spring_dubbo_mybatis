@@ -116,7 +116,6 @@
 
             //新增视频提交按钮点击事件逻辑
             $videoSubmitBtn = $("#videoSubmitBtn").click(function(){
-                //$addVideoForm.form("submit");
                 var videoCategoryId = $("#videoCategoryId").val();
                 uploadFileHandler.upload(videoCategoryId);
             });
@@ -136,7 +135,7 @@
                 url:'${baseDir.contextPath}/user/initVideoTree',
                 lines:true,
                 onClick:function(node){
-                    if(node.videoFlag) {  //视频节点
+                    if(node.musicFlag) {  //视频节点
                         $addVideoBtn.linkbutton("enable");
                         $addCategoryBtn.linkbutton("disable");
                         $centralFrame.attr("src", "${baseDir.contextPath}/user/playvideo?videoid=" + node.id);
@@ -144,6 +143,13 @@
                         $addCategoryBtn.linkbutton("enable");
                         $addVideoBtn.linkbutton("disable");
                     }
+                }
+            });
+            $musicTree = $("#musicTree").tree({
+                url:'${baseDir.contextPath}/user/initMusicTree',
+                lines:true,
+                onClick:function(node){
+
                 }
             });
 

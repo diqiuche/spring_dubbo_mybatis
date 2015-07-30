@@ -13,7 +13,6 @@ import org.tangsi.service.UserService;
 import org.tangsi.user.entity.User;
 import org.tangsi.video.entity.Video;
 import org.tangsi.video.entity.VideoCategory;
-import org.tangsi.video.entity.VideoTreeNode;
 import org.tangsi.video.service.VideoCategoryService;
 import org.tangsi.video.service.VideoService;
 import org.tangsi.video.service.impl.VideoCategoryServiceImpl;

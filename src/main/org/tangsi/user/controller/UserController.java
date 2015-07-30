@@ -9,19 +9,21 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.tangsi.user.entity.UserTreeNode;
-import org.tangsi.video.entity.Video;
-import org.tangsi.video.entity.VideoCategory;
-import org.tangsi.video.entity.VideoTreeNode;
+import org.tangsi.music.entity.MusicTreeNode;
+import org.tangsi.music.service.MusicCategoryService;
+import org.tangsi.music.service.MusicService;
 import org.tangsi.service.UserService;
 import org.tangsi.user.entity.User;
+import org.tangsi.user.entity.UserTreeNode;
 import org.tangsi.user.validate.Login;
 import org.tangsi.user.validate.Registe;
 import org.tangsi.util.mvc.Pager;
+import org.tangsi.video.entity.Video;
+import org.tangsi.video.entity.VideoCategory;
+import org.tangsi.video.entity.VideoTreeNode;
 import org.tangsi.video.service.VideoCategoryService;
 import org.tangsi.video.service.VideoService;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
@@ -50,6 +52,12 @@ public class UserController {
 
     @Autowired
     private VideoService videoService;
+
+    @Autowired
+    private MusicCategoryService musicCategoryService;
+
+    @Autowired
+    private MusicService musicService;
 
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
@@ -304,8 +312,15 @@ public class UserController {
      */
     @RequestMapping("/initVideoTree")
     @ResponseBody
-    public List<VideoTreeNode> initMusicTree(){
+    public List<VideoTreeNode> initVideoTree(){
         return this.videoCategoryService.buildVideoTree();
+    }
+
+
+    @RequestMapping("/initMusicTree")
+    @ResponseBody
+    public List<MusicTreeNode> initMusicTree() {
+        return this.musicCategoryService.buildMusicTree();
     }
 
     /**
