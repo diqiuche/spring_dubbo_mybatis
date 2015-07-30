@@ -48,7 +48,7 @@ create table t_video_category(
 drop table if exists t_video;
 create table t_video(
   id bigint auto_increment primary key,
-  musicCategoryId bigint not null,
+  videoCategoryId bigint not null,
   name varchar(256) not null,
   iconCls varchar(128) default ''
 );

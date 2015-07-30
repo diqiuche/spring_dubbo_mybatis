@@ -19,4 +19,12 @@ public class RegularExpressionTest {
 
     }
 
+    @Test
+    public void test2() {
+        Pattern pattern = Pattern.compile("^(.+\\.mp4)|(.+\\.flv)|(.+\\.MP4)|(.+\\.FLV)$");
+        String str = "sdf.FLV";
+        Matcher matcher = pattern.matcher(str);
+        System.out.println(matcher.matches());
+    }
+
 }

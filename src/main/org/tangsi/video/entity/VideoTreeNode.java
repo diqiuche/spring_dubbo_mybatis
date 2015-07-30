@@ -8,16 +8,16 @@ import java.util.List;
  */
 public class VideoTreeNode {
 
-    public static final boolean MUSIC_FLAG_YES = true;
+    public static final boolean VIDEO_FLAG_YES = true;
 
-    public static final boolean MUSIC_FLAG_NOT = false;
+    public static final boolean VIDEO_FLAG_NOT = false;
 
     private long id;
 
     /**
      * 是否是音乐
      */
-    private boolean musicFlag;
+    private boolean videoFlag;
 
     /**
      * 树节点名称
@@ -34,27 +34,27 @@ public class VideoTreeNode {
      */
     private String iconCls;
 
-    public VideoTreeNode(long id, boolean musicFlag, String text, String state, String iconCls) {
+    public VideoTreeNode(long id, boolean videoFlag, String text, String state, String iconCls) {
         this.id = id;
-        this.musicFlag = musicFlag;
+        this.videoFlag = videoFlag;
         this.text = text;
         this.state = state;
         this.iconCls = iconCls;
     }
 
-    public VideoTreeNode(long id, boolean musicFlag, String text, String state, String iconCls, List<VideoTreeNode> children) {
-        this(id, musicFlag, text, state, iconCls);
+    public VideoTreeNode(long id, boolean videoFlag, String text, String state, String iconCls, List<VideoTreeNode> children) {
+        this(id, videoFlag, text, state, iconCls);
         this.children = children;
     }
 
     private List<VideoTreeNode> children = new ArrayList<>();
 
-    public boolean isMusicFlag() {
-        return musicFlag;
+    public boolean isVideoFlag() {
+        return videoFlag;
     }
 
-    public void setMusicFlag(boolean musicFlag) {
-        this.musicFlag = musicFlag;
+    public void setVideoFlag(boolean videoFlag) {
+        this.videoFlag = videoFlag;
     }
 
     public long getId() {

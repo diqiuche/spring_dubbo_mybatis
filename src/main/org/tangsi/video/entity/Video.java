@@ -8,12 +8,12 @@ public class Video {
     private long id;
 
     /**
-     * 外键，音乐类别id
+     * 外键，视频类别id
      */
-    private long musicCategoryId;
+    private long videoCategoryId;
 
     /**
-     * 音乐名称
+     * 视频名称
      */
     private String name;
 
@@ -30,12 +30,12 @@ public class Video {
         this.id = id;
     }
 
-    public long getMusicCategoryId() {
-        return musicCategoryId;
+    public long getVideoCategoryId() {
+        return videoCategoryId;
     }
 
-    public void setMusicCategoryId(long musicCategoryId) {
-        this.musicCategoryId = musicCategoryId;
+    public void setVideoCategoryId(long videoCategoryId) {
+        this.videoCategoryId = videoCategoryId;
     }
 
     public String getName() {

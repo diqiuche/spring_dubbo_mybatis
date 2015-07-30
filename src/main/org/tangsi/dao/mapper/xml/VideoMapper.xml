@@ -3,13 +3,13 @@
 <mapper namespace="org.tangsi.video.dao.mapper.VideoMapper">
     <resultMap id="BaseResultMap" type="org.tangsi.video.entity.Video">
         <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="musicCategoryId" property="musicCategoryId" jdbcType="BIGINT"/>
+        <result column="videoCategoryId" property="videoCategoryId" jdbcType="BIGINT"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="iconCls" property="iconCls" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, musicCategoryId,name,iconCls
+        id, videoCategoryId,name,iconCls
     </sql>
 
     <select id="getAllVideo" resultMap="BaseResultMap">

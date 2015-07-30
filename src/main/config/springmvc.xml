@@ -105,14 +105,17 @@
 
     <!-- 将Controller抛出的异常转到特定View -->
     <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <property name="defaultErrorView" value="error"/>      <!-- 默认发生异常的错误视图 -->
+        <property name="defaultErrorView" value="error.jsp"/>      <!-- 默认发生异常的错误视图 -->
         <property name="exceptionAttribute" value="ex"/>           <!-- 异常页面用来获取异常信息的变量名 -->
         <property name="exceptionMappings">
             <props>
-                <prop key="java.lang.Exception">error</prop>   <!-- 只要发生Exception异常则跳转到/WEB-INF/jsp/error.jsp -->
+                <prop key="java.lang.Exception">error.jsp</prop>   <!-- 只要发生Exception异常则跳转到/WEB-INF/jsp/error.jsp -->
                 <prop key="org.springframework.web.util.NestedServletException">error</prop>
             </props>
         </property>
     </bean>
+
+    <!-- 支持上传文件 -->
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>-->
 
 </beans>

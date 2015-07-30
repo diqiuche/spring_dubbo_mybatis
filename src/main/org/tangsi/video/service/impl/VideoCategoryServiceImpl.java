@@ -34,7 +34,7 @@ public class VideoCategoryServiceImpl implements VideoCategoryService {
         List<VideoTreeNode> data = new ArrayList<>();
         VideoCategory rootCategory = this.buildCategoryInTree();
         List<Video> allVideo = this.videoMapper.getAllVideo();
-        VideoTreeNode rootCategoryTreeNode = new VideoTreeNode(rootCategory.getId(), VideoTreeNode.MUSIC_FLAG_NOT, rootCategory.getName(), "open", rootCategory.getIconCls());
+        VideoTreeNode rootCategoryTreeNode = new VideoTreeNode(rootCategory.getId(), VideoTreeNode.VIDEO_FLAG_NOT, rootCategory.getName(), "open", rootCategory.getIconCls());
         this.buildVideoTreeRecursive(rootCategoryTreeNode, rootCategory.getChildren(), allVideo);
 
         data.add(rootCategoryTreeNode);
@@ -50,14 +50,14 @@ public class VideoCategoryServiceImpl implements VideoCategoryService {
         List<VideoTreeNode> treeNodes = new ArrayList<>();
         //构建视频分类下的视频
         for(Video video : videos) {
-            if(video.getMusicCategoryId() == rootCategoryTreeNode.getId()) {
-                VideoTreeNode node = new VideoTreeNode(video.getId(), VideoTreeNode.MUSIC_FLAG_YES, video.getName() , "open" , video.getIconCls());
+            if(video.getVideoCategoryId() == rootCategoryTreeNode.getId()) {
+                VideoTreeNode node = new VideoTreeNode(video.getId(), VideoTreeNode.VIDEO_FLAG_YES, video.getName() , "open" , video.getIconCls());
                 treeNodes.add(node);
             }
         }
         //构建视频分类下的子分类
         for(VideoCategory category : children) {
-            VideoTreeNode node = new VideoTreeNode(category.getId(), VideoTreeNode.MUSIC_FLAG_NOT, category.getName(), "open", category.getIconCls());
+            VideoTreeNode node = new VideoTreeNode(category.getId(), VideoTreeNode.VIDEO_FLAG_NOT, category.getName(), "open", category.getIconCls());
             treeNodes.add(node);
             this.buildVideoTreeRecursive(node, category.getChildren(), videos);
         }

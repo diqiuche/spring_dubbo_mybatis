@@ -216,7 +216,7 @@ public class SpringTransactionTest {
         VideoService videoService = (VideoService) context.getBean("videoServiceImpl");
         List<Video> allVideos = videoService.getAllVideo();
         for(Video video : allVideos) {
-            System.out.println("name=" + video.getName() +",categoryId=" + video.getMusicCategoryId());
+            System.out.println("name=" + video.getName() +",categoryId=" + video.getVideoCategoryId());
         }
     }
 

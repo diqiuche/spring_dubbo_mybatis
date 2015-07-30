@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.tangsi.user.entity.UserTreeNode;
 import org.tangsi.video.entity.Video;
 import org.tangsi.video.entity.VideoCategory;
@@ -20,8 +21,13 @@ import org.tangsi.util.mvc.Pager;
 import org.tangsi.video.service.VideoCategoryService;
 import org.tangsi.video.service.VideoService;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -296,7 +302,7 @@ public class UserController {
      * 返回音乐树节点json数据
      * @return
      */
-    @RequestMapping("/initMusicTree")
+    @RequestMapping("/initVideoTree")
     @ResponseBody
     public List<VideoTreeNode> initMusicTree(){
         return this.videoCategoryService.buildVideoTree();
@@ -305,7 +311,7 @@ public class UserController {
     /**
      * 播放视频
      * @param request
-     * @param videoname
+     * @param videoid
      * @return
      */
     @RequestMapping("/playvideo")
@@ -329,6 +335,42 @@ public class UserController {
             map.put("message", e.getMessage());
             map.put("success", false);
         }
+        return map;
+    }
+
+    /**
+     * 上传视频
+     * @param videoCategoryId
+     * @param videoFile
+     * @return
+     */
+    @RequestMapping("/saveVideo")
+    @ResponseBody
+    public Map<String, Object> saveVideo(@RequestParam("videoCategoryId") long videoCategoryId,
+                                         @RequestParam("videoFile")MultipartFile videoFile, HttpServletRequest request) throws IOException {
+        Map<String, Object> map = new HashMap<>();
+        String base = request.getServletContext().getRealPath("/");  //项目路径
+        try {
+            String originalFileName = videoFile.getOriginalFilename();
+            InputStream inputStream = videoFile.getInputStream();
+            byte[] buff = new byte[1024*1024];
+            FileOutputStream fos = new FileOutputStream(new File(base + File.separator + "video" + File.separator + originalFileName));
+            int length = 0;
+            while((length = inputStream.read(buff)) != -1) {
+                fos.write(buff,0 ,length);
+            }
+            fos.flush();
+            fos.close();
+
+            System.out.println("文件名： " + originalFileName);
+            map.put("success", true);
+            map.put("message", "上传成功");
+        } catch (IOException e) {
+            e.printStackTrace();
+            map.put("success", false);
+            map.put("message", "上传失败,错误信息：" + e.getMessage());
+        }
+
         return map;
     }
 
