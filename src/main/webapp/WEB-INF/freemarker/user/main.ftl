@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <title>首页</title>
+    <meta charset="utf-8" content="text/html"/>
     <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/themes/black/easyui.css" rel="stylesheet" type="text/css">
     <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/themes/icon.css" rel="stylesheet" type="text/css">
     <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/demo/demo.css" rel="stylesheet" type="text/css">
@@ -23,8 +24,8 @@
         });
 
 
-        var $accordionManager, $userTree,$orderTree, $centralFrame,
-             $classTree,$videoTree,$musicTree;
+        var $accordionManager, $userTree,$settingTree, $centralFrame,
+             $pictureTree,$videoTree,$musicTree;
         var $addCategoryBtn,$addVideoBtn, //新增视频与视频分类的按钮
             $addCategoryDialog, $addCategoryForm;
         var $videoSubmitBtn,$addVideoDialog,$addVideoForm,$deleteVideoBtn     //提交视频
@@ -104,13 +105,17 @@
             }).accordion('add', {
                 title: '图片浏览',
                 iconCls:'mypicturescan-icon',
-                content: '<div><ul id="orderTree"></ul></div>',
+                content: '<div class="easyui-panel" style="padding:5px;" >'
+                        +'</div>'
+                        +'<div><ul id="pictureTree"></ul></div>',
                 height:200,
                 selected: false
             }).accordion('add', {
                 title: '系统设置',
                 iconCls:'mysetting-icon',
-                content: '<div><ul id="classTree"></ul></div>',
+                content:'<div class="easyui-panel" style="padding:5px;" >'
+                        +'</div>'
+                        +'<div><ul id="settingTree"></ul></div>',
                 height:200,
                 selected: false
             });
@@ -155,8 +160,20 @@
                     }
                 }
             });
-            $orderTree = $("#orderTree");
-            $classTree = $("#classTree");
+            $settingTree = $("#settingTree");
+            $pictureTree = $("#pictureTree").tree({
+                lines:true,
+                data:[
+                    {text:'图片',state:'open',iconCls:'',isRoot:true,children:[
+                        {text:'全部',state:'open',iconCls:'',isRoot:false}
+                    ]}
+                ],
+                onClick:function(node){
+                    //瀑布流页面
+                    if(!node.isRoot)
+                        $centralFrame.attr("src", "${baseDir.contextPath}/user/showPictureFall");
+                }
+            });
             $videoTree = $("#videoTree").tree({
                 url:'${baseDir.contextPath}/user/initVideoTree',
                 lines:true,

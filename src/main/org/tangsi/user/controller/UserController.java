@@ -429,4 +429,13 @@ public class UserController {
         return "playmusic.ftl";
     }
 
+    /**
+     * 转向瀑布流页面
+     * @return
+     */
+    @RequestMapping("/showPictureFall")
+    public String showPictureFall() {
+        return "pictureFall.ftl";
+    }
+
 }
