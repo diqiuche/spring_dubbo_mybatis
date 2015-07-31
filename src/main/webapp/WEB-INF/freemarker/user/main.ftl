@@ -79,16 +79,19 @@
 
             $accordionManager.accordion('add', {
                 title: '用户',
+                iconCls:'icon-man',
                 content: '<div><ul id="userTree"></ul></div>',
                 height:200,
                 selected: false
             }).accordion('add', {
                 title: '音乐',
+                iconCls:'mymusic-icon',
                 content: '<div><ul id="musicTree"></ul></div>',
                 height:200,
                 selected: false
             }).accordion('add', {
                 title: '视频',
+                iconCls:'myvideo-icon',
                 content: '<div class="easyui-panel" style="padding:5px;" >'
                        +      '<a href="#" id="refreshTreeBtn" class="easyui-linkbutton" data-options="plain:true,iconCls:\'icon-reload\',disabled:false">刷新</a>'
                        +      '<a href="#" id="addCategoryBtn" class="easyui-linkbutton" data-options="plain:true,iconCls:\'icon-add\',disabled:true">新增分类</a>'
@@ -99,12 +102,14 @@
                 height:200,
                 selected: false
             }).accordion('add', {
-                title: '订单',
+                title: '图片浏览',
+                iconCls:'mypicturescan-icon',
                 content: '<div><ul id="orderTree"></ul></div>',
                 height:200,
                 selected: false
             }).accordion('add', {
-                title: '课程',
+                title: '系统设置',
+                iconCls:'mysetting-icon',
                 content: '<div><ul id="classTree"></ul></div>',
                 height:200,
                 selected: false
@@ -226,7 +231,7 @@
     </script>
 <body class="easyui-layout">
     <div data-options="region:'north',title:'今日热点',split:true" style="height:200px;"></div>
-    <div data-options="region:'west',title:'主菜单',split:true" style="width:320px;">
+    <div data-options="region:'west',title:'主菜单',split:true,iconCls:'mymenu-icon'" style="width:320px;">
         <div id="accordionManager" class="easyui-accordion" style="height:250px;" data-options="fit:true">
         </div>
     </div>

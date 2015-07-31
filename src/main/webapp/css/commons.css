@@ -22,13 +22,33 @@ body {
 }
 
 .videoCls {
-    background: url('../images/commons/logo.jpg')  no-repeat -245px -115px;
+    background: url('../images/commons/logo4.jpg')  no-repeat -305px -367px;
 }
 
 .musicCls {
-    background: url('../images/commons/logo.jpg')  no-repeat -284px -470px;
+    background: url('../images/commons/logo4.jpg')  no-repeat -176px -328px;
 }
 
 .icon_upload {
     background: url('../images/commons/upload.png')  no-repeat 0px 0px;
+}
+
+.mymenu-icon {
+    background: url('../images/commons/logo2.jpg')  no-repeat -418px -180px;
+}
+
+.mymusic-icon {
+    background: url('../images/commons/logo2.jpg')  no-repeat -142px -100px;
+}
+
+.myvideo-icon {
+    background: url('../images/commons/logo2.jpg')  no-repeat -341px -259px;
+}
+
+.mysetting-icon {
+    background: url('../images/commons/logo2.jpg')  no-repeat -142px -178px;
+}
+
+.mypicturescan-icon {
+    background: url('../images/commons/logo2.jpg')  no-repeat -242px -178px;
 }
