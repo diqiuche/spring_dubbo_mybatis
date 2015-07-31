@@ -379,6 +379,10 @@ public class UserController {
             fos.close();
 
             System.out.println("文件名： " + originalFileName);
+            Video video = new Video();
+            video.setVideoCategoryId(videoCategoryId);
+            video.setName(originalFileName);
+            this.videoService.save(video);
             map.put("success", true);
             map.put("message", "上传成功");
         } catch (IOException e) {
@@ -388,6 +392,32 @@ public class UserController {
         }
 
         return map;
+    }
+
+    @RequestMapping("/deleteVideo")
+    @ResponseBody
+    public Map<String, Object> deleteVideo(@RequestParam("videoId") long videoId, HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
+        String base = request.getServletContext().getRealPath("/");
+        //删除video记录与文件
+        try {
+            Video video = this.videoService.fetch(videoId);
+            this.videoService.deleteByPrimaryId(videoId);
+            if(video != null) {
+                String videoName =video.getName();
+                File file = new File(base + File.separator + "video" + File.separator + videoName);
+                if(file.exists())
+                    file.delete();
+            }
+            map.put("success",true);
+            map.put("message", "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e);
+            map.put("success", false);
+            map.put("message", e.getMessage());
+        }
+        return  map;
     }
 
 

@@ -20,7 +20,7 @@ public class Music {
     /**
      * 音乐树节点样式
      */
-    private String iconCls;
+    private String iconCls = "musicCls";
 
     public long getId() {
         return id;
@@ -30,12 +30,12 @@ public class Music {
         this.id = id;
     }
 
-    public long getVideoCategoryId() {
+    public long getMusicCategoryId() {
         return musicCategoryId;
     }
 
-    public void setVideoCategoryId(long videoCategoryId) {
-        this.musicCategoryId = videoCategoryId;
+    public void setMusicCategoryId(long musicCategoryId) {
+        this.musicCategoryId = musicCategoryId;
     }
 
     public String getName() {

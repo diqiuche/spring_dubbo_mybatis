@@ -50,7 +50,7 @@ public class MusicCategoryServiceImpl implements MusicCategoryService {
         List<MusicTreeNode> treeNodes = new ArrayList<>();
         //构建视频分类下的视频
         for(Music music : musics) {
-            if(music.getVideoCategoryId() == rootCategoryTreeNode.getId()) {
+            if(music.getMusicCategoryId() == rootCategoryTreeNode.getId()) {
                 MusicTreeNode node = new MusicTreeNode(music.getId(), MusicTreeNode.MUSIC_FLAG_YES, music.getName() , "open" , music.getIconCls());
                 treeNodes.add(node);
             }

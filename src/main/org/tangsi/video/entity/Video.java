@@ -20,7 +20,7 @@ public class Video {
     /**
      * 视频树节点样式
      */
-    private String iconCls;
+    private String iconCls = "videoCls";
 
     public long getId() {
         return id;

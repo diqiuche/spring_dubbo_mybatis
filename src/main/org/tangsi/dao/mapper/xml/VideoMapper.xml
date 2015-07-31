@@ -24,4 +24,14 @@
         from t_video
         where id=#{videoid,jdbcType=BIGINT}
     </select>
+
+    <insert id="save" parameterType="org.tangsi.video.entity.Video" useGeneratedKeys="true" keyProperty="id">
+        insert into t_video(videoCategoryId, name, iconCls) values (#{videoCategoryId},#{name},#{iconCls})
+    </insert>
+
+
+    <delete id="deleteByPrimaryId" parameterType="java.lang.Long">
+        delete from t_video where id=#{videoId}
+    </delete>
+
 </mapper>

@@ -26,4 +26,24 @@ public class VideoServiceImpl implements VideoService {
     public Video fetch(long videoid) {
         return this.videoMapper.getByPrimaryId(videoid);
     }
+
+    /**
+     * 保存一条video记录
+     *
+     * @param video
+     */
+    @Override
+    public void save(Video video) {
+        this.videoMapper.save(video);
+    }
+
+    /**
+     * 根据主键删除一条记录
+     *
+     * @param videoId
+     */
+    @Override
+    public void deleteByPrimaryId(long videoId) {
+        this.videoMapper.deleteByPrimaryId(videoId);
+    }
 }

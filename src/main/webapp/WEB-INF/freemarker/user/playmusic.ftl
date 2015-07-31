@@ -8,7 +8,7 @@
 
     <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-1.11.3.js"></script>
     <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="${baseDir.contextPath}/js/ajaxfileupload.js"></script>
+    <script type="text/javascript" src="${baseDir.contextPath}/js/jquery.form.js"></script>
 </head>
 <body>
 

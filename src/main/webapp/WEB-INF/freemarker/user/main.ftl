@@ -8,7 +8,7 @@
 
     <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-1.11.3.js"></script>
     <script type="text/javascript" src="${baseDir.contextPath}/js/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="${baseDir.contextPath}/js/ajaxfileupload.js"></script>
+    <script type="text/javascript" src="${baseDir.contextPath}/js/jquery.form.js"></script>
     <script type="text/javascript">
 
         //定制实现jquery easyui的视频上传校验规则，只能提交MP4或者flv
@@ -27,8 +27,10 @@
              $classTree,$videoTree,$musicTree;
         var $addCategoryBtn,$addVideoBtn, //新增视频与视频分类的按钮
             $addCategoryDialog, $addCategoryForm;
-        var $videoSubmitBtn,$addVideoDialog,$addVideoForm;     //提交视频
+        var $videoSubmitBtn,$addVideoDialog,$addVideoForm,$deleteVideoBtn     //提交视频
+            ,$deleteVideoDialog, $videoDeleteSubmitBtn;
 
+        var $refreshTreeBtn;  //刷新树按钮
         $(document).ready(function(){
 
             $accordionManager = $('#accordionManager');
@@ -66,6 +68,14 @@
                 cache:false,
                 modal:true
             });
+            $deleteVideoDialog = $("#deleteVideoDialog").dialog({
+                title:'确认删除视频',
+                width:300,
+                height:200,
+                closed:true,
+                cache:false,
+                modal:true
+            });
 
             $accordionManager.accordion('add', {
                 title: '用户',
@@ -79,9 +89,11 @@
                 selected: false
             }).accordion('add', {
                 title: '视频',
-                content: '<div class="easyui-panel" style="padding:5px;">'
+                content: '<div class="easyui-panel" style="padding:5px;" >'
+                       +      '<a href="#" id="refreshTreeBtn" class="easyui-linkbutton" data-options="plain:true,iconCls:\'icon-reload\',disabled:false">刷新</a>'
                        +      '<a href="#" id="addCategoryBtn" class="easyui-linkbutton" data-options="plain:true,iconCls:\'icon-add\',disabled:true">新增分类</a>'
                        +      '<a href="#" id="addVideoBtn" class="easyui-linkbutton" data-options="plain:true,iconCls:\'icon_upload\',disabled:true">上传视频</a>'
+                       +      '<a href="#" id="deleteVideoBtn" class="easyui-linkbutton" data-options="plain:true,iconCls:\'icon-no\',disabled:true">删除视频</a>'
                        + '</div>'
                        + '<div><ul id="videoTree"></ul></div>',
                 height:200,
@@ -96,6 +108,10 @@
                 content: '<div><ul id="classTree"></ul></div>',
                 height:200,
                 selected: false
+            });
+
+            $refreshTreeBtn = $('#refreshTreeBtn').click(function() {
+                $videoTree.tree("reload");
             });
 
             $addCategoryBtn = $('#addCategoryBtn').click(function(){
@@ -116,8 +132,13 @@
 
             //新增视频提交按钮点击事件逻辑
             $videoSubmitBtn = $("#videoSubmitBtn").click(function(){
-                var videoCategoryId = $("#videoCategoryId").val();
-                uploadFileHandler.upload(videoCategoryId);
+                uploadFileHandler.upload();
+            });
+
+            $deleteVideoBtn = $("#deleteVideoBtn").click(function(){
+                var selectedNode  = $videoTree.tree("getSelected");
+                $("#tobeDeleteVideo").text(selectedNode.text);
+                $deleteVideoDialog.dialog("open");
             });
 
             $userTree = $("#userTree").tree({
@@ -137,6 +158,7 @@
                 onClick:function(node){
                     if(node.videoFlag) {  //视频节点
                         $addVideoBtn.linkbutton("enable");
+                        $deleteVideoBtn.linkbutton("enable");
                         $addCategoryBtn.linkbutton("disable");
                         $centralFrame.attr("src", "${baseDir.contextPath}/user/playvideo?videoid=" + node.id);
                     }else {  //视频分类节点
@@ -155,6 +177,23 @@
                 }
             });
 
+            $videoDeleteSubmitBtn = $("#videoDeleteSubmitBtn").click(function(){
+                var selectedNode  = $videoTree.tree("getSelected");
+                $.ajax({
+                   url:'${baseDir.contextPath}/user/deleteVideo',
+                   data:{'videoId': selectedNode.id},
+                   dataType:'json',
+                   type:'post',
+                   success:function(data) {
+                       $deleteVideoDialog.dialog('close');
+                       if(data.success)
+                            $videoTree.tree("reload");
+                       else
+                            alert("删除失败，错误信息：" + data.message);
+                   }
+                });
+            });
+
         })
 
 
@@ -167,29 +206,27 @@
         }
 
         var uploadFileHandler = {
-            upload:function(videoCategoryId) {
-                $.ajaxFileUpload ( {
-                    url: '${baseDir.contextPath}/user/saveVideo', //用于文件上传的服务器端请求地址
-                    data:{'videoCategoryId':videoCategoryId},
-                    secureuri: false, //是否需要安全协议，一般设置为false
-                    fileElementId: 'videoFile', //文件上传域的ID
-                    dataType: 'json', //返回值类型 一般设置为json
-                    success: function (data, status)  //服务器成功响应处理函数
-                    {
-                        alert(data.message);
-                    },
-                    error: function (data, status, e)//服务器响应失败处理函数
-                    {
-                        alert(e);
-                    }
-                });
+            upload:function() {
+               $addVideoForm.ajaxSubmit({
+                  type:'post',
+                  dataType:'json',
+                  success:function(data) {
+                      if(data.success) {
+                          $addVideoDialog.dialog("close");
+                           $videoTree.tree("reload");
+                      }else {
+                          alert("上传失败，错误信息：" + data.message);
+                      }
+                  }
+
+               });
             }
         };
 
     </script>
 <body class="easyui-layout">
     <div data-options="region:'north',title:'今日热点',split:true" style="height:200px;"></div>
-    <div data-options="region:'west',title:'主菜单',split:true" style="width:300px;">
+    <div data-options="region:'west',title:'主菜单',split:true" style="width:320px;">
         <div id="accordionManager" class="easyui-accordion" style="height:250px;" data-options="fit:true">
         </div>
     </div>
@@ -224,11 +261,21 @@
                 <input type="hidden" name="videoCategoryId"  id="videoCategoryId"/>
                 <div style="margin-bottom:20px">
                     <div>视频文件:</div>
-                    <input class=" easyui-validatebox" type="file" name="videoFile" id="videoFile" data-options="prompt:'Choose a video...',required:true" validType="mp4OrFlv" style="width:100%">
+                    <input class=" easyui-validatebox easyui-filebox"  name="videoFile" id="videoFile" data-options="prompt:'Choose a video...',required:true" validType="mp4OrFlv" style="width:100%">
                 </div>
             </form>
             <div style="width: 70px;margin: 0 auto;">
                 <a href="#" id="videoSubmitBtn" class="easyui-linkbutton" style="width:70px;">上传</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 删除视频对话框 -->
+    <div id="deleteVideoDialog">
+        <div class="easyui-panel" title="" data-options="fit:true">
+            <div id="tobeDeleteVideo" style="width:80px; margin: 0 auto; padding-top:20px;"></div>
+            <div style="width: 70px;margin: 0 auto;padding-top:50px;">
+                <a href="#" id="videoDeleteSubmitBtn" class="easyui-linkbutton" style="width:70px;">确定</a>
             </div>
         </div>
     </div>

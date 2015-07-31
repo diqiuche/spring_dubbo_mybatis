@@ -12,4 +12,8 @@ public interface VideoMapper {
     public List<Video> getAllVideo();
 
     public Video getByPrimaryId(long videoid);
+
+    public void save(Video video);
+
+    public void deleteByPrimaryId(long videoId);
 }
