@@ -426,7 +426,7 @@ public class UserController {
         Music music =  this.musicService.fetch(musicid);
         String musicname = music.getName();
         request.setAttribute("musicName", musicname);
-        return "playmusic.ftl";
+        return "user/playmusic.ftl";
     }
 
     /**
