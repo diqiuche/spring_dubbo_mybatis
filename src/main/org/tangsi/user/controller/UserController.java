@@ -26,11 +26,9 @@ import org.tangsi.video.service.VideoCategoryService;
 import org.tangsi.video.service.VideoService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -335,6 +333,7 @@ public class UserController {
         Video video = this.videoService.fetch(videoid);
         String videoname = video.getName();
          request.setAttribute("videoName", videoname);
+         request.setAttribute("videoId", videoid);
          return   "jqplayer.ftl";
     }
 
@@ -363,21 +362,12 @@ public class UserController {
     @RequestMapping("/saveVideo")
     @ResponseBody
     public Map<String, Object> saveVideo(@RequestParam("videoCategoryId") long videoCategoryId,
-                                         @RequestParam("videoFile")MultipartFile videoFile, HttpServletRequest request) throws IOException {
+                                         @RequestParam("videoFile")MultipartFile videoFile, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<>();
         String base = request.getServletContext().getRealPath("/");  //项目路径
         try {
             String originalFileName = videoFile.getOriginalFilename();
-            InputStream inputStream = videoFile.getInputStream();
-            byte[] buff = new byte[1024*1024];
-            FileOutputStream fos = new FileOutputStream(new File(base + File.separator + "video" + File.separator + originalFileName));
-            int length = 0;
-            while((length = inputStream.read(buff)) != -1) {
-                fos.write(buff,0 ,length);
-            }
-            fos.flush();
-            fos.close();
-
+            videoFile.transferTo(new File(base + File.separator + "video" + File.separator + originalFileName));
             System.out.println("文件名： " + originalFileName);
             Video video = new Video();
             video.setVideoCategoryId(videoCategoryId);
@@ -402,13 +392,13 @@ public class UserController {
         //删除video记录与文件
         try {
             Video video = this.videoService.fetch(videoId);
-            this.videoService.deleteByPrimaryId(videoId);
             if(video != null) {
                 String videoName =video.getName();
                 File file = new File(base + File.separator + "video" + File.separator + videoName);
                 if(file.exists())
                     file.delete();
             }
+            this.videoService.deleteByPrimaryId(videoId);
             map.put("success",true);
             map.put("message", "删除成功");
         } catch (Exception e) {
@@ -426,6 +416,7 @@ public class UserController {
         Music music =  this.musicService.fetch(musicid);
         String musicname = music.getName();
         request.setAttribute("musicName", musicname);
+        request.setAttribute("musicId", musicid);
         return "user/playmusic.ftl";
     }
 
@@ -436,6 +427,29 @@ public class UserController {
     @RequestMapping("/showPictureFall")
     public String showPictureFall() {
         return "pictureFall.ftl";
+    }
+
+    @RequestMapping("/getVideoSource/{videoId}")
+    public void getVideoSource(@PathVariable("videoId") long videoId,HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String base = request.getServletContext().getRealPath("/");
+        Video video = this.videoService.fetch(videoId);
+        String videoName = video.getName();
+        if(videoName.endsWith(".mp4") || videoName.endsWith(".MP4"))
+            response.setContentType("video/mp4");
+        else if(videoName.endsWith(".flv") || videoName.endsWith(".FLV"))
+            response.setContentType("video/x-flv");
+        FileInputStream fis = new FileInputStream(new File(base + File.separator + "video" + File.separator + videoName));
+        OutputStream outputStream = response.getOutputStream();
+        long totalLength = 0L;
+        byte[] buff = new byte[1024 * 1024];
+        int length = 0;
+        while((length = fis.read(buff)) != -1) {
+            totalLength += length;
+            outputStream.write(buff, 0, length);
+        }
+       // response.setHeader("Content-Length", totalLength+"");  //this line is very important,otherwise the browser will case "net::ERR_INCOMPLETE_CHUNKED_ENCODING" error
+        outputStream.flush();
+        outputStream.close();
     }
 
 }

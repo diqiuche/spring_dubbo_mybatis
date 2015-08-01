@@ -60,8 +60,8 @@
                 $(this).jPlayer("setMedia", {
                     title: "${videoName}",
                     /* m4v: "http://www.jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v", */
-                    flv:'${baseDir.contextPath}/video/${videoName}',
-                    m4v:"${baseDir.contextPath}/video/${videoName}",
+                    <#if videoName?ends_with('flv')> flv:'${baseDir.contextPath}/user/getVideoSource/${videoId}',
+                    <#elseif videoName?ends_with('mp4')>m4v:"${baseDir.contextPath}/user/getVideoSource/${videoId}",</#if>
                     /* ogv: "http://www.jplayer.org/video/ogv/Big_Buck_Bunny_Trailer.ogv", */
                     poster: "http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png"
                 });
