@@ -74,7 +74,8 @@
             smoothPlayBar: true,
             keyEnabled: true,
             remainingDuration: true,
-            toggleDuration: true
+            toggleDuration: true,
+            sizeFull:{width:'100%',height:'100%'}
         });
     });
 

@@ -367,7 +367,10 @@ public class UserController {
         String base = request.getServletContext().getRealPath("/");  //项目路径
         try {
             String originalFileName = videoFile.getOriginalFilename();
-            videoFile.transferTo(new File(base + File.separator + "video" + File.separator + originalFileName));
+            File dist = new File(base + File.separator + "video" + File.separator + originalFileName);
+            if(dist.exists())
+                dist.delete();
+            videoFile.transferTo(dist);
             System.out.println("文件名： " + originalFileName);
             Video video = new Video();
             video.setVideoCategoryId(videoCategoryId);
@@ -449,7 +452,7 @@ public class UserController {
         }
        // response.setHeader("Content-Length", totalLength+"");  //this line is very important,otherwise the browser will case "net::ERR_INCOMPLETE_CHUNKED_ENCODING" error
         outputStream.flush();
-        outputStream.close();
+        //outputStream.close();
     }
 
 }
