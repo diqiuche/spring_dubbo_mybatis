@@ -3,6 +3,9 @@
     <meta charset="utf-8" content="text/html"/>
     <title>webix html5前端框架</title>
     <link href="${baseDir.contextPath}/js/webix/codebase/webix.css" rel="stylesheet" type="text/css"/>
+    <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/themes/icon.css" rel="stylesheet" type="text/css">
+    <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/demo/demo.css" rel="stylesheet" type="text/css">
+    <link href="${baseDir.contextPath}/css/commons.css" type="text/css">
     <script type="text/javascript" src="${baseDir.contextPath}/js/webix/codebase/webix.js"></script>
 </head>
 <body>
@@ -19,7 +22,7 @@
                         /*gravity:0.3,*/
                         multi:true,
                         rows:[
-                            {    header:'用户',
+                            {    header:'<div style="float: left;" class="icon-man"><div style="margin-left: 16px;">用户</div></div>',
                                  animate:{type:"flip", subtype:"vertical"}
                             },
                             {
