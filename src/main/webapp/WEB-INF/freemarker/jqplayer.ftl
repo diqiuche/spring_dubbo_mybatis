@@ -64,7 +64,7 @@
                     <#elseif videoName?ends_with('mp4')>m4v:"${baseDir.contextPath}/user/getVideoSource/${videoId}",</#if>
                     /* ogv: "http://www.jplayer.org/video/ogv/Big_Buck_Bunny_Trailer.ogv", */
                     poster: "http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png"
-                });
+                });1
             },
             cssSelectorAncestor: "#jp_container_1",
             swfPath: "${baseDir.contextPath}/js/jPlayer-2.9.2",
