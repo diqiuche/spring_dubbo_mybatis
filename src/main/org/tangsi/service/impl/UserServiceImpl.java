@@ -101,4 +101,9 @@ public class UserServiceImpl implements UserService {
         return  this.userMapper.updateByPrimaryKey(user);
     }
 
+    @Override
+    public List<User> getAllUser() {
+        return this.userMapper.queryAllUser();
+    }
+
 }

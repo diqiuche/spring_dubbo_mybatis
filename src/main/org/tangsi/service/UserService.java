@@ -44,4 +44,6 @@ public interface UserService {
      * @return
      */
     public int update(User user);
+
+    public List<User> getAllUser();
 }

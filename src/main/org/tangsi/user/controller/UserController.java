@@ -19,6 +19,7 @@ import org.tangsi.user.entity.UserTreeNode;
 import org.tangsi.user.validate.Login;
 import org.tangsi.user.validate.Registe;
 import org.tangsi.util.mvc.Pager;
+import org.tangsi.util.mvc.WebIXPager;
 import org.tangsi.video.entity.Video;
 import org.tangsi.video.entity.VideoCategory;
 import org.tangsi.video.entity.VideoTreeNode;
@@ -201,6 +202,11 @@ public class UserController {
         return "user/userlist.ftl";
     }
 
+    /**
+     * 与easyui 集成的后台分页
+     * @param pager
+     * @return
+     */
     @RequestMapping("/getUsers")
     @ResponseBody
     public Pager<User> getUsers(Pager<User> pager) {
@@ -454,5 +460,27 @@ public class UserController {
         outputStream.flush();
         //outputStream.close();
     }
+
+    @RequestMapping("/webixmain")
+    public String webIXUserMain() {
+        return "webixmain.ftl";
+    }
+
+    @RequestMapping("/webixuserlist")
+    public String webIXUserlist() {
+        return "webixuserlist.ftl";
+    }
+
+
+    /**
+     * 与webix 集成实现的排序、分页
+     * @return
+     */
+    @RequestMapping("/getWebIXUsers")
+    @ResponseBody
+    public List<User> webIxPaging() {
+        return this.userService.getAllUser();
+    }
+
 
 }

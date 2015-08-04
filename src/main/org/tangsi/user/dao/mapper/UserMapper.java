@@ -83,4 +83,5 @@ public interface UserMapper {
 
     public User findByUsernameAndPwd(Map<String, String> map);
 
+    public List<User> queryAllUser();
 }

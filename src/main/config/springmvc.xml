@@ -110,7 +110,7 @@
         <property name="exceptionMappings">
             <props>
                 <prop key="java.lang.Exception">error.jsp</prop>   <!-- 只要发生Exception异常则跳转到/WEB-INF/jsp/error.jsp -->
-                <prop key="org.springframework.web.util.NestedServletException">error</prop>
+                <prop key="org.springframework.web.util.NestedServletException">error.jsp</prop>
             </props>
         </property>
     </bean>

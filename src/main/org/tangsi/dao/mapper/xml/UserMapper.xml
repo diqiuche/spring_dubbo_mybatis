@@ -71,7 +71,7 @@
     id, name, email, phone,username,password
   </sql>
 
-  <!--  查询所有的用户 -->
+  <!--  查询所有的用户,支持按字段排序 -->
   <select id="selectAll" resultType="org.tangsi.user.entity.User" parameterType="map">
       select
       <include refid="Base_Column_List" />
@@ -83,6 +83,19 @@
           ${order}
       </if>
   </select>
+
+    <!-- 获取所有用户 -->
+    <select id="queryAllUser" resultType="org.tangsi.user.entity.User" parameterType="map">
+        select
+        <include refid="Base_Column_List" />
+        from t_user
+        <if test="sort != null">
+            order by ${sort}
+        </if>
+        <if test="order != null">
+            ${order}
+        </if>
+    </select>
 
   <select id="selectWithParamMap" resultMap="BaseResultMap" parameterType="map">
       select

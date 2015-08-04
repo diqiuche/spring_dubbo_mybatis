@@ -21,12 +21,12 @@ public class Pager<T> {
     /**
      * 第几页, index starts with 1
      */
-    private int page;
+    private int page = 1;
 
     /**
      * 页面记录大小
      */
-    private int pageSize;
+    private int pageSize = 10;
 
     /**
      * 排序字段
