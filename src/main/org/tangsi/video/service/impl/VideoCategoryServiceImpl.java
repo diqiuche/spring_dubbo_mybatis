@@ -62,7 +62,7 @@ public class VideoCategoryServiceImpl implements VideoCategoryService {
             this.buildVideoTreeRecursive(node, category.getChildren(), videos);
         }
 
-        rootCategoryTreeNode.setChildren(treeNodes);
+        rootCategoryTreeNode.setChildren(treeNodes, VideoTreeNode.IS_EASYUI_TREE);
     }
 
     /**

@@ -35,7 +35,13 @@
                     data:[
                         {id:1,value:'用户',open:true,
                             data:[
-                                {id:2,value:'用户列表',open:true}
+                                {id:2,value:'用户列表',open:true, data:[
+                                       {id:3,value:'用户1',open:true,data:[
+                                            {id:4,value:'用户2',open:true}
+                                            ]
+                                       }
+                                    ]
+                                }
                             ]
                         }
                     ],
@@ -62,7 +68,22 @@
                 headerHeight:32,
                 headerAltHeight:32,  //折叠时的高度
                 animate:{type:"slide", subtype:"in"},
-                collapsed:true
+                collapsed:true,
+                body:{
+                    id:'videoTree',
+                    view:'tree',
+                    url:'${baseDir.contextPath}/user/initVideoTree',
+                    dataType:'jsarray',
+                    type:'lineTree',
+                    select:true,
+                    on:{
+                        onItemClick:function(id, event, htmlNode) {
+                            var treeNodeData = $$("videoTree").getItem(id);
+                            alert(treeNodeData.value);
+                        }
+                    }
+
+                }
             },
             {
                 header:'图片浏览',
