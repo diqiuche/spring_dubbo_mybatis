@@ -7,14 +7,16 @@
 </head>
 <body>
 
+<div id="usertable"></div>
+<div id="pagingbar"></div>
 
 <script type="text/javascript">
     webix.ui({
         rows:[
-            {view:'template',type:'header',template:"tangsi's App!"},
             {view:'datatable',
                 /*autoConfig:true,*/
                 editable:true,
+                container:'usertable',
                 /*data:[{   //load data from datasource obj
                     name:'tangsi',username:'root',email:'tangside163@163.com',phone:18670950325
                 }],*/
@@ -23,13 +25,19 @@
                /* autowidth:true,*/
                 resizeColumn:true,
                 resizeRow:true,
-                container:'body',
+                scroll:false,
                 columns:[
                      {id:'name',header:'姓名',fillspace:true,sort:'server'},  //force some of columns to widen for filling the unused space
                      {id:'username',header:'用户名',fillspace:true,sort:'server'},
                      {id:'email',header:'邮箱',fillspace:true,sort:'server'},
                      {id:'phone',header:'电话',fillspace:true,sort:'server'}
                 ],
+                pager:{
+                    template:"{common.prev()} {common.pages()} {common.next()}",
+                    container:"pagingbar",
+                    size:10,
+                    group:5
+                },
                 on:{
                     "onBeforeSort":function(by, dir, as) {
                         alert("by = " + by + " , dir = " + dir + ", as = " + as);
