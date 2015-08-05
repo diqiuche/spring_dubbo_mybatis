@@ -4,25 +4,26 @@
     <title>webix html5前端框架</title>
     <link href="${baseDir.contextPath}/js/webix/codebase/webix.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="${baseDir.contextPath}/js/webix/codebase/webix.js"></script>
+    <style type="text/css">
+        .myaligncenter {
+            margin: 0 auto;
+        }
+
+    </style>
 </head>
 <body>
 
 <div id="usertable"></div>
-<div id="pagingbar"></div>
+<div id="pagingbar" style="margin: 0 auto;"></div>
 
 <script type="text/javascript">
     webix.ui({
+        container:'usertable',
         rows:[
-            {view:'datatable',
-                /*autoConfig:true,*/
-                editable:true,
-                container:'usertable',
-                /*data:[{   //load data from datasource obj
-                    name:'tangsi',username:'root',email:'tangside163@163.com',phone:18670950325
-                }],*/
+            {
+                view:'datatable',
                 url:'${baseDir.contextPath}/user/getWebIXUsers',
                 autoheight:true,
-               /* autowidth:true,*/
                 resizeColumn:true,
                 resizeRow:true,
                 scroll:false,
@@ -36,7 +37,8 @@
                     template:"{common.prev()} {common.pages()} {common.next()}",
                     container:"pagingbar",
                     size:10,
-                    group:5
+                    group:5,
+                    css:'myaligncenter'
                 },
                 on:{
                     "onBeforeSort":function(by, dir, as) {
