@@ -12,6 +12,21 @@
 <body>
 <script type="text/javascript">
 
+    var cities = [
+        {id:'1',label:'上海'},
+        {id:'2',label:'北京'},
+        {id:'3',label:'广州'},
+        {id:'4',label:'南京'},
+        {id:'5',label:'无锡'},
+        {id:'6',label:'长沙'},
+        {id:'7',label:'武汉'},
+        {id:'8',label:'湘潭'},
+        {id:'9',label:'西安'},
+        {id:'10',label:'云南'}
+
+
+    ];
+
     var topPanel = {
         borderless:true,
         margin:0,
@@ -61,14 +76,14 @@
                         //datatype:'jsarray',
                         select:true,
                         data:[
-                            {"id":1,title:'奥巴马的新闻标题',content:'出访中国',date:'2015年7月28日'},
-                            {id:2,title:'施罗德的新闻标题',content:'出访日本',date:'2015年7月28日'},
-                            {id:3,title:'默克尔的新闻标题',content:'出访美国',date:'2015年7月28日'},
-                            {id:4,title:'小泉的新闻标题',content:'出访中国',date:'2015年7月28日'},
-                            {id:6,title:'威廉王子的新闻标题',content:'游玩塞班岛',date:'2015年7月28日'},
-                            {id:7,title:'保罗艾伦的新闻标题',content:'制造宇宙飞船游太空',date:'2015年7月28日'},
-                            {id:8,title:'比尔盖茨的新闻标题',content:'发布windows 10',date:'2015年7月28日'},
-                            {id:9,title:'老习的新闻标题',content:'出访世界各地',date:'2015年7月28日'}
+                            {"id":1,title:'马云的新闻标题',content:'出访中国',date:'2015年7月28日'},
+                            {id:2,title:'陈天桥的新闻标题',content:'出访日本',date:'2015年7月28日'},
+                            {id:3,title:'俞敏洪的新闻标题',content:'出访美国',date:'2015年7月28日'},
+                            {id:4,title:'李彦宏的新闻标题',content:'出访中国',date:'2015年7月28日'},
+                            {id:6,title:'马化腾的新闻标题',content:'游玩塞班岛',date:'2015年7月28日'},
+                            {id:7,title:'古永铿的新闻标题',content:'制造宇宙飞船游太空',date:'2015年7月28日'},
+                            {id:8,title:'王石的新闻标题',content:'发布windows 10',date:'2015年7月28日'},
+                            {id:9,title:'王健林的新闻标题',content:'出访世界各地',date:'2015年7月28日'}
                         ],
                         template:"#id#---#title#---#content#,时间：#date#"
                     }
@@ -111,6 +126,38 @@
                         }
                     }
 
+                }
+            },
+            {
+                header:"航班预定",
+                headerHeight:32,
+                headerAltHeight:32,  //折叠时的高度
+                animate:{type:"slide", subtype:"in"},
+                //height:600,
+                collapsed:true, //默认关闭
+                body:
+                {
+                    view:"form", elements:[
+                        {view:"radio", id:"radio1", value:1, options:[{id:1, value:"单程"}, {id:2, value:"往返"}], label:"旅程"},
+                        {view:"combo", label:"从", options:cities, placeholder:"选择出发地",value:1},
+                        {view:"combo", label:"至", options:cities, placeholder:"选择目的地"},
+                        {view:"datepicker", label:"出发日期", value:new Date(), format:"%d  %M %Y"},
+                        {view:"datepicker", id:"datepicker2", label:"回程日期", value:new Date(), format:"%d  %M %Y", hidden:true},
+                        {view:"checkbox", id:"flexible", value:0, label: "不固定日期"},
+                        {
+                            cols:[
+                                {view:"label",  label: "乘客", width: 100,align:'left'},
+                                {view:"counter",  labelPosition: "top", label:"成年人", value:1, min:1},
+                                {view:"counter",  labelPosition: "top", label:"儿童"}
+                            ]
+                        },
+                        { height: 10},
+                        {view:"button", type:"form", value:"现在预定", inputWidth:140, align: "center"}, {}
+
+                    ],
+                    elementsConfig:{
+                        labelWidth:100, labelAlign:"left"
+                    }
                 }
             },
             {
