@@ -315,10 +315,10 @@ public class UserController {
      * 返回音乐树节点json数据
      * @return
      */
-    @RequestMapping("/initVideoTree")
+    @RequestMapping("/initVideoTree/{isEasyUITree}")
     @ResponseBody
-    public List<VideoTreeNode> initVideoTree(){
-        return this.videoCategoryService.buildVideoTree();
+    public List<VideoTreeNode> initVideoTree(@PathVariable("isEasyUITree") boolean isEasyUITree){
+        return this.videoCategoryService.buildVideoTree(isEasyUITree);
     }
 
 

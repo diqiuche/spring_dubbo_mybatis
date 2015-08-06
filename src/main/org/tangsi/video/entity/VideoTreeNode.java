@@ -86,12 +86,12 @@ public class VideoTreeNode implements Serializable{
     /**
      * 对应于easyui的树控件的子节点数据
      */
-    private List<VideoTreeNode> children = new ArrayList<>();
+    private List<VideoTreeNode> children;
 
     /**
      * 对应于webix的树控件的子节点数据
      */
-    private List<VideoTreeNode> data = new ArrayList<>();
+    private List<VideoTreeNode> data;
 
     public List<VideoTreeNode> getData() {
         return data;

@@ -15,8 +15,9 @@ public interface VideoCategoryService {
     /**
      * 构建视频树的父子结构数据
      * @return
+     * @param isEasyUITree
      */
-    public List<VideoTreeNode> buildVideoTree();
+    public List<VideoTreeNode> buildVideoTree(boolean isEasyUITree);
 
 
     public void add(VideoCategory category);

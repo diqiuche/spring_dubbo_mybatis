@@ -50,12 +50,20 @@
                     },
                     "onAfterSort":function(by, dir, as) {
                         alert("排序后：by = " + by + " , dir = " + dir + ", as = " + as);
+                    },
+                    onDataRequest:function( start, count, handler, url ) {
+                        alert("请求数据：start =" + start + ",count =" + count + ",url=" + url);
+                        console.dir(url);
                     }
                 }
 
             }
         ]
     });
+
+    var handler = function () {
+
+    };
 </script>
 </body>
 </html>

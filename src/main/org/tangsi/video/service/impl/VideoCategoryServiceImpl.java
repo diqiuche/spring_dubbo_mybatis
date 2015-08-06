@@ -30,12 +30,12 @@ public class VideoCategoryServiceImpl implements VideoCategoryService {
     }
 
     @Override
-    public List<VideoTreeNode> buildVideoTree() {
+    public List<VideoTreeNode> buildVideoTree(boolean isEasyUITree) {
         List<VideoTreeNode> data = new ArrayList<>();
         VideoCategory rootCategory = this.buildCategoryInTree();
         List<Video> allVideo = this.videoMapper.getAllVideo();
         VideoTreeNode rootCategoryTreeNode = new VideoTreeNode(rootCategory.getId(), VideoTreeNode.VIDEO_FLAG_NOT, rootCategory.getName(), "open", rootCategory.getIconCls());
-        this.buildVideoTreeRecursive(rootCategoryTreeNode, rootCategory.getChildren(), allVideo);
+        this.buildVideoTreeRecursive(rootCategoryTreeNode, rootCategory.getChildren(), allVideo, isEasyUITree);
 
         data.add(rootCategoryTreeNode);
         return data;
@@ -46,7 +46,7 @@ public class VideoCategoryServiceImpl implements VideoCategoryService {
         this.videoCategoryMapper.save(category);
     }
 
-    private void buildVideoTreeRecursive(VideoTreeNode rootCategoryTreeNode, List<VideoCategory> children, List<Video> videos) {
+    private void buildVideoTreeRecursive(VideoTreeNode rootCategoryTreeNode, List<VideoCategory> children, List<Video> videos, boolean isEasyUITree) {
         List<VideoTreeNode> treeNodes = new ArrayList<>();
         //构建视频分类下的视频
         for(Video video : videos) {
@@ -59,10 +59,11 @@ public class VideoCategoryServiceImpl implements VideoCategoryService {
         for(VideoCategory category : children) {
             VideoTreeNode node = new VideoTreeNode(category.getId(), VideoTreeNode.VIDEO_FLAG_NOT, category.getName(), "open", category.getIconCls());
             treeNodes.add(node);
-            this.buildVideoTreeRecursive(node, category.getChildren(), videos);
+            this.buildVideoTreeRecursive(node, category.getChildren(), videos, isEasyUITree);
         }
 
-        rootCategoryTreeNode.setChildren(treeNodes, VideoTreeNode.IS_EASYUI_TREE);
+        if(!treeNodes.isEmpty())  //有子节点时才设置子节点
+            rootCategoryTreeNode.setChildren(treeNodes, isEasyUITree);
     }
 
     /**

@@ -175,7 +175,7 @@
                 }
             });
             $videoTree = $("#videoTree").tree({
-                url:'${baseDir.contextPath}/user/initVideoTree',
+                url:'${baseDir.contextPath}/user/initVideoTree/true',
                 lines:true,
                 onClick:function(node){
                     if(node.videoFlag) {  //视频节点
