@@ -7,11 +7,13 @@
     <link href="${baseDir.contextPath}/js/jquery-easyui-1.4.3/demo/demo.css" rel="stylesheet" type="text/css">
     <link href="${baseDir.contextPath}/css/commons.css" type="text/css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="${baseDir.contextPath}/js/webix/codebase/webix.js"></script>
+    <!-- i18n 中文-->
+    <script type="text/javascript" src="${baseDir.contextPath}/js/webix/codebase/i18n/zh.js"></script>
 
 </head>
 <body>
 <script type="text/javascript">
-
+    webix.i18n.setLocale("zh-CN");   //i18n ，中文
     var cities = [
         {id:'1',label:'上海'},
         {id:'2',label:'北京'},
@@ -141,9 +143,16 @@
                         {view:"radio", id:"radio1", value:1, options:[{id:1, value:"单程"}, {id:2, value:"往返"}], label:"旅程"},
                         {view:"combo", label:"从", options:cities, placeholder:"选择出发地",value:1},
                         {view:"combo", label:"至", options:cities, placeholder:"选择目的地"},
-                        {view:"datepicker", label:"出发日期", value:new Date(), format:"%d  %M %Y"},
-                        {view:"datepicker", id:"datepicker2", label:"回程日期", value:new Date(), format:"%d  %M %Y", hidden:true},
-                        {view:"checkbox", id:"flexible", value:0, label: "不固定日期"},
+                        {
+                            view:"datepicker", id:"startDate",label:"出发日期", value:new Date(), format:"%Y-%m-%d",
+                            on:{
+                                onChange:function(newValue, oldValue) {
+                                    alert(newValue);
+                                }
+                            }
+                        },
+                        {view:"datepicker", id:"endDate", label:"回程日期", format:"%Y-%m-%d", hidden:true},
+                        /*{view:"checkbox", id:"flexible", value:0, label: "不固定日期"},*/
                         {
                             cols:[
                                 {view:"label",  label: "乘客", width: 100,align:'left'},
@@ -151,7 +160,7 @@
                                 {view:"counter",  labelPosition: "top", label:"儿童"}
                             ]
                         },
-                        { height: 10},
+                        /*{ height: 2},*/
                         {view:"button", type:"form", value:"现在预定", inputWidth:140, align: "center"}, {}
 
                     ],
