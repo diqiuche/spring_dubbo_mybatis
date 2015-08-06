@@ -35,8 +35,8 @@
 
         var isPlayingFlag = true;
 
+        //enter 键控制html5播放器的播放与暂停
         webix.UIManager.addHotKey("enter", function() {
-            $$("videoPlayer").enable();
             var html5videoObj = $$("videoPlayer").getVideo();
             if(isPlayingFlag) {
                 html5videoObj.pause();
@@ -46,6 +46,27 @@
                 html5videoObj.play();
                 isPlayingFlag = true;
             }
+        });
+        var MaxVolume = 1,  //最大音量
+             MinVolume = 0,  //最小音量
+                step = 0.1  //步进
+                ;
+        //增加音量
+        webix.UIManager.addHotKey("up", function() {
+            var html5videoObj = $$("videoPlayer").getVideo();
+            if(html5videoObj.volume < MaxVolume) {
+                html5videoObj.volume = html5videoObj.volume + step;
+            }
+
+        });
+
+        //减少音量
+        webix.UIManager.addHotKey("down", function() {
+            var html5videoObj = $$("videoPlayer").getVideo();
+            if(html5videoObj.volume > MinVolume) {
+                html5videoObj.volume = html5videoObj.volume - step;
+            }
+
         });
 
     </script>
