@@ -140,17 +140,17 @@
                 body:
                 {
                     view:"form", elements:[
-                        {view:"radio", id:"radio1", value:1, options:[{id:1, value:"单程"}, {id:2, value:"往返"}], label:"旅程"},
-                        {view:"combo", label:"从", options:cities, placeholder:"选择出发地",value:1},
-                        {view:"combo", label:"至", options:cities, placeholder:"选择目的地"},
                         {
-                            view:"datepicker", id:"startDate",label:"出发日期", value:new Date(), format:"%Y-%m-%d",
+                            view:"radio", id:"radio1", value:1, options:[{id:1, value:"单程"}, {id:2, value:"往返"}], label:"旅程",
                             on:{
-                                onChange:function(newValue, oldValue) {
-                                    alert(newValue);
+                                onItemClick:function(id, event) {
+                                    alert(id);
                                 }
                             }
                         },
+                        {view:"combo", label:"从", options:cities, placeholder:"选择出发地",value:1},
+                        {view:"combo", label:"至", options:cities, placeholder:"选择目的地"},
+                        {view:"datepicker", id:"startDate",label:"出发日期", value:new Date(), format:"%Y-%m-%d"},
                         {view:"datepicker", id:"endDate", label:"回程日期", format:"%Y-%m-%d", hidden:true},
                         /*{view:"checkbox", id:"flexible", value:0, label: "不固定日期"},*/
                         {
