@@ -482,5 +482,53 @@ public class UserController {
         return this.userService.getAllUser();
     }
 
+    @RequestMapping("/getAllVideoInTree")
+    @ResponseBody
+    public List<VideoTreeNode> getAllVideoInInTree() {
+        return this.videoService.buildAllVideoInTree();
+    }
+
+    /**
+     * 导向webix视频播放器界面
+     * @param videoId
+     * @param request
+     * @return
+     */
+    @RequestMapping("/playVideoViaWebIX/{videoId}")
+    public String playVideoViaWebIX(@PathVariable("videoId") long videoId, HttpServletRequest request) {
+        Video video = this.videoService.fetch(videoId);
+        if(video != null) {
+            request.setAttribute("VIDEOId", video.getId());
+            request.setAttribute("videoName", video.getName());
+
+        }
+        return "webIXPlayVideo.ftl";
+
+    }
+
+    /**
+     * 获取webix播放视频的视频流
+     * @param videoId
+     * @param request
+     * @param response
+     * @throws FileNotFoundException
+     */
+    @RequestMapping("/getVideoSourceForWebIx/{videoId}")
+    public void getVideoSourceForWebIx(@PathVariable("videoId") long videoId, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Video video = this.videoService.fetch(videoId);
+        String base = request.getServletContext().getRealPath("/");
+        FileInputStream fis = new FileInputStream(new File(base + File.separator + "video" + File.separator + video.getName()));
+        OutputStream outputStream = response.getOutputStream();
+        long totalLength = 0L;
+        byte[] buff = new byte[1024 * 1024];
+        int length = 0;
+        while((length = fis.read(buff)) != -1) {
+            totalLength += length;
+            outputStream.write(buff, 0, length);
+        }
+        // response.setHeader("Content-Length", totalLength+"");  //this line is very important,otherwise the browser will case "net::ERR_INCOMPLETE_CHUNKED_ENCODING" error
+        outputStream.flush();
+    }
+
 
 }

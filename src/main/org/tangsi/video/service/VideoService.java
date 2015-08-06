@@ -1,6 +1,7 @@
 package org.tangsi.video.service;
 
 import org.tangsi.video.entity.Video;
+import org.tangsi.video.entity.VideoTreeNode;
 
 import java.util.List;
 
@@ -24,4 +25,10 @@ public interface VideoService {
      * @param videoId
      */
     public void deleteByPrimaryId(long videoId);
+
+    /**
+     * 获取所有的视频，并将视频构建成一个层级的树菜单
+     * @return
+     */
+    public List<VideoTreeNode> buildAllVideoInTree();
 }

@@ -22,10 +22,15 @@
         gravity:0.4,
         body:{
             view:'tabview',
+            borderless:true,
+            margin:0,
+            padding:0,
             cells:[
                 {
                     header:'国际新闻',
                     width:200,
+                    margin:0,
+                    padding:0,
                     body:{
                         id:'internationalNewsList',
                         view:'list',
@@ -48,6 +53,8 @@
                 {
                     header:'国内新闻',
                     width:200,
+                    margin:0,
+                    padding:0,
                     body:{
                         id:'domesticNewsList',
                         view:'list',
@@ -122,14 +129,15 @@
                 body:{
                     id:'videoTree',
                     view:'tree',
-                    //url:'${baseDir.contextPath}/user/initVideoTree/false',
+                    url:'${baseDir.contextPath}/user/getAllVideoInTree',
                     dataType:'jsarray',
                     type:'lineTree',
                     select:true,
                     on:{
                         onItemClick:function(id, event, htmlNode) {
                             var treeNodeData = $$("videoTree").getItem(id);
-                            alert(treeNodeData.value);
+                            if(treeNodeData.id != 0)
+                                $$("rightFrame").getIframe().src="${baseDir.contextPath}/user/playVideoViaWebIX/"+treeNodeData.id;
                         }
                     }
 

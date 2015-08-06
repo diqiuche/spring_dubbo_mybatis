@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.tangsi.video.dao.mapper.VideoMapper;
 import org.tangsi.video.entity.Video;
+import org.tangsi.video.entity.VideoTreeNode;
 import org.tangsi.video.service.VideoService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,5 +47,34 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public void deleteByPrimaryId(long videoId) {
         this.videoMapper.deleteByPrimaryId(videoId);
+    }
+
+    /**
+     * 获取所有的视频，并将视频构建成一个层级的树菜单
+     *
+     * @return
+     */
+    @Override
+    public List<VideoTreeNode> buildAllVideoInTree() {
+        List<Video> allVideo = this.getAllVideo();
+        List<VideoTreeNode> children = new ArrayList<>();
+        if(allVideo != null && !allVideo.isEmpty()) {
+            for(Video video : allVideo) {
+                VideoTreeNode child = new VideoTreeNode();
+                children.add(child);
+                child.setId(video.getId());
+                child.setValue(video.getName());
+                child.setOpen(true);
+            }
+        }
+        VideoTreeNode root = new VideoTreeNode();
+        root.setId(0);
+        root.setValue("视频");
+        root.setOpen(true);
+        if(!children.isEmpty())
+            root.setData(children);
+        List<VideoTreeNode> topRoots = new ArrayList<>();
+        topRoots.add(root);
+        return topRoots;
     }
 }
