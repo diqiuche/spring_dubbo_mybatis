@@ -14,26 +14,39 @@
             fullscreen:true,  //全屏
             borderless:true,   //无边框设置
             body:{
-                id:'videoObj',
+                id:'videoPlayer',
                 view:"video",
+                borderless:true,
                 controls:true,
                 src: [
                     '${baseDir.contextPath}/user/getVideoSourceForWebIx/${VIDEOId}'
                 ],
                 autoplay:true   //自动播放
+
             },
             head:{
                 view:"toolbar", elements:[
-                    {view:"label", label: "${videoName}", align:'left'}
+                    {view:"label", label: "${videoName}", align:'center'}
                 ]
             },
-           /* top:150,
-            left:300,
-            width:800,
-            height:600,*/
             move:true   //页面可移动
 
         }).show();
+
+        var isPlayingFlag = true;
+
+        webix.UIManager.addHotKey("enter", function() {
+            $$("videoPlayer").enable();
+            var html5videoObj = $$("videoPlayer").getVideo();
+            if(isPlayingFlag) {
+                html5videoObj.pause();
+                isPlayingFlag = false;
+            }
+            else {
+                html5videoObj.play();
+                isPlayingFlag = true;
+            }
+        });
 
     </script>
 </body>
