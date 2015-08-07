@@ -373,22 +373,41 @@
                     { view:"button", label: '关闭', width: 40, align: 'right', click:"$$('uploadWindow').hide();"}
                 ]
             },
-            width:400,
+            width:430,
             height:300,
             hidden:true,
             modal:true,
             move:true,
             position:"center",
             body:{
+                id:'videoUploadForm',
                 view:'form',
                 elements:[
                     {
                         cols:[
-                            {view:'label',label:'文件名',width:60},
                             {
                                 id:'videoFileUploader',
                                 view:'uploader',
-                                placeholder:'请选择MP4或者flv格式的视频文件'
+                                value:'请选择MP4或者flv格式的视频文件',
+                                accept:'video/mp4,video/x-flv',
+                                height:60,
+                                name:'videoFile',
+                                link:'myfiletemplate'   //用来显示被选中的文件
+                            },
+                            {view:'label',label:'文件名',width:60},
+                            {
+                                id:'myfiletemplate',autoheight:true,
+                                template:function(data) {
+                                    var filenames = [];
+                                    if(data.each) {
+                                        data.each(function(obj){
+                                           filenames.push('<div style="padding-top: 20px;">'+obj.name+'</div>');
+                                        });
+                                    }
+                                    return filenames.join("&nbsp;&nbsp;&nbsp;");
+                                },
+                                height:60,
+                                borderless:true
                             }
                         ]
                     },
@@ -399,7 +418,7 @@
                                 view:'button',type:'form',label:'提交',width:50,
                                 on:{
                                     onItemClick:function(id, event) {
-                                        $$("uploadWindow").show();
+                                        $$("videoUploadForm").getValues;
                                     }
                                 }
                             },
