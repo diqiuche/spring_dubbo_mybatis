@@ -121,7 +121,9 @@
                                             {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_1.jpg"}},
                                             {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_2.jpg"}},
                                             {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_3.jpg"}},
-                                            {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_4.jpg"}}
+                                            {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_4.jpg"}},
+                                            {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_5.jpg"}},
+                                            {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_6.jpg"}}
                                         ]
                                     },
                                      {
@@ -236,20 +238,55 @@
                 animate:{type:"slide", subtype:"in"},
                 collapsed:true,
                 body:{
-                    id:'videoTree',
-                    view:'tree',
-                    url:'${baseDir.contextPath}/user/getAllVideoInTree',
-                    dataType:'jsarray',
-                    type:'lineTree',
-                    select:true,
-                    on:{
-                        onItemClick:function(id, event, htmlNode) {
-                            var treeNodeData = $$("videoTree").getItem(id);
-                            if(treeNodeData.id != 0)
-                                $$("rightFrame").getIframe().src="${baseDir.contextPath}/user/playVideoViaWebIX/"+treeNodeData.id;
-                        }
-                    }
+                    rows:[
+                        {
+                            id:'buttonBar',
+                            view:'toolbar',
+                            height:40,
+                            cols:[
+                                {
+                                    id:'addVideoButton',
+                                    view:"button", type:"icon",  label:"新增", width:50,align:'left',type:'form',disabled:true,
+                                    on:{
+                                        onItemClick:function(id, event) {
+                                            $$("uploadWindow").show();
+                                        }
+                                    }
+                                },
+                                {
+                                    id:'deleteVideoButton',
+                                    view:"button", type:"icon",  label:"删除", width:50,align:'left',type:'danger',disabled:true,
+                                    on:{
+                                        onItemClick:function(id, event) {
 
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            id:'videoTree',
+                            view:'tree',
+                            url:'${baseDir.contextPath}/user/getAllVideoInTree',
+                            dataType:'jsarray',
+                            type:'lineTree',
+                            select:true,
+                            on:{
+                                onItemClick:function(id, event, htmlNode) {
+                                    var treeNodeData = $$("videoTree").getItem(id);
+                                    if(treeNodeData.id != -1) {  //视频节点
+                                        $$("rightFrame").getIframe().src="${baseDir.contextPath}/user/playVideoViaWebIX/"+treeNodeData.id;
+                                        $$("deleteVideoButton").enable();
+                                        $$("addVideoButton").disable();
+                                    }else {  //根节点
+                                        $$("deleteVideoButton").disable();
+                                        $$("addVideoButton").enable();
+                                    }
+
+                                }
+                            }
+                        }
+                    ]
                 }
             },
             {
@@ -324,6 +361,55 @@
                 }
             ]
         });
+
+        webix.ui({
+            id:'uploadWindow',
+            view:'window',
+            head:{
+                view:"toolbar",
+                height:40,
+                cols:[
+                    {view:"label", label: "上传视频",align:'center',height:40 },
+                    { view:"button", label: '关闭', width: 40, align: 'right', click:"$$('uploadWindow').hide();"}
+                ]
+            },
+            width:400,
+            height:300,
+            hidden:true,
+            modal:true,
+            move:true,
+            position:"center",
+            body:{
+                view:'form',
+                elements:[
+                    {
+                        cols:[
+                            {view:'label',label:'文件名',width:60},
+                            {
+                                id:'videoFileUploader',
+                                view:'uploader',
+                                placeholder:'请选择MP4或者flv格式的视频文件'
+                            }
+                        ]
+                    },
+                    {
+                        cols:[
+                            { view:'template',borderless:true },
+                            {
+                                view:'button',type:'form',label:'提交',width:50,
+                                on:{
+                                    onItemClick:function(id, event) {
+                                        $$("uploadWindow").show();
+                                    }
+                                }
+                            },
+                            { view:'template',borderless:true  }
+                        ]
+                    }
+                ]
+            }
+        });
+
     });
 
 </script>

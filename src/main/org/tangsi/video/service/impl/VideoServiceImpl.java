@@ -68,7 +68,7 @@ public class VideoServiceImpl implements VideoService {
             }
         }
         VideoTreeNode root = new VideoTreeNode();
-        root.setId(0);
+        root.setId(-1);
         root.setValue("视频");
         root.setOpen(true);
         if(!children.isEmpty())
