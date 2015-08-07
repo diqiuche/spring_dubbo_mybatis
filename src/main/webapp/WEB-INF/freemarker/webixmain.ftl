@@ -33,11 +33,103 @@
         return '<img src="'+ obj.src +'"/>';
     }
 
+    var topTabs = [
+        {
+            header:'国际新闻',
+            width:200,
+            height:200,
+            margin:0,
+            padding:0,
+            body:{
+                id:'internationalNewsList',
+                view:'list',
+                //datatype:'jsarray',
+                select:true,
+                data:[
+                    {id:1,title:'奥巴马的新闻标题',content:'出访中国',date:'2015年7月28日'},
+                    {id:2,title:'施罗德的新闻标题',content:'出访日本',date:'2015年7月28日'},
+                    {id:3,title:'默克尔的新闻标题',content:'出访美国',date:'2015年7月28日'},
+                    {id:4,title:'小泉的新闻标题',content:'出访中国',date:'2015年7月28日'},
+                    {id:6,title:'威廉王子的新闻标题',content:'游玩塞班岛',date:'2015年7月28日'},
+                    {id:7,title:'保罗艾伦的新闻标题',content:'制造宇宙飞船游太空',date:'2015年7月28日'},
+                    {id:8,title:'比尔盖茨的新闻标题',content:'发布windows 10',date:'2015年7月28日'},
+                    {id:9,title:'老习的新闻标题',content:'出访世界各地',date:'2015年7月28日'}
+                ],
+                template:"#id#---#title#---#content#,时间：#date#"
+
+            }
+        },
+        {
+            header:'国内新闻',
+            width:200,
+            height:200,
+            margin:0,
+            padding:0,
+            body:{
+                id:'domesticNewsList',
+                view:'list',
+                //datatype:'jsarray',
+                select:true,
+                data:[
+                    {"id":1,title:'马云的新闻标题',content:'出访中国',date:'2015年7月28日'},
+                    {id:2,title:'陈天桥的新闻标题',content:'出访日本',date:'2015年7月28日'},
+                    {id:3,title:'俞敏洪的新闻标题',content:'出访美国',date:'2015年7月28日'},
+                    {id:4,title:'李彦宏的新闻标题',content:'出访中国',date:'2015年7月28日'},
+                    {id:6,title:'马化腾的新闻标题',content:'游玩塞班岛',date:'2015年7月28日'},
+                    {id:7,title:'古永铿的新闻标题',content:'制造宇宙飞船游太空',date:'2015年7月28日'},
+                    {id:8,title:'王石的新闻标题',content:'发布windows 10',date:'2015年7月28日'},
+                    {id:9,title:'王健林的新闻标题',content:'出访世界各地',date:'2015年7月28日'}
+                ],
+                template:"#id#---#title#---#content#,时间：#date#"
+            }
+        },
+        {
+            header: '热点图片',
+            width: 200,
+            height:200,
+            margin: 0,
+            padding:0,
+            body: {
+                type:'clean',
+                cols:[
+                    {
+                        type:'clean',
+                        cols:[
+                            {
+                                view:'template',borderless:true
+                            },
+                            {
+                                id:'pictureCarousel',
+                                view:'carousel',
+                                width:200,
+                                height:180,
+                                borderless:true,
+                                cols:[
+                                    {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_1.jpg"}},
+                                    {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_2.jpg"}},
+                                    {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_3.jpg"}},
+                                    {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_4.jpg"}},
+                                    {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_5.jpg"}},
+                                    {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_6.jpg"}}
+                                ]
+                            },
+                            {
+                                view:'template',borderless:true
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ];
+
     var topPanel = {
         borderless:true,
         margin:0,
         padding:0,
-        header:'今日热点',
+        header:'<span class="webix_icon fa-envelope"></span>今日热点'
+                +'<div title="设置" style="float: right;margin-top: 8px;" class="webix_icon fa-cog"></div>'
+                +'<div title="账户" style="float: right;margin-top: 8px;" class="webix_icon fa-user"></div>',
         headerHeight:35,
         headerAltHeight:35,
         gravity:0.4,
@@ -46,95 +138,7 @@
             borderless:true,
             margin:0,
             padding:0,
-            cells:[
-                {
-                    header:'国际新闻',
-                    width:200,
-                    height:200,
-                    margin:0,
-                    padding:0,
-                    body:{
-                        id:'internationalNewsList',
-                        view:'list',
-                        //datatype:'jsarray',
-                        select:true,
-                        data:[
-                            {id:1,title:'奥巴马的新闻标题',content:'出访中国',date:'2015年7月28日'},
-                            {id:2,title:'施罗德的新闻标题',content:'出访日本',date:'2015年7月28日'},
-                            {id:3,title:'默克尔的新闻标题',content:'出访美国',date:'2015年7月28日'},
-                            {id:4,title:'小泉的新闻标题',content:'出访中国',date:'2015年7月28日'},
-                            {id:6,title:'威廉王子的新闻标题',content:'游玩塞班岛',date:'2015年7月28日'},
-                            {id:7,title:'保罗艾伦的新闻标题',content:'制造宇宙飞船游太空',date:'2015年7月28日'},
-                            {id:8,title:'比尔盖茨的新闻标题',content:'发布windows 10',date:'2015年7月28日'},
-                            {id:9,title:'老习的新闻标题',content:'出访世界各地',date:'2015年7月28日'}
-                        ],
-                        template:"#id#---#title#---#content#,时间：#date#"
-
-                    }
-                },
-                {
-                    header:'国内新闻',
-                    width:200,
-                    height:200,
-                    margin:0,
-                    padding:0,
-                    body:{
-                        id:'domesticNewsList',
-                        view:'list',
-                        //datatype:'jsarray',
-                        select:true,
-                        data:[
-                            {"id":1,title:'马云的新闻标题',content:'出访中国',date:'2015年7月28日'},
-                            {id:2,title:'陈天桥的新闻标题',content:'出访日本',date:'2015年7月28日'},
-                            {id:3,title:'俞敏洪的新闻标题',content:'出访美国',date:'2015年7月28日'},
-                            {id:4,title:'李彦宏的新闻标题',content:'出访中国',date:'2015年7月28日'},
-                            {id:6,title:'马化腾的新闻标题',content:'游玩塞班岛',date:'2015年7月28日'},
-                            {id:7,title:'古永铿的新闻标题',content:'制造宇宙飞船游太空',date:'2015年7月28日'},
-                            {id:8,title:'王石的新闻标题',content:'发布windows 10',date:'2015年7月28日'},
-                            {id:9,title:'王健林的新闻标题',content:'出访世界各地',date:'2015年7月28日'}
-                        ],
-                        template:"#id#---#title#---#content#,时间：#date#"
-                    }
-                },
-                {
-                    header: '热点图片',
-                    width: 200,
-                    height:200,
-                    margin: 0,
-                    padding:0,
-                    body: {
-                        type:'clean',
-                        cols:[
-                             {
-                                 type:'clean',
-                                 cols:[
-                                     {
-                                         view:'template',borderless:true
-                                     },
-                                    {
-                                        id:'pictureCarousel',
-                                        view:'carousel',
-                                        width:200,
-                                        height:180,
-                                        borderless:true,
-                                        cols:[
-                                            {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_1.jpg"}},
-                                            {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_2.jpg"}},
-                                            {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_3.jpg"}},
-                                            {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_4.jpg"}},
-                                            {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_5.jpg"}},
-                                            {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_6.jpg"}}
-                                        ]
-                                    },
-                                     {
-                                         view:'template',borderless:true
-                                     }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
+            cells:topTabs
         }
     };
 
@@ -147,7 +151,7 @@
                 headerHeight:32,
                 headerAltHeight:32,  //折叠时的高度
                 animate:{type:"slide", subtype:"in"},
-                //height:600,
+                css:'webix_icon fa-cog',
                 collapsed:false, //默认展开
                 body:{
                     id:'userTree',
@@ -246,7 +250,7 @@
                             cols:[
                                 {
                                     id:'addVideoButton',
-                                    view:"button", type:"icon",  label:"新增", width:50,align:'left',type:'form',disabled:true,
+                                    view:"button", type:"icon",  label:"新增", width:60,align:'left',disabled:true,icon:'plus',
                                     on:{
                                         onItemClick:function(id, event) {
                                             $$("uploadWindow").show();
@@ -255,7 +259,7 @@
                                 },
                                 {
                                     id:'deleteVideoButton',
-                                    view:"button", type:"icon",  label:"删除", width:50,align:'left',type:'danger',disabled:true,
+                                    view:"button", type:"icon",  label:"删除", width:60,align:'left',disabled:true,icon:'times',
                                     on:{
                                         onItemClick:function(id, event) {
                                             var  $$videoTree = $$("videoTree");
@@ -340,7 +344,7 @@
 
     webix.ready(function(){
         webix.ui({
-            view:'headerlayout',
+            //view:'headerlayout',
             type:'space',
             borderless:true,
             margin:0,
