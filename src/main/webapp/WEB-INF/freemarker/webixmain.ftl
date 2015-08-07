@@ -29,6 +29,10 @@
 
     ];
 
+    function img(obj) {
+        return '<img src="'+ obj.src +'"/>';
+    }
+
     var topPanel = {
         borderless:true,
         margin:0,
@@ -46,6 +50,7 @@
                 {
                     header:'国际新闻',
                     width:200,
+                    height:200,
                     margin:0,
                     padding:0,
                     body:{
@@ -70,6 +75,7 @@
                 {
                     header:'国内新闻',
                     width:200,
+                    height:200,
                     margin:0,
                     padding:0,
                     body:{
@@ -88,6 +94,42 @@
                             {id:9,title:'王健林的新闻标题',content:'出访世界各地',date:'2015年7月28日'}
                         ],
                         template:"#id#---#title#---#content#,时间：#date#"
+                    }
+                },
+                {
+                    header: '热点图片',
+                    width: 200,
+                    height:200,
+                    margin: 0,
+                    padding:0,
+                    body: {
+                        type:'clean',
+                        cols:[
+                             {
+                                 type:'clean',
+                                 cols:[
+                                     {
+                                         view:'template',borderless:true
+                                     },
+                                    {
+                                        id:'pictureCarousel',
+                                        view:'carousel',
+                                        width:200,
+                                        height:180,
+                                        borderless:true,
+                                        cols:[
+                                            {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_1.jpg"}},
+                                            {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_2.jpg"}},
+                                            {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_3.jpg"}},
+                                            {css:'image',template:img,data:{src:"${baseDir.contextPath}/images/beautiful/image_4.jpg"}}
+                                        ]
+                                    },
+                                     {
+                                         view:'template',borderless:true
+                                     }
+                                ]
+                            }
+                        ]
                     }
                 }
             ]
