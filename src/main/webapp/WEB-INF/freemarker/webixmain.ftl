@@ -258,7 +258,18 @@
                                     view:"button", type:"icon",  label:"删除", width:50,align:'left',type:'danger',disabled:true,
                                     on:{
                                         onItemClick:function(id, event) {
-
+                                            var  $$videoTree = $$("videoTree");
+                                            var videoId = $$videoTree.getSelectedId();
+                                            webix.ajax().get("${baseDir.contextPath}/user/deleteVideo", { videoId : videoId }, function(text, xml, xhr){
+                                                 var data = eval("(" + text +")");
+                                                if(data.success) {
+                                                    $$videoTree.clearAll();
+                                                    $$videoTree.load("${baseDir.contextPath}/user/getAllVideoInTree");
+                                                    webix.message("删除成功");
+                                                }else {
+                                                    webix.message("删除失败，错误信息:" + data.message);
+                                                }
+                                            });
                                         }
                                     }
                                 }
@@ -370,7 +381,14 @@
                 height:40,
                 cols:[
                     {view:"label", label: "上传视频",align:'center',height:40 },
-                    { view:"button", label: '关闭', width: 40, align: 'right', click:"$$('uploadWindow').hide();"}
+                    {
+                        view:"button", label: '关闭', width: 40, align: 'right', click:"$$('uploadWindow').hide();",
+                        on:{
+                            onItemClick:function(id, event) {
+                                $$("videoFileUploader").unbind();
+                            }
+                        }
+                    }
                 ]
             },
             width:430,
@@ -392,6 +410,8 @@
                                 accept:'video/mp4,video/x-flv',
                                 height:60,
                                 name:'videoFile',
+                                autosend:false,
+                                upload:'${baseDir.contextPath}/user/saveVideoForWebIX',
                                 link:'myfiletemplate'   //用来显示被选中的文件
                             },
                             {view:'label',label:'文件名',width:60},
@@ -418,7 +438,13 @@
                                 view:'button',type:'form',label:'提交',width:50,
                                 on:{
                                     onItemClick:function(id, event) {
-                                        $$("videoUploadForm").getValues;
+                                        var $$videoFileUploader = $$("videoFileUploader");
+                                        $$videoFileUploader.send(function(response){
+                                            console.dir(response);
+                                            alert(response);
+                                        },{  //额外的将要被发送到服务器的数据
+                                            videoCategoryId:1
+                                        })
                                     }
                                 }
                             },

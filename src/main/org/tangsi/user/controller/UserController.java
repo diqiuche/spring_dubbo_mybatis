@@ -530,5 +530,39 @@ public class UserController {
         outputStream.flush();
     }
 
+     /**
+     * 上传视频
+     * @param videoCategoryId
+     * @param videoFile
+     * @return
+     */
+    @RequestMapping("/saveVideoForWebIX")
+    @ResponseBody
+    public Map<String, Object> saveVideoForWebIX(@RequestParam("videoCategoryId") long videoCategoryId,
+                                         @RequestParam("upload")MultipartFile videoFile, HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
+        String base = request.getServletContext().getRealPath("/");  //项目路径
+        try {
+            String originalFileName = videoFile.getOriginalFilename();
+            File dist = new File(base + File.separator + "video" + File.separator + originalFileName);
+            if(dist.exists())
+                dist.delete();
+            videoFile.transferTo(dist);
+            System.out.println("文件名： " + originalFileName);
+            Video video = new Video();
+            video.setVideoCategoryId(videoCategoryId);
+            video.setName(originalFileName);
+            this.videoService.save(video);
+            map.put("success", true);
+            map.put("message", "上传成功");
+        } catch (IOException e) {
+            e.printStackTrace();
+            map.put("success", false);
+            map.put("message", "上传失败,错误信息：" + e.getMessage());
+        }
+
+        return map;
+    }
+
 
 }
