@@ -15,16 +15,16 @@
 <script type="text/javascript">
     webix.i18n.setLocale("zh-CN");   //i18n ，中文
     var cities = [
-        {id:'1',label:'上海'},
-        {id:'2',label:'北京'},
-        {id:'3',label:'广州'},
-        {id:'4',label:'南京'},
-        {id:'5',label:'无锡'},
-        {id:'6',label:'长沙'},
-        {id:'7',label:'武汉'},
-        {id:'8',label:'湘潭'},
-        {id:'9',label:'西安'},
-        {id:'10',label:'云南'}
+        {id:'1',value:'上海'},
+        {id:'2',value:'北京'},
+        {id:'3',value:'广州'},
+        {id:'4',value:'南京'},
+        {id:'5',value:'无锡'},
+        {id:'6',value:'长沙'},
+        {id:'7',value:'武汉'},
+        {id:'8',value:'湘潭'},
+        {id:'9',value:'西安'},
+        {id:'10',value:'云南'}
 
 
     ];
@@ -141,15 +141,26 @@
                 {
                     view:"form", elements:[
                         {
-                            view:"radio", id:"radio1", value:1, options:[{id:1, value:"单程"}, {id:2, value:"往返"}], label:"旅程",
+                            view:"radio", id:"tripRadio", value:1, options:[{id:1, value:"单程"}, {id:2, value:"往返"}], label:"旅程",
                             on:{
-                                onItemClick:function(id, event) {
-                                    alert(id);
+                                onChange:function(newValue, oldValue) {
+                                    var $$endDate = $$("endDate");
+                                    if(newValue == 2) {
+                                        $$endDate.show();
+                                    }else {
+                                        $$endDate.hide();
+                                    }
                                 }
                             }
                         },
-                        {view:"combo", label:"从", options:cities, placeholder:"选择出发地",value:1},
-                        {view:"combo", label:"至", options:cities, placeholder:"选择目的地"},
+                        {
+                            view:"combo", label:"从", options:cities, placeholder:"请选择出发地",value:1,
+                            required:true,tooltip:'请选择出发地'
+                        },
+                        {
+                            view:"combo", label:"至", options:cities, placeholder:"请选择目的地",
+                            required:true,tooltip:'请选择目的地'
+                        },
                         {view:"datepicker", id:"startDate",label:"出发日期", value:new Date(), format:"%Y-%m-%d"},
                         {view:"datepicker", id:"endDate", label:"回程日期", format:"%Y-%m-%d", hidden:true},
                         /*{view:"checkbox", id:"flexible", value:0, label: "不固定日期"},*/
