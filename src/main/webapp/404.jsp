@@ -25,7 +25,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<!--start-content------>
 			<div class="content">
 				<img src="${base}/images/commons/error-img.png" title="error" />
-				<p><span><label>O</label>ops.....</span>You Requested the page that is no longer There.</p>
+				<p><span><label>O</label>oops.....</span>You Requested the page that is no longer There.</p>
 				<a href="${base}/user/tologin">Back To Login Page</a>
 				<div class="copy-right">
 					<p>&#169 All rights Reserved | Designed by <a href="http://w3layouts.com/">W3Layouts</a></p>
