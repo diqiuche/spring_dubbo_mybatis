@@ -101,7 +101,7 @@
                             {
                                 id:'pictureCarousel',
                                 view:'carousel',
-                                width:200,
+                                width:210,
                                 height:180,
                                 borderless:true,
                                 cols:[
@@ -460,6 +460,18 @@
         });
 
     });
+
+    //每隔一秒切换下一张图片
+    window.setInterval(switchPicture,1000);
+
+    function switchPicture() {
+        var $$pictureCarousel = $$("pictureCarousel");
+        var currentActiveIndex = $$pictureCarousel.getActiveIndex();
+        if(currentActiveIndex == 5)
+            $$pictureCarousel.setActiveIndex(0);
+        else
+            $$pictureCarousel.showNext();
+    }
 
 </script>
 </body>
