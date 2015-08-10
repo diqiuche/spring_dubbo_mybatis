@@ -33,13 +33,7 @@
                      {id:'email',header:'邮箱',fillspace:true,sort:'server'},
                      {id:'phone',header:'电话',fillspace:true,sort:'server'}
                 ],
-                pager:{
-                    template:"{common.prev()} {common.pages()} {common.next()}",
-                    container:"pagingbar",
-                    size:10,
-                    group:5,
-                    css:'myaligncenter'
-                },
+                pager:'userpager',
                 on:{
                     "onBeforeSort":function(by, dir, as) {
                         alert("by = " + by + " , dir = " + dir + ", as = " + as);
@@ -57,6 +51,19 @@
                     }
                 }
 
+            },
+            {
+                view:'pager',
+                id:'userpager',
+                template:"{common.prev()} {common.pages()} {common.next()}",
+                container:"pagingbar",
+                size:10,
+                group:5,
+                css:'myaligncenter',
+                animate:{
+                    direction:"top",
+                    type:"flip"
+                }
             }
         ]
     });
