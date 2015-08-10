@@ -14,7 +14,7 @@
 <body>
 
 <div id="usertable"></div>
-<div id="pagingbar" style="margin: 0 auto;"></div>
+<#--<div id="pagingbar" style="margin: 0 auto;"></div>-->
 
 <script type="text/javascript">
     webix.ui({
@@ -56,7 +56,7 @@
                 view:'pager',
                 id:'userpager',
                 template:"{common.prev()} {common.pages()} {common.next()}",
-                container:"pagingbar",
+                //container:"pagingbar",
                 size:10,
                 group:5,
                 css:'myaligncenter',
