@@ -147,11 +147,11 @@
         multi:false,  //默认只能展开一项,
         rows:[
             {
-                header:'用户',
+                header:'<span class="webix_icon fa-user"></span>用户',
+                borderless:true,
                 headerHeight:32,
                 headerAltHeight:32,  //折叠时的高度
                 animate:{type:"slide", subtype:"in"},
-                css:'webix_icon fa-cog',
                 collapsed:false, //默认展开
                 body:{
                     id:'userTree',
@@ -179,7 +179,8 @@
                 }
             },
             {
-                header:"航班预定",
+                header:"<span class='webix_icon fa-fighter-jet'></span>航班预定",
+                borderless:true,
                 headerHeight:32,
                 headerAltHeight:32,  //折叠时的高度
                 animate:{type:"slide", subtype:"in"},
@@ -229,14 +230,16 @@
                 }
             },
             {
-                header:'音乐',
+                header:'<span class="webix_icon fa-music"></span>音乐',
+                borderless:true,
                 headerHeight:32,
                 headerAltHeight:32,  //折叠时的高度
                 animate:{type:"slide", subtype:"in"},
                 collapsed:true
             },
             {
-                header:'视频',
+                header:'<span class="webix_icon fa-film"></span>视频',
+                borderless:true,
                 headerHeight:32,
                 headerAltHeight:32,  //折叠时的高度
                 animate:{type:"slide", subtype:"in"},
@@ -305,7 +308,8 @@
                 }
             },
             {
-                header:'图片浏览',
+                header:'<span class="webix_icon fa-picture-o "></span>图片浏览',
+                borderless:true,
                 headerHeight:32,
                 headerAltHeight:32,  //折叠时的高度
                 animate:{type:"slide", subtype:"in"},
@@ -333,7 +337,8 @@
                 }
             },
             {
-                header:'系统设置',
+                header:'<span class="webix_icon fa-cog "></span>系统设置',
+                borderless:true,
                 headerHeight:32,
                 headerAltHeight:32,  //折叠时的高度
                 animate:{type:"slide", subtype:"in"},
@@ -359,7 +364,11 @@
                             //width:350,
                             gravity:0.25,
                             headerHeight:40,
-                            body:leftAccordionPanel
+                            body:{
+                                rows:[
+                                    leftAccordionPanel
+                                ]
+                            }
                         } ,
                         {view : 'resizer'},
                         {
