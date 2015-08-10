@@ -33,6 +33,9 @@
                      {id:'email',header:'邮箱',fillspace:true,sort:'server'},
                      {id:'phone',header:'电话',fillspace:true,sort:'server'}
                 ],
+                yCount:10,
+                datafetch:10,  //he number of records that should be loaded from server side during each dynamic loading request
+                loadahead:10, //the number of records that should be loaded ahead of the "datafetch" parameter.
                 pager:'userpager',
                 on:{
                     "onBeforeSort":function(by, dir, as) {

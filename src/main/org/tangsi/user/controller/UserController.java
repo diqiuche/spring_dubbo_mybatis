@@ -478,9 +478,11 @@ public class UserController {
      */
     @RequestMapping("/getWebIXUsers")
     @ResponseBody
-    public List<User> webIxPaging() {
+    public List<User> getWebIXUsers() {
         return this.userService.getAllUser();
     }
+
+
 
     @RequestMapping("/getAllVideoInTree")
     @ResponseBody
